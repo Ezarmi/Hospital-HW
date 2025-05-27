@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="hospitalModelStoreContainer" CdmEntityContainer="hdata">
+    <EntitySetMapping Name="tbl_Doctors">
+      <EntityTypeMapping TypeName="hospitalModel.tbl_Doctors">
+        <MappingFragment StoreEntitySet="tbl_Doctors">
+          <ScalarProperty Name="pkID" ColumnName="pkID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Family" ColumnName="Family" />
+          <ScalarProperty Name="fkSkill" ColumnName="fkSkill" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Skills">
+      <EntityTypeMapping TypeName="hospitalModel.tbl_Skills">
+        <MappingFragment StoreEntitySet="tbl_Skills">
+          <ScalarProperty Name="pkID" ColumnName="pkID" />
+          <ScalarProperty Name="Skill" ColumnName="Skill" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Awards">
+      <EntityTypeMapping TypeName="hospitalModel.tbl_Awards">
+        <MappingFragment StoreEntitySet="tbl_Awards">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="pkID" ColumnName="pkID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Research">
+      <EntityTypeMapping TypeName="hospitalModel.tbl_Research">
+        <MappingFragment StoreEntitySet="tbl_Research">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="pkID" ColumnName="pkID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

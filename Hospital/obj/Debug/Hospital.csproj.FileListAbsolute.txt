@@ -70,3 +70,7 @@ C:\Users\Ezarm\OneDrive\Documents\Projects\HW Project\Hospital\Hospital\obj\Debu
 C:\Users\Ezarm\OneDrive\Documents\Projects\HW Project\Hospital\Hospital\obj\Debug\Hospital.csproj.CopyComplete
 C:\Users\Ezarm\OneDrive\Documents\Projects\HW Project\Hospital\Hospital\obj\Debug\Hospital.dll
 C:\Users\Ezarm\OneDrive\Documents\Projects\HW Project\Hospital\Hospital\obj\Debug\Hospital.pdb
+C:\Users\Ezarm\OneDrive\Documents\Projects\HW Project\Hospital\Hospital\bin\EntityFramework.dll
+C:\Users\Ezarm\OneDrive\Documents\Projects\HW Project\Hospital\Hospital\bin\EntityFramework.SqlServer.dll
+C:\Users\Ezarm\OneDrive\Documents\Projects\HW Project\Hospital\Hospital\bin\EntityFramework.xml
+C:\Users\Ezarm\OneDrive\Documents\Projects\HW Project\Hospital\Hospital\bin\EntityFramework.SqlServer.xml

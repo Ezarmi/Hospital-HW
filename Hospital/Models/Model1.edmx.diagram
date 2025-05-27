@@ -8,6 +8,8 @@
         <EntityTypeShape EntityType="hospitalModel.tbl_Doctors" Width="1.5" PointX="3.375" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="hospitalModel.tbl_Skills" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="hospitalModel.FK_Table_1_Table_1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="hospitalModel.tbl_Awards" Width="1.5" PointX="0.75" PointY="2.875" />
+        <EntityTypeShape EntityType="hospitalModel.tbl_Research" Width="1.5" PointX="3.375" PointY="2.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="hospitalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tbl_Doctors">
+    <Key>
+      <PropertyRef Name="pkID" />
+    </Key>
+    <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Family" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="fkSkill" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_Skills" Relationship="Self.FK_Table_1_Table_1" FromRole="tbl_Doctors" ToRole="tbl_Skills" />
+  </EntityType>
+  <EntityType Name="tbl_Skills">
+    <Key>
+      <PropertyRef Name="pkID" />
+    </Key>
+    <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Skill" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tbl_Doctors" Relationship="Self.FK_Table_1_Table_1" FromRole="tbl_Skills" ToRole="tbl_Doctors" />
+  </EntityType>
+  <Association Name="FK_Table_1_Table_1">
+    <End Role="tbl_Skills" Type="Self.tbl_Skills" Multiplicity="1" />
+    <End Role="tbl_Doctors" Type="Self.tbl_Doctors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Skills">
+        <PropertyRef Name="pkID" />
+      </Principal>
+      <Dependent Role="tbl_Doctors">
+        <PropertyRef Name="fkSkill" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="hdata" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbl_Doctors" EntityType="Self.tbl_Doctors" />
+    <EntitySet Name="tbl_Skills" EntityType="Self.tbl_Skills" />
+    <AssociationSet Name="FK_Table_1_Table_1" Association="Self.FK_Table_1_Table_1">
+      <End Role="tbl_Skills" EntitySet="tbl_Skills" />
+      <End Role="tbl_Doctors" EntitySet="tbl_Doctors" />
+    </AssociationSet>
+    <EntitySet Name="tbl_Awards" EntityType="hospitalModel.tbl_Awards" />
+    <EntitySet Name="tbl_Research" EntityType="hospitalModel.tbl_Research" />
+  </EntityContainer>
+  <EntityType Name="tbl_Awards">
+    <Key>
+      <PropertyRef Name="pkID" />
+    </Key>
+    <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_Research">
+    <Key>
+      <PropertyRef Name="pkID" />
+    </Key>
+    <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>
