@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="hospitalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Doctors">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Family" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fkSkill" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Skills">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Skill" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Table_1_Table_1">
+          <End Role="tbl_Skills" Type="Self.tbl_Skills" Multiplicity="1" />
+          <End Role="tbl_Doctors" Type="Self.tbl_Doctors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Skills">
+              <PropertyRef Name="pkID" />
+            </Principal>
+            <Dependent Role="tbl_Doctors">
+              <PropertyRef Name="fkSkill" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hospitalModelStoreContainer">
+          <EntitySet Name="tbl_Doctors" EntityType="Self.tbl_Doctors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Skills" EntityType="Self.tbl_Skills" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Table_1_Table_1" Association="Self.FK_Table_1_Table_1">
+            <End Role="tbl_Skills" EntitySet="tbl_Skills" />
+            <End Role="tbl_Doctors" EntitySet="tbl_Doctors" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="hospitalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_Doctors">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Family" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fkSkill" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_Skills" Relationship="Self.FK_Table_1_Table_1" FromRole="tbl_Doctors" ToRole="tbl_Skills" />
+        </EntityType>
+        <EntityType Name="tbl_Skills">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Skill" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_Doctors" Relationship="Self.FK_Table_1_Table_1" FromRole="tbl_Skills" ToRole="tbl_Doctors" />
+        </EntityType>
+        <Association Name="FK_Table_1_Table_1">
+          <End Role="tbl_Skills" Type="Self.tbl_Skills" Multiplicity="1" />
+          <End Role="tbl_Doctors" Type="Self.tbl_Doctors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Skills">
+              <PropertyRef Name="pkID" />
+            </Principal>
+            <Dependent Role="tbl_Doctors">
+              <PropertyRef Name="fkSkill" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hdata" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Doctors" EntityType="Self.tbl_Doctors" />
+          <EntitySet Name="tbl_Skills" EntityType="Self.tbl_Skills" />
+          <AssociationSet Name="FK_Table_1_Table_1" Association="Self.FK_Table_1_Table_1">
+            <End Role="tbl_Skills" EntitySet="tbl_Skills" />
+            <End Role="tbl_Doctors" EntitySet="tbl_Doctors" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="hospitalModelStoreContainer" CdmEntityContainer="hdata">
+          <EntitySetMapping Name="tbl_Doctors">
+            <EntityTypeMapping TypeName="hospitalModel.tbl_Doctors">
+              <MappingFragment StoreEntitySet="tbl_Doctors">
+                <ScalarProperty Name="pkID" ColumnName="pkID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Family" ColumnName="Family" />
+                <ScalarProperty Name="fkSkill" ColumnName="fkSkill" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Skills">
+            <EntityTypeMapping TypeName="hospitalModel.tbl_Skills">
+              <MappingFragment StoreEntitySet="tbl_Skills">
+                <ScalarProperty Name="pkID" ColumnName="pkID" />
+                <ScalarProperty Name="Skill" ColumnName="Skill" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
