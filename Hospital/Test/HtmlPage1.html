@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <p id="demo" data-start="0" data-end="100" data-time="10">o</p>
+
+    <script>
+        var ds = document.getElementById("demo").getAttribute("data-start");
+        var de = document.getElementById("demo").getAttribute("data-end");
+        var dt = document.getElementById("demo").getAttribute("data-time")*1000;
+
+        var range = de - ds;
+        var timee = dt / range;
+
+        document.getElementById("demo").innerHTML = ds;
+
+        var myVar = setInterval(myTimer, timee);
+
+        function myTimer() {
+            document.getElementById("demo").innerHTML++;
+
+            if (document.getElementById("demo").innerHTML == de) {
+                clearInterval(myVar);
+            }
+        }
+    </script>
+
+</body>
+</html>
