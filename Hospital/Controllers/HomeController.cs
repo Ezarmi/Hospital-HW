@@ -27,5 +27,12 @@ namespace Hospital.Controllers
 
             return View();
         }
+
+        public ActionResult getdep()
+        {
+            var dep = context.tbl_Skills.Select(x => new {x.pkID,x.Skill}).ToList();
+
+            return Json(dep, JsonRequestBehavior.AllowGet);
+        }
     }
 }
