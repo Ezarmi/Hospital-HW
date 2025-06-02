@@ -34,5 +34,11 @@ namespace Hospital.Controllers
 
             return Json(dep, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult getdocs(int dep)
+        {
+            var docs =context.tbl_Doctors.Where(x=> x.fkSkill==dep).Select(x=> new { x.pkID, x.Name, x.Family }).ToList();
+
+            return Json(docs, JsonRequestBehavior.AllowGet);
+        }
     }
 }
