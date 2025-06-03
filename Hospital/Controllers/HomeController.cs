@@ -40,5 +40,12 @@ namespace Hospital.Controllers
 
             return Json(docs, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult getvisit(int doc)
+        {
+            var visit = context.View_Visit.Where(x=> x.fkDocID==doc && x.fkPID==null).Select(x=>new {x.pkID,x.PDate,x.PTime}).ToList();
+
+            return Json(visit, JsonRequestBehavior.AllowGet);
+        }
     }
 }

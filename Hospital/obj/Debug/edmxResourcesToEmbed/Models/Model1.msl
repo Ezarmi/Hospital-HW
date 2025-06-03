@@ -35,5 +35,33 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Visit">
+      <EntityTypeMapping TypeName="hospitalModel.tbl_Visit">
+        <MappingFragment StoreEntitySet="tbl_Visit">
+          <ScalarProperty Name="fkVTID" ColumnName="fkVTID" />
+          <ScalarProperty Name="fkPID" ColumnName="fkPID" />
+          <ScalarProperty Name="EDate" ColumnName="EDate" />
+          <ScalarProperty Name="SDate" ColumnName="SDate" />
+          <ScalarProperty Name="fkDocID" ColumnName="fkDocID" />
+          <ScalarProperty Name="pkID" ColumnName="pkID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_Visit">
+      <EntityTypeMapping TypeName="hospitalModel.View_Visit">
+        <MappingFragment StoreEntitySet="View_Visit">
+          <ScalarProperty Name="PTime" ColumnName="PTime" />
+          <ScalarProperty Name="PDate" ColumnName="PDate" />
+          <ScalarProperty Name="Family" ColumnName="Family" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="fkPID" ColumnName="fkPID" />
+          <ScalarProperty Name="fkVTID" ColumnName="fkVTID" />
+          <ScalarProperty Name="EDate" ColumnName="EDate" />
+          <ScalarProperty Name="SDate" ColumnName="SDate" />
+          <ScalarProperty Name="pkID" ColumnName="pkID" />
+          <ScalarProperty Name="fkDocID" ColumnName="fkDocID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -41,4 +41,31 @@
             });
 
     });
+
+
+    $("#doctor").on('change', function (e) {
+        var doc = $("#doctor").val();
+        var doc2 = doc.split("-");
+
+        $.post("/Home/getvisit", { doc: doc2[0] })
+            .done(function (res) {
+                console.log(res);
+                $("#visit").empty();
+                $("#visit").append("<option>" + "انتخاب کنید" + "</option>");
+
+                for (var item in res) {
+                    $("#visit").append(
+                        "<option>" + res[item].pkID + " - " + res[item].PDate + "|" + res[item].PTime + "</option>"
+                    );
+                }
+
+            })
+            .fail(function () {
+
+            })
+            .always(function () {
+
+            });
+
+    });
 });

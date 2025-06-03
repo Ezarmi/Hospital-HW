@@ -14,11 +14,19 @@ namespace Hospital.Models
     
     public partial class tbl_Doctors
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbl_Doctors()
+        {
+            this.tbl_Visit = new HashSet<tbl_Visit>();
+        }
+    
         public int pkID { get; set; }
         public string Name { get; set; }
         public string Family { get; set; }
         public int fkSkill { get; set; }
     
         public virtual tbl_Skills tbl_Skills { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_Visit> tbl_Visit { get; set; }
     }
 }
