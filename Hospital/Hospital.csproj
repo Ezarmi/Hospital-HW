@@ -234,6 +234,9 @@
     <Compile Include="Models\tbl_Doctors.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbl_Patient.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbl_Research.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

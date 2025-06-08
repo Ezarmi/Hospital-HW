@@ -12,7 +12,9 @@
         <EntityTypeShape EntityType="hospitalModel.tbl_Research" Width="1.5" PointX="3.375" PointY="2.875" />
         <EntityTypeShape EntityType="hospitalModel.tbl_Visit" Width="1.5" PointX="5.5" PointY="0.5" />
         <AssociationConnector Association="hospitalModel.FK_tbl_Visit_To_tbl_Doctors" />
-        <EntityTypeShape EntityType="hospitalModel.View_Visit" Width="1.5" PointX="5.5" PointY="3" />
+        <EntityTypeShape EntityType="hospitalModel.View_Visit" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="hospitalModel.tbl_Patient" Width="1.5" PointX="3.375" PointY="5.875" />
+        <AssociationConnector Association="hospitalModel.FK_tbl_Visit_To_Patient" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

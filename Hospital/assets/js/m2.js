@@ -20,7 +20,7 @@
         var dep = $("#department").val();
         var dep2 = dep.split("-");
 
-        $.post("/Home/getdocs", {dep:dep2[0]})
+        $.post("/Home/getdocs", { dep: dep2[0] })
             .done(function (res) {
 
                 $("#doctor").empty();
@@ -49,7 +49,7 @@
 
         $.post("/Home/getvisit", { doc: doc2[0] })
             .done(function (res) {
-                console.log(res);
+                //console.log(res);
                 $("#visit").empty();
                 $("#visit").append("<option>" + "انتخاب کنید" + "</option>");
 
@@ -69,3 +69,28 @@
 
     });
 });
+
+function setvisit() {
+    var vn = $("#visit").val();
+    var vn2 = vn.split("-");
+
+    var namee = $("#name").val();
+    var phone = $("#phone").val();
+    var family = $("#family").val();
+
+    $.post("/Home/setvisit", { vn: vn2, namee: namee, phone: phone, family: family })
+        .done(function (res) {
+            //console.log(res);
+            if (res = "ok") {
+                alert("نوبت شما ثبت شد");
+            }
+
+        })
+        .fail(function () {
+            alert("خطا در برقراری ارتباط با سرور");
+        })
+        .always(function () {
+
+        });
+
+}

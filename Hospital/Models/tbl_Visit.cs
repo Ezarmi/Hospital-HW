@@ -22,5 +22,6 @@ namespace Hospital.Models
         public Nullable<int> fkVTID { get; set; }
     
         public virtual tbl_Doctors tbl_Doctors { get; set; }
+        public virtual tbl_Patient tbl_Patient { get; set; }
     }
 }

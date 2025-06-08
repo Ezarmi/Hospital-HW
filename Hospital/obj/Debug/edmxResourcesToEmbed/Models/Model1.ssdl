@@ -16,6 +16,15 @@
     <Property Name="Family" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="fkSkill" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="tbl_Patient">
+    <Key>
+      <PropertyRef Name="pkID" />
+    </Key>
+    <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Family" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Mobile" Type="char" MaxLength="11" Nullable="false" />
+  </EntityType>
   <EntityType Name="tbl_Research">
     <Key>
       <PropertyRef Name="pkID" />
@@ -42,7 +51,7 @@
     <Property Name="fkVTID" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\USERS\EZARM\ONEDRIVE\DOCUMENTS\PROJECTS\HW PROJECT\HOSPITAL-HW\HOSPITAL\APP_DATA\DATABASE1.MDF.dbo.View_Visit' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJECT\HOSPITAL-HW\HOSPITAL\APP_DATA\DATABASE1.MDF.dbo.View_Visit' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="View_Visit">
     <Key>
       <PropertyRef Name="fkDocID" />
@@ -74,6 +83,18 @@ warning 6002: The table/view 'C:\USERS\EZARM\ONEDRIVE\DOCUMENTS\PROJECTS\HW PROJ
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tbl_Visit_To_Patient">
+    <End Role="tbl_Patient" Type="Self.tbl_Patient" Multiplicity="0..1" />
+    <End Role="tbl_Visit" Type="Self.tbl_Visit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Patient">
+        <PropertyRef Name="pkID" />
+      </Principal>
+      <Dependent Role="tbl_Visit">
+        <PropertyRef Name="fkPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tbl_Visit_To_tbl_Doctors">
     <End Role="tbl_Doctors" Type="Self.tbl_Doctors" Multiplicity="1" />
     <End Role="tbl_Visit" Type="Self.tbl_Visit" Multiplicity="*" />
@@ -89,6 +110,7 @@ warning 6002: The table/view 'C:\USERS\EZARM\ONEDRIVE\DOCUMENTS\PROJECTS\HW PROJ
   <EntityContainer Name="hospitalModelStoreContainer">
     <EntitySet Name="tbl_Awards" EntityType="Self.tbl_Awards" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_Doctors" EntityType="Self.tbl_Doctors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Patient" EntityType="Self.tbl_Patient" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_Research" EntityType="Self.tbl_Research" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_Skills" EntityType="Self.tbl_Skills" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_Visit" EntityType="Self.tbl_Visit" Schema="dbo" store:Type="Tables" />
@@ -109,6 +131,10 @@ warning 6002: The table/view 'C:\USERS\EZARM\ONEDRIVE\DOCUMENTS\PROJECTS\HW PROJ
     <AssociationSet Name="FK_Table_1_Table_1" Association="Self.FK_Table_1_Table_1">
       <End Role="tbl_Skills" EntitySet="tbl_Skills" />
       <End Role="tbl_Doctors" EntitySet="tbl_Doctors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Visit_To_Patient" Association="Self.FK_tbl_Visit_To_Patient">
+      <End Role="tbl_Patient" EntitySet="tbl_Patient" />
+      <End Role="tbl_Visit" EntitySet="tbl_Visit" />
     </AssociationSet>
     <AssociationSet Name="FK_tbl_Visit_To_tbl_Doctors" Association="Self.FK_tbl_Visit_To_tbl_Doctors">
       <End Role="tbl_Doctors" EntitySet="tbl_Doctors" />
