@@ -28,12 +28,15 @@ namespace Hospital.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult getdep()
         {
             var dep = context.tbl_Skills.Select(x => new { x.pkID, x.Skill }).ToList();
 
             return Json(dep, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult getdocs(int dep)
         {
             var docs = context.tbl_Doctors.Where(x => x.fkSkill == dep).Select(x => new { x.pkID, x.Name, x.Family }).ToList();
@@ -50,37 +53,51 @@ namespace Hospital.Controllers
 
         public ActionResult setvisit(int vn, string namee, string phone, string family)
         {
-            int pid = 0;
-            var p = context.tbl_Patient.Where(x => x.Mobile == phone).SingleOrDefault();
+            var c = context.tbl_Visit.Where(x => x.pkID == vn).SingleOrDefault();
 
-            if (p == null)
+            int statee = 0;
+
+            if (c.fkPID == null)
             {
-                tbl_Patient newp = new tbl_Patient();
 
-                newp.Name = namee;
-                newp.Family = family;
-                newp.Mobile = phone;
+                int pid = 0;
+                var p = context.tbl_Patient.Where(x => x.Mobile == phone).SingleOrDefault();
 
-                context.tbl_Patient.Add(newp);
+                if (p == null)
+                {
+                    tbl_Patient newp = new tbl_Patient();
+
+                    newp.Name = namee;
+                    newp.Family = family;
+                    newp.Mobile = phone;
+
+                    context.tbl_Patient.Add(newp);
+                    context.SaveChanges();
+
+                    var np = context.tbl_Patient.Where(x => x.Mobile == phone).SingleOrDefault();
+                    pid = np.pkID;
+                }
+                else
+                {
+                    pid = p.pkID;
+                }
+
+                var v = context.tbl_Visit.Where(x => x.pkID == vn).SingleOrDefault();
+
+                v.fkPID = pid;
+                v.fkVTID = 1;
+                v.EDate = v.SDate.AddMinutes(20);
+
                 context.SaveChanges();
-
-                var np = context.tbl_Patient.Where(x => x.Mobile == phone).SingleOrDefault();
-                pid = np.pkID;
+                statee = 2; //نوبت دهی انجام شد
             }
             else
             {
-                pid = p.pkID;
+                statee = 1; //نوبت پر است
             }
 
-            var v = context.tbl_Visit.Where(x => x.pkID == vn).SingleOrDefault();
+            return Json(statee, JsonRequestBehavior.AllowGet);
 
-            v.fkPID = pid;
-            v.fkVTID = 1;
-            v.EDate = v.SDate.AddMinutes(20);
-
-            context.SaveChanges();
-
-            return Json("ok", JsonRequestBehavior.AllowGet);
         }
     }
 }

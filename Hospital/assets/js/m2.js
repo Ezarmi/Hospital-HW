@@ -20,7 +20,9 @@
         var dep = $("#department").val();
         var dep2 = dep.split("-");
 
-        $.post("/Home/getdocs", { dep: dep2[0] })
+        var token = $('input[name="__RequestVerificationToken"]').val();
+
+        $.post("/Home/getdocs", { dep: dep2[0], __RequestVerificationToken:token })
             .done(function (res) {
 
                 $("#doctor").empty();
@@ -81,8 +83,11 @@ function setvisit() {
     $.post("/Home/setvisit", { vn: vn2, namee: namee, phone: phone, family: family })
         .done(function (res) {
             //console.log(res);
-            if (res = "ok") {
-                alert("نوبت شما ثبت شد");
+            switch (res) {
+                case 1: alert("چنین نوبتی وجود ندارد");
+                    break;
+                case 2: alert("نوبت شما ثبت شد");
+                    break;
             }
 
         })
