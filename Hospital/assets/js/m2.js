@@ -73,29 +73,21 @@
     $("#name").focus(function () {
         document.getElementById("name-v").innerHTML = "";
     });
-    $("#name").blur(function () {
-       var valid = validtion();
-    });
 
     $("#family").focus(function () {
         document.getElementById("family-v").innerHTML = "";
-    });
-    $("#family").blur(function () {
-        var valid = validtion();
     });
 
     $("#phone").focus(function () {
         document.getElementById("phone-v").innerHTML = "";
     });
-    $("#phone").blur(function () {
-        var valid = validtion();
-    });
 
     $("#visit").focus(function () {
         document.getElementById("visit-v").innerHTML = "";
     });
-    $("#visit").blur(function () {
-        var valid = validtion();
+
+    $(".valiid").blur(function () {
+        var valid = validtion(this.id);
     });
 });
 
@@ -107,16 +99,19 @@ function setvisit() {
     var phone = $("#phone").val();
     var family = $("#family").val();
 
-    var valid = validtion();
+    var valid1 = validtion("name");
+    var valid2 = validtion("family");
+    var valid3 = validtion("phone");
+    var valid4 = validtion("visit");
 
-    if (valid) {
+    if (valid1 && valid2 && valid3 && valid4) {
         $.post("/Home/setvisit", { vn: vn2, namee: namee, phone: phone, family: family })
             .done(function (res) {
                 //console.log(res);
                 switch (res) {
-                    case 1: alert("چنین نوبتی وجود ندارد");
+                    case 1: swal("عملیات ناموفق", "چنین نوبتی وجود ندارد", "error");
                         break;
-                    case 2: alert("نوبت شما ثبت شد");
+                    case 2: swal("عملیات موفق", "نوبت شما با موفقیت ثبت شد", "success");
                         break;
                 }
 
@@ -128,9 +123,12 @@ function setvisit() {
 
             });
     }
+    else {
+        swal("عملیات ناموفق", "لطفا خطاهای ورودی را تحصیح کنید", "error");
+    }
 }
 
-function validtion() {
+function validtion(itemm) {
 
     var valid = true;
 
@@ -138,24 +136,40 @@ function validtion() {
     var family = $("#family").val();
     var phone = $("#phone").val();
 
-    if (namee.length > 20 || namee.length <= 2) {
-        valid = false;
-        $("#name-v").html("نام باید بین ۳ تا ۲۰ کاراکتر باشد");
+    switch (itemm) {
+        case "name":
+            if (namee.length > 20 || namee.length <= 2) {
+                valid = false;
+                $("#name-v").html("نام باید بین ۳ تا ۲۰ کاراکتر باشد");
+            }
+            break;
+        case "family":
+            if (family.length > 20 || family.length <= 2) {
+                valid = false;
+                $("#family-v").html("نام خانوادگی باید بین ۳ تا ۲۰ کاراکتر باشد");
+            }
+            break;
+        case "phone":
+            if (phone.length != 11) {
+                valid = false;
+                $("#phone-v").html("شماره همراه باید ۱۱ رقم باشد.");
+            }
+            break;
+        case "visit":
+            if ($("#visit").val() == "انتخاب کنید") {
+                valid = false;
+                $("#visit-v").html("از منوی بالا یک نوبت انتخاب کنید");
+            }
+            break;
     }
 
-    if (family.length > 20 || family.length <= 2) {
-        valid = false;
-        $("#family-v").html("نام خانوادگی باید بین ۳ تا ۲۰ کاراکتر باشد");
+    if (!valid) {
+        $('#' + itemm).removeClass("inputcorrect");
+        $('#' + itemm).addClass("inputerror");
     }
-
-    if (phone.length !=11) {
-        valid = false;
-        $("#phone-v").html("شماره همراه باید ۱۱ رقم باشد.");
-    }
-
-    if ($(#"visit").val() == "انتخاب کنید") {
-        valid = false;
-        $("#phone-v").html("از منوی بالا یک نوبت انتخاب کنید");
+    else {
+        $('#' + itemm).removeClass("inputerror");
+        $('#' + itemm).addClass("inputcorrect");
     }
     return valid;
 }
