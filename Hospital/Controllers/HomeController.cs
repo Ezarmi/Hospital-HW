@@ -99,5 +99,16 @@ namespace Hospital.Controllers
             return Json(statee, JsonRequestBehavior.AllowGet);
 
         }
+
+        public ActionResult recept()
+        {
+            ViewBag.title = "داشبرد";
+            return View();
+        }
+        public ActionResult visit_management()
+        {
+            ViewBag.title = "مدیریت نوبت‌ها";
+            return View();
+        }
     }
 }
