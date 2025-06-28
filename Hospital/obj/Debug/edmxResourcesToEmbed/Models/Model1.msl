@@ -4,6 +4,8 @@
     <EntitySetMapping Name="tbl_Doctors">
       <EntityTypeMapping TypeName="hospitalModel.tbl_Doctors">
         <MappingFragment StoreEntitySet="tbl_Doctors">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PersonalNum" ColumnName="PersonalNum" />
           <ScalarProperty Name="pkID" ColumnName="pkID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Family" ColumnName="Family" />

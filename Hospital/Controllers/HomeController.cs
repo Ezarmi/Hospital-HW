@@ -110,5 +110,36 @@ namespace Hospital.Controllers
             ViewBag.title = "مدیریت نوبت‌ها";
             return View();
         }
+
+        public ActionResult login()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult login_check(int pn, string pass)
+        {
+            int status = 0;
+            var user = context.tbl_Doctors.Where(x => x.PersonalNum == pn).SingleOrDefault();
+            if (user != null)
+            {
+                if (user.Password == pass)
+                {
+                    Session["userid"] = user.pkID;
+
+                    status = 1;//login ok
+                }
+                else
+                {
+                    status = 2;//wrong pass
+                }
+            }
+            else
+            {
+                status = 3; //dosen't match pn
+            }
+            return Json(status, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

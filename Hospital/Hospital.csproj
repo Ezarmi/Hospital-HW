@@ -9683,6 +9683,7 @@
     <Content Include="assets\JQuery\JQuery 3.7.1.js" />
     <Content Include="assets\js\m2.js" />
     <Content Include="assets\js\main.js" />
+    <Content Include="assets\login\login.js" />
     <Content Include="assets\plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="assets\plugins\bootstrap-slider\slider.css" />
     <Content Include="assets\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.js" />
@@ -9826,6 +9827,7 @@
     <Content Include="assets\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="assets\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="assets\scss\Readme.txt" />
+    <Content Include="assets\sweetalert\sweetalert_1.js" />
     <Content Include="assets\vendor\animate.css\animate.compat.css" />
     <Content Include="assets\vendor\animate.css\animate.css" />
     <Content Include="assets\vendor\animate.css\animate.min.css" />
@@ -10823,6 +10825,7 @@
     <Content Include="Views\shared\layout.cshtml" />
     <Content Include="Views\Home\recept.cshtml" />
     <Content Include="Views\Home\visit_management.cshtml" />
+    <Content Include="Views\Home\login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

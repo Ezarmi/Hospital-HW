@@ -10,6 +10,8 @@
     <Property Name="fkSkill" Type="Int32" Nullable="false" />
     <NavigationProperty Name="tbl_Skills" Relationship="Self.FK_Table_1_Table_1" FromRole="tbl_Doctors" ToRole="tbl_Skills" />
     <NavigationProperty Name="tbl_Visit" Relationship="hospitalModel.FK_tbl_Visit_To_tbl_Doctors" FromRole="tbl_Doctors" ToRole="tbl_Visit" />
+    <Property Name="PersonalNum" Type="Int32" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="tbl_Skills">
     <Key>

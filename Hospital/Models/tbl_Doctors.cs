@@ -24,6 +24,8 @@ namespace Hospital.Models
         public string Name { get; set; }
         public string Family { get; set; }
         public int fkSkill { get; set; }
+        public Nullable<int> PersonalNum { get; set; }
+        public string Password { get; set; }
     
         public virtual tbl_Skills tbl_Skills { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
