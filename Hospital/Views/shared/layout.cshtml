@@ -1,6 +1,16 @@
-﻿@{ if (Session["userid"] == null)
+﻿@{
+    //if (Session["userid"] == null)
+    //{
+    //    Response.Redirect("~/Home/login");
+    //}
+
+    if (Request.Cookies["userid"] == null || Request.Cookies["userid"].Value == null)
     {
-        Response.Redirect("~/Home/login");
+            Response.Redirect("~/Home/login");
+    }
+    else
+    {
+        Response.Cookies["userid"].Expires = DateTime.Now.AddDays(10);
     }
 }
 
@@ -300,7 +310,7 @@
                                         <a href="#" class="btn btn-default btn-flat">پروفایل</a>
                                     </div>
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">خروج</a>
+                                        <a href="/Home/logout" class="btn btn-default btn-flat">خروج</a>
                                     </div>
                                 </li>
                             </ul>

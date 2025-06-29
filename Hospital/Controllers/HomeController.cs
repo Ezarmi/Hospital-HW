@@ -102,6 +102,7 @@ namespace Hospital.Controllers
 
         public ActionResult recept()
         {
+            //Session.Timeout = 60;
             ViewBag.title = "داشبرد";
             return View();
         }
@@ -125,7 +126,10 @@ namespace Hospital.Controllers
             {
                 if (user.Password == pass)
                 {
-                    Session["userid"] = user.pkID;
+                    // Session["userid"] = user.pkID;
+
+                    Response.Cookies["userid"].Value = user.pkID.ToString();
+                    Response.Cookies["userid"].Expires = DateTime.Now.AddDays(10);
 
                     status = 1;//login ok
                 }
@@ -139,6 +143,13 @@ namespace Hospital.Controllers
                 status = 3; //dosen't match pn
             }
             return Json(status, JsonRequestBehavior.AllowGet);
+        }
+
+        public void logout()
+        {
+            Response.Cookies["userid"].Expires = DateTime.Now.AddDays(-1);
+
+            Response.Redirect("/Home/index");
         }
 
     }
