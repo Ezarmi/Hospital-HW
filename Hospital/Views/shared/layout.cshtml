@@ -1,16 +1,24 @@
 ﻿@{
+    string username="";
+
     //if (Session["userid"] == null)
     //{
     //    Response.Redirect("~/Home/login");
     //}
 
-    if (Request.Cookies["userid"] == null || Request.Cookies["userid"].Value == null)
+    if (Request.Cookies["omg2i@try"] == null || Request.Cookies["omg2i@try"].Value == null)
     {
-            Response.Redirect("~/Home/login");
+        Response.Redirect("~/Home/login");
     }
     else
     {
-        Response.Cookies["userid"].Expires = DateTime.Now.AddDays(10);
+        Response.Cookies["omg2i@try"].Expires = DateTime.Now.AddDays(10);
+
+        if (Session["username"] == null)
+        {
+            Html.RenderAction("setname", "Home");
+        }
+        username = Session["username"].ToString();
     }
 }
 
@@ -19,7 +27,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>صفحه خالی | کنترل پنل</title>
+    <title>@ViewBag.title | کنترل پنل</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -277,7 +285,7 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="~/assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                <span class="hidden-xs">علیرضا حسینی زاده</span>
+                                <span class="hidden-xs">@username</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
@@ -285,7 +293,7 @@
                                     <img src="~/assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                                     <p>
-                                        علیرضا حسینی زاده
+                                        @username
                                         <small>مدیریت کل سایت</small>
                                     </p>
                                 </li>
@@ -333,7 +341,7 @@
                         <img src="~/assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-right info">
-                        <p>علیرضا حسینی زاده</p>
+                        <p>@username</p>
                         <a href="#"><i class="fa fa-circle text-success"></i> آنلاین</a>
                     </div>
                 </div>
@@ -354,12 +362,12 @@
                     <li class="header">منو</li>
                     <li>
                         <a href="/Home/recept">
-                            <i class="fa fa-dashboard"></i> <span>داشبرد</span>
+                            <i class="fa fa-dashboard"></i> <span>@Hospital.res.res1.m_dashbord</span>
                         </a>
                     </li>
                     <li>
                         <a href="/Home/visit_management">
-                            <i class="fa fa-clock-o"></i> <span>مدیریت نوبت‌ها</span>
+                            <i class="fa fa-clock-o"></i> <span>@Hospital.res.res1.m_visit</span>
                         </a>
                     </li>
                 </ul>
@@ -372,7 +380,7 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    صفحه خالی
+                    @ViewBag.title
                     <small>آماده برای پروژه شما</small>
                 </h1>
                 <ol class="breadcrumb">

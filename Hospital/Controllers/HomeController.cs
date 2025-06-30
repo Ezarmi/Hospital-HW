@@ -5,6 +5,9 @@ using System.Web;
 using Hospital.Models;
 using System.Web.Mvc;
 
+using System.Text;
+using System.Web.Security;
+
 namespace Hospital.Controllers
 {
     public class HomeController : Controller
@@ -103,12 +106,12 @@ namespace Hospital.Controllers
         public ActionResult recept()
         {
             //Session.Timeout = 60;
-            ViewBag.title = "داشبرد";
+            ViewBag.title = Hospital.res.res1.m_dashbord;
             return View();
         }
         public ActionResult visit_management()
         {
-            ViewBag.title = "مدیریت نوبت‌ها";
+            ViewBag.title = Hospital.res.res1.m_visit;
             return View();
         }
 
@@ -128,8 +131,11 @@ namespace Hospital.Controllers
                 {
                     // Session["userid"] = user.pkID;
 
-                    Response.Cookies["userid"].Value = user.pkID.ToString();
-                    Response.Cookies["userid"].Expires = DateTime.Now.AddDays(10);
+                    var cookieText = Encoding.UTF8.GetBytes(user.pkID.ToString());
+                    var encryptedValue = Convert.ToBase64String(MachineKey.Protect(cookieText, "alirezaomg"));
+
+                    Response.Cookies["omg2i@try"].Value = encryptedValue;
+                    Response.Cookies["omg2i@try"].Expires = DateTime.Now.AddDays(10);
 
                     status = 1;//login ok
                 }
@@ -147,9 +153,23 @@ namespace Hospital.Controllers
 
         public void logout()
         {
-            Response.Cookies["userid"].Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies["omg2i@try"].Expires = DateTime.Now.AddDays(-1);
+            Session.Abandon();
 
             Response.Redirect("/Home/index");
+        }
+
+        public void setname()
+        {
+            var bytes = Convert.FromBase64String(Request.Cookies["omg2i@try"].Value);
+            var output = MachineKey.Unprotect(bytes, "alirezaomg");
+            string result = Encoding.UTF8.GetString(output);
+
+            int userid = int.Parse(result);
+
+            var user=context.tbl_Doctors.Where(x=> x.pkID == userid).SingleOrDefault();
+
+            Session["username"] = user.Name + " " + user.Family;
         }
 
     }
