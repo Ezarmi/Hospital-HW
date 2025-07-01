@@ -24,5 +24,8 @@ namespace Hospital.Models
         public string Family { get; set; }
         public string PDate { get; set; }
         public string PTime { get; set; }
+        public string pName { get; set; }
+        public string pFamily { get; set; }
+        public string pMobile { get; set; }
     }
 }

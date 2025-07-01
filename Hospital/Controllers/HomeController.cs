@@ -115,6 +115,12 @@ namespace Hospital.Controllers
             return View();
         }
 
+        public ActionResult getvisits()
+        {
+            var visits = context.View_Visit.ToList();
+            return Json(visits, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult login()
         {
             return View();
@@ -134,8 +140,8 @@ namespace Hospital.Controllers
                     var cookieText = Encoding.UTF8.GetBytes(user.pkID.ToString());
                     var encryptedValue = Convert.ToBase64String(MachineKey.Protect(cookieText, "alirezaomg"));
 
-                    Response.Cookies["omg2i@try"].Value = encryptedValue;
-                    Response.Cookies["omg2i@try"].Expires = DateTime.Now.AddDays(10);
+                    Response.Cookies["iid"].Value = encryptedValue;
+                    Response.Cookies["iid"].Expires = DateTime.Now.AddDays(500);
 
                     status = 1;//login ok
                 }
@@ -153,7 +159,7 @@ namespace Hospital.Controllers
 
         public void logout()
         {
-            Response.Cookies["omg2i@try"].Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies["iid"].Expires = DateTime.Now.AddDays(-1);
             Session.Abandon();
 
             Response.Redirect("/Home/index");
@@ -161,7 +167,7 @@ namespace Hospital.Controllers
 
         public void setname()
         {
-            var bytes = Convert.FromBase64String(Request.Cookies["omg2i@try"].Value);
+            var bytes = Convert.FromBase64String(Request.Cookies["iid"].Value);
             var output = MachineKey.Unprotect(bytes, "alirezaomg");
             string result = Encoding.UTF8.GetString(output);
 

@@ -30,7 +30,8 @@ namespace Hospital.Models
         public virtual DbSet<tbl_Awards> tbl_Awards { get; set; }
         public virtual DbSet<tbl_Research> tbl_Research { get; set; }
         public virtual DbSet<tbl_Visit> tbl_Visit { get; set; }
-        public virtual DbSet<View_Visit> View_Visit { get; set; }
         public virtual DbSet<tbl_Patient> tbl_Patient { get; set; }
+        public virtual DbSet<tbl_VisitType> tbl_VisitType { get; set; }
+        public virtual DbSet<View_Visit> View_Visit { get; set; }
     }
 }

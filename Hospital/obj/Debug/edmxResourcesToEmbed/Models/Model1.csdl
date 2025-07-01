@@ -47,10 +47,15 @@
       <End Role="tbl_Doctors" EntitySet="tbl_Doctors" />
       <End Role="tbl_Visit" EntitySet="tbl_Visit" />
     </AssociationSet>
-    <EntitySet Name="View_Visit" EntityType="hospitalModel.View_Visit" />
     <EntitySet Name="tbl_Patient" EntityType="hospitalModel.tbl_Patient" />
     <AssociationSet Name="FK_tbl_Visit_To_Patient" Association="hospitalModel.FK_tbl_Visit_To_Patient">
       <End Role="tbl_Patient" EntitySet="tbl_Patient" />
+      <End Role="tbl_Visit" EntitySet="tbl_Visit" />
+    </AssociationSet>
+    <EntitySet Name="tbl_VisitType" EntityType="hospitalModel.tbl_VisitType" />
+    <EntitySet Name="View_Visit" EntityType="hospitalModel.View_Visit" />
+    <AssociationSet Name="FK_tbl_Visit_To_VisitType" Association="hospitalModel.FK_tbl_Visit_To_VisitType">
+      <End Role="tbl_VisitType" EntitySet="tbl_VisitType" />
       <End Role="tbl_Visit" EntitySet="tbl_Visit" />
     </AssociationSet>
   </EntityContainer>
@@ -80,6 +85,7 @@
     <Property Name="fkVTID" Type="Int32" />
     <NavigationProperty Name="tbl_Doctors" Relationship="hospitalModel.FK_tbl_Visit_To_tbl_Doctors" FromRole="tbl_Visit" ToRole="tbl_Doctors" />
     <NavigationProperty Name="tbl_Patient" Relationship="hospitalModel.FK_tbl_Visit_To_Patient" FromRole="tbl_Visit" ToRole="tbl_Patient" />
+    <NavigationProperty Name="tbl_VisitType" Relationship="hospitalModel.FK_tbl_Visit_To_VisitType" FromRole="tbl_Visit" ToRole="tbl_VisitType" />
   </EntityType>
   <Association Name="FK_tbl_Visit_To_tbl_Doctors">
     <End Type="hospitalModel.tbl_Doctors" Role="tbl_Doctors" Multiplicity="1" />
@@ -93,25 +99,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="View_Visit">
-    <Key>
-      <PropertyRef Name="fkDocID" />
-      <PropertyRef Name="pkID" />
-      <PropertyRef Name="SDate" />
-      <PropertyRef Name="Name" />
-      <PropertyRef Name="Family" />
-    </Key>
-    <Property Name="fkDocID" Type="Int32" Nullable="false" />
-    <Property Name="pkID" Type="Int32" Nullable="false" />
-    <Property Name="SDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="EDate" Type="DateTime" Precision="3" />
-    <Property Name="fkVTID" Type="Int32" />
-    <Property Name="fkPID" Type="Int32" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Family" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="PTime" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="tbl_Patient">
     <Key>
       <PropertyRef Name="pkID" />
@@ -131,6 +118,51 @@
       </Principal>
       <Dependent Role="tbl_Visit">
         <PropertyRef Name="fkPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tbl_VisitType">
+    <Key>
+      <PropertyRef Name="pkID" />
+    </Key>
+    <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbl_Visit" Relationship="hospitalModel.FK_tbl_Visit_To_VisitType" FromRole="tbl_VisitType" ToRole="tbl_Visit" />
+  </EntityType>
+  <EntityType Name="View_Visit">
+    <Key>
+      <PropertyRef Name="fkDocID" />
+      <PropertyRef Name="pkID" />
+      <PropertyRef Name="SDate" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Family" />
+      <PropertyRef Name="pName" />
+      <PropertyRef Name="pFamily" />
+      <PropertyRef Name="pMobile" />
+    </Key>
+    <Property Name="fkDocID" Type="Int32" Nullable="false" />
+    <Property Name="pkID" Type="Int32" Nullable="false" />
+    <Property Name="SDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EDate" Type="DateTime" Precision="3" />
+    <Property Name="fkVTID" Type="Int32" />
+    <Property Name="fkPID" Type="Int32" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Family" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="PTime" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="pName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="pFamily" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="pMobile" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_tbl_Visit_To_VisitType">
+    <End Type="hospitalModel.tbl_VisitType" Role="tbl_VisitType" Multiplicity="0..1" />
+    <End Type="hospitalModel.tbl_Visit" Role="tbl_Visit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_VisitType">
+        <PropertyRef Name="pkID" />
+      </Principal>
+      <Dependent Role="tbl_Visit">
+        <PropertyRef Name="fkVTID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

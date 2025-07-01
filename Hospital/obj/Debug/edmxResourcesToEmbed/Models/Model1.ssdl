@@ -52,6 +52,13 @@
     <Property Name="fkPID" Type="int" />
     <Property Name="fkVTID" Type="int" />
   </EntityType>
+  <EntityType Name="tbl_VisitType">
+    <Key>
+      <PropertyRef Name="pkID" />
+    </Key>
+    <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJECT\HOSPITAL-HW\HOSPITAL\APP_DATA\DATABASE1.MDF.dbo.View_Visit' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="View_Visit">
@@ -61,6 +68,9 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
       <PropertyRef Name="SDate" />
       <PropertyRef Name="Name" />
       <PropertyRef Name="Family" />
+      <PropertyRef Name="pName" />
+      <PropertyRef Name="pFamily" />
+      <PropertyRef Name="pMobile" />
     </Key>
     <Property Name="fkDocID" Type="int" Nullable="false" />
     <Property Name="pkID" Type="int" Nullable="false" />
@@ -72,6 +82,9 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
     <Property Name="Family" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="PDate" Type="nvarchar" MaxLength="10" />
     <Property Name="PTime" Type="varchar" MaxLength="8" />
+    <Property Name="pName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="pFamily" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="pMobile" Type="char" MaxLength="11" Nullable="false" />
   </EntityType>
   <Association Name="FK_Table_1_Table_1">
     <End Role="tbl_Skills" Type="Self.tbl_Skills" Multiplicity="1" />
@@ -109,6 +122,18 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tbl_Visit_To_VisitType">
+    <End Role="tbl_VisitType" Type="Self.tbl_VisitType" Multiplicity="0..1" />
+    <End Role="tbl_Visit" Type="Self.tbl_Visit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_VisitType">
+        <PropertyRef Name="pkID" />
+      </Principal>
+      <Dependent Role="tbl_Visit">
+        <PropertyRef Name="fkVTID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="hospitalModelStoreContainer">
     <EntitySet Name="tbl_Awards" EntityType="Self.tbl_Awards" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_Doctors" EntityType="Self.tbl_Doctors" Schema="dbo" store:Type="Tables" />
@@ -116,6 +141,7 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
     <EntitySet Name="tbl_Research" EntityType="Self.tbl_Research" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_Skills" EntityType="Self.tbl_Skills" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_Visit" EntityType="Self.tbl_Visit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_VisitType" EntityType="Self.tbl_VisitType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="View_Visit" EntityType="Self.View_Visit" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [View_Visit].[fkDocID] AS [fkDocID], 
@@ -127,7 +153,10 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
     [View_Visit].[Name] AS [Name], 
     [View_Visit].[Family] AS [Family], 
     [View_Visit].[PDate] AS [PDate], 
-    [View_Visit].[PTime] AS [PTime]
+    [View_Visit].[PTime] AS [PTime], 
+    [View_Visit].[pName] AS [pName], 
+    [View_Visit].[pFamily] AS [pFamily], 
+    [View_Visit].[pMobile] AS [pMobile]
     FROM [dbo].[View_Visit] AS [View_Visit]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_Table_1_Table_1" Association="Self.FK_Table_1_Table_1">
@@ -140,6 +169,10 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
     </AssociationSet>
     <AssociationSet Name="FK_tbl_Visit_To_tbl_Doctors" Association="Self.FK_tbl_Visit_To_tbl_Doctors">
       <End Role="tbl_Doctors" EntitySet="tbl_Doctors" />
+      <End Role="tbl_Visit" EntitySet="tbl_Visit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Visit_To_VisitType" Association="Self.FK_tbl_Visit_To_VisitType">
+      <End Role="tbl_VisitType" EntitySet="tbl_VisitType" />
       <End Role="tbl_Visit" EntitySet="tbl_Visit" />
     </AssociationSet>
   </EntityContainer>

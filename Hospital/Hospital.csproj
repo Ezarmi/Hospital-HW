@@ -9559,6 +9559,7 @@
     <Content Include="assets\build\js\PushMenu.js" />
     <Content Include="assets\build\js\TodoList.js" />
     <Content Include="assets\build\js\Tree.js" />
+    <Content Include="assets\css\ft.css" />
     <Content Include="assets\css\style.css" />
     <Content Include="assets\dist\css\AdminLTE.css" />
     <Content Include="assets\dist\css\AdminLTE.min.css" />
@@ -9681,8 +9682,10 @@
     <Content Include="assets\img\testimonials\testimonials-4.jpg" />
     <Content Include="assets\img\testimonials\testimonials-5.jpg" />
     <Content Include="assets\JQuery\JQuery 3.7.1.js" />
+    <Content Include="assets\js\ft.js" />
     <Content Include="assets\js\m2.js" />
     <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\visit.js" />
     <Content Include="assets\login\login.js" />
     <Content Include="assets\plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="assets\plugins\bootstrap-slider\slider.css" />
@@ -9941,6 +9944,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_Visit.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_VisitType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\View_Visit.cs">

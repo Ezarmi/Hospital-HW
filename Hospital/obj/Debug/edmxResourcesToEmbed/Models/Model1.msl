@@ -49,9 +49,30 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Patient">
+      <EntityTypeMapping TypeName="hospitalModel.tbl_Patient">
+        <MappingFragment StoreEntitySet="tbl_Patient">
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Family" ColumnName="Family" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="pkID" ColumnName="pkID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_VisitType">
+      <EntityTypeMapping TypeName="hospitalModel.tbl_VisitType">
+        <MappingFragment StoreEntitySet="tbl_VisitType">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="pkID" ColumnName="pkID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="View_Visit">
       <EntityTypeMapping TypeName="hospitalModel.View_Visit">
         <MappingFragment StoreEntitySet="View_Visit">
+          <ScalarProperty Name="pMobile" ColumnName="pMobile" />
+          <ScalarProperty Name="pFamily" ColumnName="pFamily" />
+          <ScalarProperty Name="pName" ColumnName="pName" />
           <ScalarProperty Name="PTime" ColumnName="PTime" />
           <ScalarProperty Name="PDate" ColumnName="PDate" />
           <ScalarProperty Name="Family" ColumnName="Family" />
@@ -62,16 +83,6 @@
           <ScalarProperty Name="SDate" ColumnName="SDate" />
           <ScalarProperty Name="pkID" ColumnName="pkID" />
           <ScalarProperty Name="fkDocID" ColumnName="fkDocID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tbl_Patient">
-      <EntityTypeMapping TypeName="hospitalModel.tbl_Patient">
-        <MappingFragment StoreEntitySet="tbl_Patient">
-          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-          <ScalarProperty Name="Family" ColumnName="Family" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="pkID" ColumnName="pkID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

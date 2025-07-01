@@ -12,17 +12,18 @@ namespace Hospital.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_Visit
+    public partial class tbl_VisitType
     {
-        public int pkID { get; set; }
-        public int fkDocID { get; set; }
-        public System.DateTime SDate { get; set; }
-        public Nullable<System.DateTime> EDate { get; set; }
-        public Nullable<int> fkPID { get; set; }
-        public Nullable<int> fkVTID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbl_VisitType()
+        {
+            this.tbl_Visit = new HashSet<tbl_Visit>();
+        }
     
-        public virtual tbl_Doctors tbl_Doctors { get; set; }
-        public virtual tbl_Patient tbl_Patient { get; set; }
-        public virtual tbl_VisitType tbl_VisitType { get; set; }
+        public int pkID { get; set; }
+        public string Type { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_Visit> tbl_Visit { get; set; }
     }
 }
