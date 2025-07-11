@@ -58,6 +58,11 @@
       <End Role="tbl_VisitType" EntitySet="tbl_VisitType" />
       <End Role="tbl_Visit" EntitySet="tbl_Visit" />
     </AssociationSet>
+    <EntitySet Name="tbl_VisitStatus" EntityType="hospitalModel.tbl_VisitStatus" />
+    <AssociationSet Name="FK_tbl_Visit_To_VisitStatus" Association="hospitalModel.FK_tbl_Visit_To_VisitStatus">
+      <End Role="tbl_VisitStatus" EntitySet="tbl_VisitStatus" />
+      <End Role="tbl_Visit" EntitySet="tbl_Visit" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="tbl_Awards">
     <Key>
@@ -86,6 +91,8 @@
     <NavigationProperty Name="tbl_Doctors" Relationship="hospitalModel.FK_tbl_Visit_To_tbl_Doctors" FromRole="tbl_Visit" ToRole="tbl_Doctors" />
     <NavigationProperty Name="tbl_Patient" Relationship="hospitalModel.FK_tbl_Visit_To_Patient" FromRole="tbl_Visit" ToRole="tbl_Patient" />
     <NavigationProperty Name="tbl_VisitType" Relationship="hospitalModel.FK_tbl_Visit_To_VisitType" FromRole="tbl_Visit" ToRole="tbl_VisitType" />
+    <Property Name="fkVisitStatus" Type="Int32" />
+    <NavigationProperty Name="tbl_VisitStatus" Relationship="hospitalModel.FK_tbl_Visit_To_VisitStatus" FromRole="tbl_Visit" ToRole="tbl_VisitStatus" />
   </EntityType>
   <Association Name="FK_tbl_Visit_To_tbl_Doctors">
     <End Type="hospitalModel.tbl_Doctors" Role="tbl_Doctors" Multiplicity="1" />
@@ -139,6 +146,8 @@
       <PropertyRef Name="pName" />
       <PropertyRef Name="pFamily" />
       <PropertyRef Name="pMobile" />
+      <PropertyRef Name="Type" />
+      <PropertyRef Name="VisitStatus" />
     </Key>
     <Property Name="fkDocID" Type="Int32" Nullable="false" />
     <Property Name="pkID" Type="Int32" Nullable="false" />
@@ -153,6 +162,9 @@
     <Property Name="pName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="pFamily" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="pMobile" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="false" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="fkVisitStatus" Type="Int32" />
+    <Property Name="VisitStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_tbl_Visit_To_VisitType">
     <End Type="hospitalModel.tbl_VisitType" Role="tbl_VisitType" Multiplicity="0..1" />
@@ -163,6 +175,26 @@
       </Principal>
       <Dependent Role="tbl_Visit">
         <PropertyRef Name="fkVTID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tbl_VisitStatus">
+    <Key>
+      <PropertyRef Name="pkID" />
+    </Key>
+    <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VisitStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbl_Visit" Relationship="hospitalModel.FK_tbl_Visit_To_VisitStatus" FromRole="tbl_VisitStatus" ToRole="tbl_Visit" />
+  </EntityType>
+  <Association Name="FK_tbl_Visit_To_VisitStatus">
+    <End Type="hospitalModel.tbl_VisitStatus" Role="tbl_VisitStatus" Multiplicity="0..1" />
+    <End Type="hospitalModel.tbl_Visit" Role="tbl_Visit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_VisitStatus">
+        <PropertyRef Name="pkID" />
+      </Principal>
+      <Dependent Role="tbl_Visit">
+        <PropertyRef Name="fkVisitStatus" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

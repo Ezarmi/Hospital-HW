@@ -43,7 +43,6 @@
             });
     });
 
-
     $("#doctor").on('change', function (e) {
         var doc = $("#doctor").val();
         var doc2 = doc.split("-");

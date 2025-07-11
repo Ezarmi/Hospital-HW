@@ -9946,6 +9946,9 @@
     <Compile Include="Models\tbl_Visit.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbl_VisitStatus.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbl_VisitType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

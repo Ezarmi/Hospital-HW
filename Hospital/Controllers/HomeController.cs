@@ -115,12 +115,6 @@ namespace Hospital.Controllers
             return View();
         }
 
-        public ActionResult getvisits()
-        {
-            var visits = context.View_Visit.ToList();
-            return Json(visits, JsonRequestBehavior.AllowGet);
-        }
-
         public ActionResult login()
         {
             return View();
@@ -153,6 +147,32 @@ namespace Hospital.Controllers
             else
             {
                 status = 3; //dosen't match pn
+            }
+            return Json(status, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult getvisits()
+        {
+            var visits = context.View_Visit.ToList();
+            return Json(visits, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult getstatus()
+        {
+            var status=context.tbl_VisitStatus.Select(x=> new {x.pkID, x.VisitStatus}).ToList();
+
+            return Json(status, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult setstatus(int state, int id)
+        {
+            int status = 0;
+            var visit = context.tbl_Visit.Where(x => x.pkID == id).SingleOrDefault();
+            if (visit != null)
+            {
+                visit.fkVisitStatus= state;
+                context.SaveChanges();
+                status = 1; //ok
             }
             return Json(status, JsonRequestBehavior.AllowGet);
         }

@@ -40,6 +40,7 @@
     <EntitySetMapping Name="tbl_Visit">
       <EntityTypeMapping TypeName="hospitalModel.tbl_Visit">
         <MappingFragment StoreEntitySet="tbl_Visit">
+          <ScalarProperty Name="fkVisitStatus" ColumnName="fkVisitStatus" />
           <ScalarProperty Name="fkVTID" ColumnName="fkVTID" />
           <ScalarProperty Name="fkPID" ColumnName="fkPID" />
           <ScalarProperty Name="EDate" ColumnName="EDate" />
@@ -70,6 +71,9 @@
     <EntitySetMapping Name="View_Visit">
       <EntityTypeMapping TypeName="hospitalModel.View_Visit">
         <MappingFragment StoreEntitySet="View_Visit">
+          <ScalarProperty Name="VisitStatus" ColumnName="VisitStatus" />
+          <ScalarProperty Name="fkVisitStatus" ColumnName="fkVisitStatus" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="pMobile" ColumnName="pMobile" />
           <ScalarProperty Name="pFamily" ColumnName="pFamily" />
           <ScalarProperty Name="pName" ColumnName="pName" />
@@ -83,6 +87,14 @@
           <ScalarProperty Name="SDate" ColumnName="SDate" />
           <ScalarProperty Name="pkID" ColumnName="pkID" />
           <ScalarProperty Name="fkDocID" ColumnName="fkDocID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_VisitStatus">
+      <EntityTypeMapping TypeName="hospitalModel.tbl_VisitStatus">
+        <MappingFragment StoreEntitySet="tbl_VisitStatus">
+          <ScalarProperty Name="VisitStatus" ColumnName="VisitStatus" />
+          <ScalarProperty Name="pkID" ColumnName="pkID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

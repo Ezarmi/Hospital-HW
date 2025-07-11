@@ -20,9 +20,11 @@ namespace Hospital.Models
         public Nullable<System.DateTime> EDate { get; set; }
         public Nullable<int> fkPID { get; set; }
         public Nullable<int> fkVTID { get; set; }
+        public Nullable<int> fkVisitStatus { get; set; }
     
         public virtual tbl_Doctors tbl_Doctors { get; set; }
         public virtual tbl_Patient tbl_Patient { get; set; }
         public virtual tbl_VisitType tbl_VisitType { get; set; }
+        public virtual tbl_VisitStatus tbl_VisitStatus { get; set; }
     }
 }

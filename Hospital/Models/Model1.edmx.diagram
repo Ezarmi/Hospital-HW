@@ -9,14 +9,16 @@
         <EntityTypeShape EntityType="hospitalModel.tbl_Skills" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="hospitalModel.FK_Table_1_Table_1" ManuallyRouted="false" />
         <EntityTypeShape EntityType="hospitalModel.tbl_Awards" Width="1.5" PointX="0.75" PointY="2.875" />
-        <EntityTypeShape EntityType="hospitalModel.tbl_Research" Width="1.5" PointX="3.375" PointY="2.875" />
+        <EntityTypeShape EntityType="hospitalModel.tbl_Research" Width="1.5" PointX="3.375" PointY="3.25" />
         <EntityTypeShape EntityType="hospitalModel.tbl_Visit" Width="1.5" PointX="5.5" PointY="0.5" />
         <AssociationConnector Association="hospitalModel.FK_tbl_Visit_To_tbl_Doctors" />
-        <EntityTypeShape EntityType="hospitalModel.tbl_Patient" Width="1.5" PointX="3.375" PointY="5.875" />
+        <EntityTypeShape EntityType="hospitalModel.tbl_Patient" Width="1.5" PointX="0.75" PointY="4.875" />
         <AssociationConnector Association="hospitalModel.FK_tbl_Visit_To_Patient" />
-        <EntityTypeShape EntityType="hospitalModel.tbl_VisitType" Width="1.5" PointX="0.75" PointY="5.875" />
-        <EntityTypeShape EntityType="hospitalModel.View_Visit" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="hospitalModel.tbl_VisitType" Width="1.5" PointX="5.625" PointY="5.5" />
+        <EntityTypeShape EntityType="hospitalModel.View_Visit" Width="1.5" PointX="7.25" PointY="0.5" />
         <AssociationConnector Association="hospitalModel.FK_tbl_Visit_To_VisitType" />
+        <EntityTypeShape EntityType="hospitalModel.tbl_VisitStatus" Width="1.5" PointX="0.75" PointY="7.875" />
+        <AssociationConnector Association="hospitalModel.FK_tbl_Visit_To_VisitStatus" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

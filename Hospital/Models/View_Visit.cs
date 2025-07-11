@@ -27,5 +27,8 @@ namespace Hospital.Models
         public string pName { get; set; }
         public string pFamily { get; set; }
         public string pMobile { get; set; }
+        public string Type { get; set; }
+        public Nullable<int> fkVisitStatus { get; set; }
+        public string VisitStatus { get; set; }
     }
 }
