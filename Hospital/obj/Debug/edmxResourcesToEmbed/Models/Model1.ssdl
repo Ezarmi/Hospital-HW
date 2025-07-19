@@ -52,6 +52,7 @@
     <Property Name="fkPID" Type="int" />
     <Property Name="fkVTID" Type="int" />
     <Property Name="fkVisitStatus" Type="int" />
+    <Property Name="hashid" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="tbl_VisitStatus">
     <Key>
@@ -88,6 +89,7 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
     <Property Name="EDate" Type="datetime" />
     <Property Name="fkVTID" Type="int" />
     <Property Name="fkPID" Type="int" />
+    <Property Name="hashid" Type="nvarchar" MaxLength="100" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Family" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="PDate" Type="nvarchar" MaxLength="10" />
@@ -176,6 +178,7 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
     [View_Visit].[EDate] AS [EDate], 
     [View_Visit].[fkVTID] AS [fkVTID], 
     [View_Visit].[fkPID] AS [fkPID], 
+    [View_Visit].[hashid] AS [hashid], 
     [View_Visit].[Name] AS [Name], 
     [View_Visit].[Family] AS [Family], 
     [View_Visit].[PDate] AS [PDate], 

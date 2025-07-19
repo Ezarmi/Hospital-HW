@@ -57,6 +57,7 @@
           <Property Name="fkPID" Type="int" />
           <Property Name="fkVTID" Type="int" />
           <Property Name="fkVisitStatus" Type="int" />
+          <Property Name="hashid" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="tbl_VisitStatus">
           <Key>
@@ -93,6 +94,7 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
           <Property Name="EDate" Type="datetime" />
           <Property Name="fkVTID" Type="int" />
           <Property Name="fkPID" Type="int" />
+          <Property Name="hashid" Type="nvarchar" MaxLength="100" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Family" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PDate" Type="nvarchar" MaxLength="10" />
@@ -181,6 +183,7 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
     [View_Visit].[EDate] AS [EDate], 
     [View_Visit].[fkVTID] AS [fkVTID], 
     [View_Visit].[fkPID] AS [fkPID], 
+    [View_Visit].[hashid] AS [hashid], 
     [View_Visit].[Name] AS [Name], 
     [View_Visit].[Family] AS [Family], 
     [View_Visit].[PDate] AS [PDate], 
@@ -311,6 +314,7 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
           <NavigationProperty Name="tbl_VisitType" Relationship="hospitalModel.FK_tbl_Visit_To_VisitType" FromRole="tbl_Visit" ToRole="tbl_VisitType" />
           <Property Name="fkVisitStatus" Type="Int32" />
           <NavigationProperty Name="tbl_VisitStatus" Relationship="hospitalModel.FK_tbl_Visit_To_VisitStatus" FromRole="tbl_Visit" ToRole="tbl_VisitStatus" />
+          <Property Name="hashid" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_tbl_Visit_To_tbl_Doctors">
           <End Type="hospitalModel.tbl_Doctors" Role="tbl_Doctors" Multiplicity="1" />
@@ -383,6 +387,7 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
           <Property Name="Type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="fkVisitStatus" Type="Int32" />
           <Property Name="VisitStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hashid" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_tbl_Visit_To_VisitType">
           <End Type="hospitalModel.tbl_VisitType" Role="tbl_VisitType" Multiplicity="0..1" />
@@ -461,6 +466,7 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
           <EntitySetMapping Name="tbl_Visit">
             <EntityTypeMapping TypeName="hospitalModel.tbl_Visit">
               <MappingFragment StoreEntitySet="tbl_Visit">
+                <ScalarProperty Name="hashid" ColumnName="hashid" />
                 <ScalarProperty Name="fkVisitStatus" ColumnName="fkVisitStatus" />
                 <ScalarProperty Name="fkVTID" ColumnName="fkVTID" />
                 <ScalarProperty Name="fkPID" ColumnName="fkPID" />
@@ -492,6 +498,7 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
           <EntitySetMapping Name="View_Visit">
             <EntityTypeMapping TypeName="hospitalModel.View_Visit">
               <MappingFragment StoreEntitySet="View_Visit">
+                <ScalarProperty Name="hashid" ColumnName="hashid" />
                 <ScalarProperty Name="VisitStatus" ColumnName="VisitStatus" />
                 <ScalarProperty Name="fkVisitStatus" ColumnName="fkVisitStatus" />
                 <ScalarProperty Name="Type" ColumnName="Type" />

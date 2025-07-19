@@ -12,7 +12,7 @@
                     "<td>" + res[item].pName + " " + res[item].pFamily + "</td>" +
                     "<td>" + res[item].pMobile + "</td>" +
                     "<td>" + res[item].Type + "</td>" +
-                    "<td class='status' id=status_" + res[item].pkID + " >" + res[item].VisitStatus + "</td>"
+                    "<td class='status' id=status_" + res[item].hashid + " >" + res[item].VisitStatus + "</td>"
                 );
             }
 
@@ -52,19 +52,34 @@
 
     $(document).on("click", ".chgstatus", function () {
         var state = $(this).html().split(" - ");
+
+
+        var nid = $("#chg").html();
+
+        var pstatus = document.getElementById(nid).innerHTML;
+        document.getElementById(nid).innerHTML="...تغییر...";
+
         var id = $("#chg").html().split("_");
 
-        $.post("/Home/setstatus", {state:state[0],id:id[1]})
+        var token = $('input[name="__RequestVerificationToken"]').val();
+
+        $.post("/Home/setstatus", { state: state[0], sid: id[1], __RequestVerificationToken:token})
             .done(function (res) {
-                if (res == 1) {
-                    location.reload();
+                if (res.status == 1) {
+                    //location.reload();
+
+                    document.getElementById(nid).innerHTML = res.sname;
                 }
 
             })
             .fail(function () {
 
+                document.getElementById(nid).innerHTML = pstatus;
+
             })
             .always(function () {
+
+                $("#changestatus").modal('hide');
 
             });
     });

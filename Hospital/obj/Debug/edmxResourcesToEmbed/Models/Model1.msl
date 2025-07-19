@@ -40,6 +40,7 @@
     <EntitySetMapping Name="tbl_Visit">
       <EntityTypeMapping TypeName="hospitalModel.tbl_Visit">
         <MappingFragment StoreEntitySet="tbl_Visit">
+          <ScalarProperty Name="hashid" ColumnName="hashid" />
           <ScalarProperty Name="fkVisitStatus" ColumnName="fkVisitStatus" />
           <ScalarProperty Name="fkVTID" ColumnName="fkVTID" />
           <ScalarProperty Name="fkPID" ColumnName="fkPID" />
@@ -71,6 +72,7 @@
     <EntitySetMapping Name="View_Visit">
       <EntityTypeMapping TypeName="hospitalModel.View_Visit">
         <MappingFragment StoreEntitySet="View_Visit">
+          <ScalarProperty Name="hashid" ColumnName="hashid" />
           <ScalarProperty Name="VisitStatus" ColumnName="VisitStatus" />
           <ScalarProperty Name="fkVisitStatus" ColumnName="fkVisitStatus" />
           <ScalarProperty Name="Type" ColumnName="Type" />

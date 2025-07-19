@@ -123,6 +123,7 @@ namespace Hospital.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult login_check(int pn, string pass)
         {
+            Session.Timeout = 30;
             int status = 0;
             var user = context.tbl_Doctors.Where(x => x.PersonalNum == pn).SingleOrDefault();
             if (user != null)
@@ -131,8 +132,8 @@ namespace Hospital.Controllers
                 {
                     // Session["userid"] = user.pkID;
 
-                    var cookieText = Encoding.UTF8.GetBytes(user.pkID.ToString());
-                    var encryptedValue = Convert.ToBase64String(MachineKey.Protect(cookieText, "alirezaomg"));
+                        var cookieText = Encoding.UTF8.GetBytes(user.pkID.ToString());
+                        var encryptedValue = Convert.ToBase64String(MachineKey.Protect(cookieText, "alirezaomg"));
 
                     Response.Cookies["iid"].Value = encryptedValue;
                     Response.Cookies["iid"].Expires = DateTime.Now.AddDays(500);
@@ -154,6 +155,14 @@ namespace Hospital.Controllers
         public ActionResult getvisits()
         {
             var visits = context.View_Visit.ToList();
+
+            foreach (var item in visits)
+            {
+                var idText = Encoding.UTF8.GetBytes(item.pkID.ToString());
+                var encryptedID = Convert.ToBase64String(MachineKey.Protect(idText, "alirezaomg"));
+                item.hashid = encryptedID;
+            }
+
             return Json(visits, JsonRequestBehavior.AllowGet);
         }
 
@@ -164,17 +173,29 @@ namespace Hospital.Controllers
             return Json(status, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult setstatus(int state, int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult setstatus(int state, string sid)
         {
+            var bytes = Convert.FromBase64String(sid);
+            var output = MachineKey.Unprotect(bytes, "alirezaomg");
+            string result = Encoding.UTF8.GetString(output);
+
+            int id = int.Parse(result);
+
             int status = 0;
+
+            string sname = "";
             var visit = context.tbl_Visit.Where(x => x.pkID == id).SingleOrDefault();
             if (visit != null)
             {
                 visit.fkVisitStatus= state;
                 context.SaveChanges();
                 status = 1; //ok
+
+                sname=context.tbl_VisitStatus.Where(x=> x.pkID == state).Select(x=> x.VisitStatus).SingleOrDefault();
             }
-            return Json(status, JsonRequestBehavior.AllowGet);
+            return Json(new { status = status, sname = sname }, JsonRequestBehavior.AllowGet);
         }
 
         public void logout()

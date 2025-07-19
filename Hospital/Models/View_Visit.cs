@@ -30,5 +30,6 @@ namespace Hospital.Models
         public string Type { get; set; }
         public Nullable<int> fkVisitStatus { get; set; }
         public string VisitStatus { get; set; }
+        public string hashid { get; set; }
     }
 }
