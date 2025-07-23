@@ -24,6 +24,7 @@ namespace Hospital.Models
         public string Name { get; set; }
         public string Family { get; set; }
         public string Mobile { get; set; }
+        public string NationalCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_Visit> tbl_Visit { get; set; }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Hospital.Models;
 using System.Web.Mvc;
+using System.Globalization;
 
 using System.Text;
 using System.Web.Security;
@@ -198,6 +199,82 @@ namespace Hospital.Controllers
             return Json(new { status = status, sname = sname }, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult removevisit(string vid)
+        {
+            var bytes = Convert.FromBase64String(vid);
+            var output = MachineKey.Unprotect(bytes, "alirezaomg");
+            string result = Encoding.UTF8.GetString(output);
+
+            int id=int.Parse(result);
+            var visit = context.tbl_Visit.Where(x => x.pkID == id).SingleOrDefault();
+
+            context.tbl_Visit.Remove(visit);
+            context.SaveChanges();
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult addvisit(int docid, int visitid, string visitdatetime, string pid)
+        {
+            int intpid = 0;
+
+            if (pid != "")
+            {
+                var p = context.tbl_Patient.Where(x => x.NationalCode == pid).SingleOrDefault();
+                if (p == null)
+                {
+                    return Json(new { status = 2, nv = 0 }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    intpid = p.pkID;
+                }
+            }
+
+            string[] vdatetime = visitdatetime.Split(' ');
+            string[] vdate = vdatetime[0].Split('/');
+            string[] vtime = vdatetime[1].Split(':');
+
+            int y = MyExtensions.PersianToEnglish(vdate[0]);
+            int m = MyExtensions.PersianToEnglish(vdate[1]);
+            int d = MyExtensions.PersianToEnglish(vdate[2]);
+            int h = MyExtensions.PersianToEnglish(vtime[0]);
+            int min = MyExtensions.PersianToEnglish(vtime[1]);
+
+            PersianCalendar pc = new PersianCalendar();
+
+            DateTime a = pc.ToDateTime(y, m, d, h, min, 0, 0);
+
+            double duration = context.View_VisitPerDoctors.Where(x => x.fkDocID == docid && x.fkVisitID == visitid).Select(x => x.Duration).Single();
+
+            tbl_Visit nv = new tbl_Visit();
+
+            nv.fkDocID = docid;
+            nv.SDate = a;
+            nv.EDate = a.AddMinutes(duration);
+            if (pid == "")
+            {
+                nv.fkPID = null;
+            }
+            else
+            {
+                nv.fkPID = intpid;
+            }
+            nv.fkVTID = visitid;
+            nv.fkVisitStatus = 1;
+
+            context.tbl_Visit.Add(nv);
+            context.SaveChanges();
+
+            var thisvisit = context.View_Visit.Where(x => x.fkDocID == docid && x.SDate == nv.SDate && x.EDate == nv.EDate).SingleOrDefault();
+
+            var idtext = Encoding.UTF8.GetBytes(thisvisit.pkID.ToString());
+            var encryptedID = Convert.ToBase64String(MachineKey.Protect(idtext, "alirezaomg"));
+
+            return Json(new { status = 1, nv = thisvisit }, JsonRequestBehavior.AllowGet);
+        }
+
         public void logout()
         {
             Response.Cookies["iid"].Expires = DateTime.Now.AddDays(-1);
@@ -219,5 +296,33 @@ namespace Hospital.Controllers
             Session["username"] = user.Name + " " + user.Family;
         }
 
+
+
+    }
+
+    // This class will convert unicod to ASCII
+    public static class MyExtensions
+    {
+        public static int PersianToEnglish (this string persianStr)
+        {
+            Dictionary<char, char> LettersDictionary = new Dictionary<char, char>
+            {
+                ['۰'] = '0',
+                ['۱'] = '1',
+                ['۲'] = '2',
+                ['۳'] = '3',
+                ['۴'] = '4',
+                ['۵'] = '5',
+                ['۶'] = '6',
+                ['۷'] = '7',
+                ['۸'] = '8',
+                ['۹'] = '9',
+            };
+            foreach(var item in persianStr)
+            {
+                persianStr = persianStr.Replace(item, LettersDictionary[item]);
+            }
+            return int.Parse(persianStr);
+        }
     }
 }

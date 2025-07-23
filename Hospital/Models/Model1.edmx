@@ -31,6 +31,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Family" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Mobile" Type="char" MaxLength="11" Nullable="false" />
+          <Property Name="NationalCode" Type="char" MaxLength="10" />
         </EntityType>
         <EntityType Name="tbl_Research">
           <Key>
@@ -85,7 +86,6 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
             <PropertyRef Name="pName" />
             <PropertyRef Name="pFamily" />
             <PropertyRef Name="pMobile" />
-            <PropertyRef Name="Type" />
             <PropertyRef Name="VisitStatus" />
           </Key>
           <Property Name="fkDocID" Type="int" Nullable="false" />
@@ -102,9 +102,24 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
           <Property Name="pName" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="pFamily" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="pMobile" Type="char" MaxLength="11" Nullable="false" />
-          <Property Name="Type" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="30" />
           <Property Name="fkVisitStatus" Type="int" />
           <Property Name="VisitStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PNC" Type="char" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJECT\HOSPITAL-HW\HOSPITAL\APP_DATA\DATABASE1.MDF.dbo.View_VisitPerDoctors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_VisitPerDoctors">
+          <Key>
+            <PropertyRef Name="pkID" />
+            <PropertyRef Name="fkDocID" />
+            <PropertyRef Name="fkVisitID" />
+            <PropertyRef Name="Duration" />
+          </Key>
+          <Property Name="pkID" Type="int" Nullable="false" />
+          <Property Name="fkDocID" Type="int" Nullable="false" />
+          <Property Name="fkVisitID" Type="int" Nullable="false" />
+          <Property Name="Duration" Type="bigint" Nullable="false" />
         </EntityType>
         <Association Name="FK_Table_1_Table_1">
           <End Role="tbl_Skills" Type="Self.tbl_Skills" Multiplicity="1" />
@@ -193,8 +208,17 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
     [View_Visit].[pMobile] AS [pMobile], 
     [View_Visit].[Type] AS [Type], 
     [View_Visit].[fkVisitStatus] AS [fkVisitStatus], 
-    [View_Visit].[VisitStatus] AS [VisitStatus]
+    [View_Visit].[VisitStatus] AS [VisitStatus], 
+    [View_Visit].[PNC] AS [PNC]
     FROM [dbo].[View_Visit] AS [View_Visit]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_VisitPerDoctors" EntityType="Self.View_VisitPerDoctors" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_VisitPerDoctors].[pkID] AS [pkID], 
+    [View_VisitPerDoctors].[fkDocID] AS [fkDocID], 
+    [View_VisitPerDoctors].[fkVisitID] AS [fkVisitID], 
+    [View_VisitPerDoctors].[Duration] AS [Duration]
+    FROM [dbo].[View_VisitPerDoctors] AS [View_VisitPerDoctors]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Table_1_Table_1" Association="Self.FK_Table_1_Table_1">
             <End Role="tbl_Skills" EntitySet="tbl_Skills" />
@@ -274,7 +298,6 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
             <End Role="tbl_Visit" EntitySet="tbl_Visit" />
           </AssociationSet>
           <EntitySet Name="tbl_VisitType" EntityType="hospitalModel.tbl_VisitType" />
-          <EntitySet Name="View_Visit" EntityType="hospitalModel.View_Visit" />
           <AssociationSet Name="FK_tbl_Visit_To_VisitType" Association="hospitalModel.FK_tbl_Visit_To_VisitType">
             <End Role="tbl_VisitType" EntitySet="tbl_VisitType" />
             <End Role="tbl_Visit" EntitySet="tbl_Visit" />
@@ -284,6 +307,8 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
             <End Role="tbl_VisitStatus" EntitySet="tbl_VisitStatus" />
             <End Role="tbl_Visit" EntitySet="tbl_Visit" />
           </AssociationSet>
+          <EntitySet Name="View_Visit" EntityType="hospitalModel.View_Visit" />
+          <EntitySet Name="View_VisitPerDoctors" EntityType="hospitalModel.View_VisitPerDoctors" />
         </EntityContainer>
         <EntityType Name="tbl_Awards">
           <Key>
@@ -337,6 +362,7 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
           <Property Name="Family" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Mobile" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="tbl_Visit" Relationship="hospitalModel.FK_tbl_Visit_To_Patient" FromRole="tbl_Patient" ToRole="tbl_Visit" />
+          <Property Name="NationalCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
         </EntityType>
         <Association Name="FK_tbl_Visit_To_Patient">
           <End Type="hospitalModel.tbl_Patient" Role="tbl_Patient" Multiplicity="0..1" />
@@ -357,37 +383,6 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
           <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tbl_Visit" Relationship="hospitalModel.FK_tbl_Visit_To_VisitType" FromRole="tbl_VisitType" ToRole="tbl_Visit" />
-        </EntityType>
-        <EntityType Name="View_Visit">
-          <Key>
-            <PropertyRef Name="fkDocID" />
-            <PropertyRef Name="pkID" />
-            <PropertyRef Name="SDate" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Family" />
-            <PropertyRef Name="pName" />
-            <PropertyRef Name="pFamily" />
-            <PropertyRef Name="pMobile" />
-            <PropertyRef Name="Type" />
-            <PropertyRef Name="VisitStatus" />
-          </Key>
-          <Property Name="fkDocID" Type="Int32" Nullable="false" />
-          <Property Name="pkID" Type="Int32" Nullable="false" />
-          <Property Name="SDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EDate" Type="DateTime" Precision="3" />
-          <Property Name="fkVTID" Type="Int32" />
-          <Property Name="fkPID" Type="Int32" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Family" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="PTime" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="pName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="pFamily" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="pMobile" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="false" />
-          <Property Name="Type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="fkVisitStatus" Type="Int32" />
-          <Property Name="VisitStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="hashid" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_tbl_Visit_To_VisitType">
           <End Type="hospitalModel.tbl_VisitType" Role="tbl_VisitType" Multiplicity="0..1" />
@@ -421,6 +416,49 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="View_Visit">
+          <Key>
+            <PropertyRef Name="fkDocID" />
+            <PropertyRef Name="pkID" />
+            <PropertyRef Name="SDate" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Family" />
+            <PropertyRef Name="pName" />
+            <PropertyRef Name="pFamily" />
+            <PropertyRef Name="pMobile" />
+            <PropertyRef Name="VisitStatus" />
+          </Key>
+          <Property Name="fkDocID" Type="Int32" Nullable="false" />
+          <Property Name="pkID" Type="Int32" Nullable="false" />
+          <Property Name="SDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EDate" Type="DateTime" Precision="3" />
+          <Property Name="fkVTID" Type="Int32" />
+          <Property Name="fkPID" Type="Int32" />
+          <Property Name="hashid" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Family" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PTime" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="pName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="pFamily" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="pMobile" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="fkVisitStatus" Type="Int32" />
+          <Property Name="VisitStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PNC" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="View_VisitPerDoctors">
+          <Key>
+            <PropertyRef Name="pkID" />
+            <PropertyRef Name="fkDocID" />
+            <PropertyRef Name="fkVisitID" />
+            <PropertyRef Name="Duration" />
+          </Key>
+          <Property Name="pkID" Type="Int32" Nullable="false" />
+          <Property Name="fkDocID" Type="Int32" Nullable="false" />
+          <Property Name="fkVisitID" Type="Int32" Nullable="false" />
+          <Property Name="Duration" Type="Int64" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -480,6 +518,7 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
           <EntitySetMapping Name="tbl_Patient">
             <EntityTypeMapping TypeName="hospitalModel.tbl_Patient">
               <MappingFragment StoreEntitySet="tbl_Patient">
+                <ScalarProperty Name="NationalCode" ColumnName="NationalCode" />
                 <ScalarProperty Name="Mobile" ColumnName="Mobile" />
                 <ScalarProperty Name="Family" ColumnName="Family" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -495,10 +534,18 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbl_VisitStatus">
+            <EntityTypeMapping TypeName="hospitalModel.tbl_VisitStatus">
+              <MappingFragment StoreEntitySet="tbl_VisitStatus">
+                <ScalarProperty Name="VisitStatus" ColumnName="VisitStatus" />
+                <ScalarProperty Name="pkID" ColumnName="pkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="View_Visit">
             <EntityTypeMapping TypeName="hospitalModel.View_Visit">
               <MappingFragment StoreEntitySet="View_Visit">
-                <ScalarProperty Name="hashid" ColumnName="hashid" />
+                <ScalarProperty Name="PNC" ColumnName="PNC" />
                 <ScalarProperty Name="VisitStatus" ColumnName="VisitStatus" />
                 <ScalarProperty Name="fkVisitStatus" ColumnName="fkVisitStatus" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -509,6 +556,7 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
                 <ScalarProperty Name="PDate" ColumnName="PDate" />
                 <ScalarProperty Name="Family" ColumnName="Family" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="hashid" ColumnName="hashid" />
                 <ScalarProperty Name="fkPID" ColumnName="fkPID" />
                 <ScalarProperty Name="fkVTID" ColumnName="fkVTID" />
                 <ScalarProperty Name="EDate" ColumnName="EDate" />
@@ -518,10 +566,12 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbl_VisitStatus">
-            <EntityTypeMapping TypeName="hospitalModel.tbl_VisitStatus">
-              <MappingFragment StoreEntitySet="tbl_VisitStatus">
-                <ScalarProperty Name="VisitStatus" ColumnName="VisitStatus" />
+          <EntitySetMapping Name="View_VisitPerDoctors">
+            <EntityTypeMapping TypeName="hospitalModel.View_VisitPerDoctors">
+              <MappingFragment StoreEntitySet="View_VisitPerDoctors">
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="fkVisitID" ColumnName="fkVisitID" />
+                <ScalarProperty Name="fkDocID" ColumnName="fkDocID" />
                 <ScalarProperty Name="pkID" ColumnName="pkID" />
               </MappingFragment>
             </EntityTypeMapping>

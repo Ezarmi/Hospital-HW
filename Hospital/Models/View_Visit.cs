@@ -20,6 +20,7 @@ namespace Hospital.Models
         public Nullable<System.DateTime> EDate { get; set; }
         public Nullable<int> fkVTID { get; set; }
         public Nullable<int> fkPID { get; set; }
+        public string hashid { get; set; }
         public string Name { get; set; }
         public string Family { get; set; }
         public string PDate { get; set; }
@@ -30,6 +31,6 @@ namespace Hospital.Models
         public string Type { get; set; }
         public Nullable<int> fkVisitStatus { get; set; }
         public string VisitStatus { get; set; }
-        public string hashid { get; set; }
+        public string PNC { get; set; }
     }
 }

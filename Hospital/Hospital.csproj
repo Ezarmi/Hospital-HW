@@ -9560,6 +9560,7 @@
     <Content Include="assets\build\js\TodoList.js" />
     <Content Include="assets\build\js\Tree.js" />
     <Content Include="assets\css\ft.css" />
+    <Content Include="assets\css\jquery.Bootstrap-PersianDateTimePicker.css" />
     <Content Include="assets\css\style.css" />
     <Content Include="assets\dist\css\AdminLTE.css" />
     <Content Include="assets\dist\css\AdminLTE.min.css" />
@@ -9682,7 +9683,9 @@
     <Content Include="assets\img\testimonials\testimonials-4.jpg" />
     <Content Include="assets\img\testimonials\testimonials-5.jpg" />
     <Content Include="assets\JQuery\JQuery 3.7.1.js" />
+    <Content Include="assets\js\calendar.js" />
     <Content Include="assets\js\ft.js" />
+    <Content Include="assets\js\jquery.Bootstrap-PersianDateTimePicker.js" />
     <Content Include="assets\js\m2.js" />
     <Content Include="assets\js\main.js" />
     <Content Include="assets\js\visit.js" />
@@ -9953,6 +9956,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\View_Visit.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\View_VisitPerDoctors.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

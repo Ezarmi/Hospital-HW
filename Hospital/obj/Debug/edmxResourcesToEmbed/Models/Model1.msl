@@ -54,6 +54,7 @@
     <EntitySetMapping Name="tbl_Patient">
       <EntityTypeMapping TypeName="hospitalModel.tbl_Patient">
         <MappingFragment StoreEntitySet="tbl_Patient">
+          <ScalarProperty Name="NationalCode" ColumnName="NationalCode" />
           <ScalarProperty Name="Mobile" ColumnName="Mobile" />
           <ScalarProperty Name="Family" ColumnName="Family" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -69,10 +70,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tbl_VisitStatus">
+      <EntityTypeMapping TypeName="hospitalModel.tbl_VisitStatus">
+        <MappingFragment StoreEntitySet="tbl_VisitStatus">
+          <ScalarProperty Name="VisitStatus" ColumnName="VisitStatus" />
+          <ScalarProperty Name="pkID" ColumnName="pkID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="View_Visit">
       <EntityTypeMapping TypeName="hospitalModel.View_Visit">
         <MappingFragment StoreEntitySet="View_Visit">
-          <ScalarProperty Name="hashid" ColumnName="hashid" />
+          <ScalarProperty Name="PNC" ColumnName="PNC" />
           <ScalarProperty Name="VisitStatus" ColumnName="VisitStatus" />
           <ScalarProperty Name="fkVisitStatus" ColumnName="fkVisitStatus" />
           <ScalarProperty Name="Type" ColumnName="Type" />
@@ -83,6 +92,7 @@
           <ScalarProperty Name="PDate" ColumnName="PDate" />
           <ScalarProperty Name="Family" ColumnName="Family" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="hashid" ColumnName="hashid" />
           <ScalarProperty Name="fkPID" ColumnName="fkPID" />
           <ScalarProperty Name="fkVTID" ColumnName="fkVTID" />
           <ScalarProperty Name="EDate" ColumnName="EDate" />
@@ -92,10 +102,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbl_VisitStatus">
-      <EntityTypeMapping TypeName="hospitalModel.tbl_VisitStatus">
-        <MappingFragment StoreEntitySet="tbl_VisitStatus">
-          <ScalarProperty Name="VisitStatus" ColumnName="VisitStatus" />
+    <EntitySetMapping Name="View_VisitPerDoctors">
+      <EntityTypeMapping TypeName="hospitalModel.View_VisitPerDoctors">
+        <MappingFragment StoreEntitySet="View_VisitPerDoctors">
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="fkVisitID" ColumnName="fkVisitID" />
+          <ScalarProperty Name="fkDocID" ColumnName="fkDocID" />
           <ScalarProperty Name="pkID" ColumnName="pkID" />
         </MappingFragment>
       </EntityTypeMapping>

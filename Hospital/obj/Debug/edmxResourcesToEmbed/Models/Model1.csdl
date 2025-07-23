@@ -53,7 +53,6 @@
       <End Role="tbl_Visit" EntitySet="tbl_Visit" />
     </AssociationSet>
     <EntitySet Name="tbl_VisitType" EntityType="hospitalModel.tbl_VisitType" />
-    <EntitySet Name="View_Visit" EntityType="hospitalModel.View_Visit" />
     <AssociationSet Name="FK_tbl_Visit_To_VisitType" Association="hospitalModel.FK_tbl_Visit_To_VisitType">
       <End Role="tbl_VisitType" EntitySet="tbl_VisitType" />
       <End Role="tbl_Visit" EntitySet="tbl_Visit" />
@@ -63,6 +62,8 @@
       <End Role="tbl_VisitStatus" EntitySet="tbl_VisitStatus" />
       <End Role="tbl_Visit" EntitySet="tbl_Visit" />
     </AssociationSet>
+    <EntitySet Name="View_Visit" EntityType="hospitalModel.View_Visit" />
+    <EntitySet Name="View_VisitPerDoctors" EntityType="hospitalModel.View_VisitPerDoctors" />
   </EntityContainer>
   <EntityType Name="tbl_Awards">
     <Key>
@@ -116,6 +117,7 @@
     <Property Name="Family" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="Mobile" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="false" />
     <NavigationProperty Name="tbl_Visit" Relationship="hospitalModel.FK_tbl_Visit_To_Patient" FromRole="tbl_Patient" ToRole="tbl_Visit" />
+    <Property Name="NationalCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
   </EntityType>
   <Association Name="FK_tbl_Visit_To_Patient">
     <End Type="hospitalModel.tbl_Patient" Role="tbl_Patient" Multiplicity="0..1" />
@@ -136,37 +138,6 @@
     <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="tbl_Visit" Relationship="hospitalModel.FK_tbl_Visit_To_VisitType" FromRole="tbl_VisitType" ToRole="tbl_Visit" />
-  </EntityType>
-  <EntityType Name="View_Visit">
-    <Key>
-      <PropertyRef Name="fkDocID" />
-      <PropertyRef Name="pkID" />
-      <PropertyRef Name="SDate" />
-      <PropertyRef Name="Name" />
-      <PropertyRef Name="Family" />
-      <PropertyRef Name="pName" />
-      <PropertyRef Name="pFamily" />
-      <PropertyRef Name="pMobile" />
-      <PropertyRef Name="Type" />
-      <PropertyRef Name="VisitStatus" />
-    </Key>
-    <Property Name="fkDocID" Type="Int32" Nullable="false" />
-    <Property Name="pkID" Type="Int32" Nullable="false" />
-    <Property Name="SDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="EDate" Type="DateTime" Precision="3" />
-    <Property Name="fkVTID" Type="Int32" />
-    <Property Name="fkPID" Type="Int32" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Family" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="PTime" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
-    <Property Name="pName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="pFamily" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="pMobile" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="false" />
-    <Property Name="Type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="fkVisitStatus" Type="Int32" />
-    <Property Name="VisitStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="hashid" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_tbl_Visit_To_VisitType">
     <End Type="hospitalModel.tbl_VisitType" Role="tbl_VisitType" Multiplicity="0..1" />
@@ -200,4 +171,47 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="View_Visit">
+    <Key>
+      <PropertyRef Name="fkDocID" />
+      <PropertyRef Name="pkID" />
+      <PropertyRef Name="SDate" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Family" />
+      <PropertyRef Name="pName" />
+      <PropertyRef Name="pFamily" />
+      <PropertyRef Name="pMobile" />
+      <PropertyRef Name="VisitStatus" />
+    </Key>
+    <Property Name="fkDocID" Type="Int32" Nullable="false" />
+    <Property Name="pkID" Type="Int32" Nullable="false" />
+    <Property Name="SDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EDate" Type="DateTime" Precision="3" />
+    <Property Name="fkVTID" Type="Int32" />
+    <Property Name="fkPID" Type="Int32" />
+    <Property Name="hashid" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Family" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="PTime" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="pName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="pFamily" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="pMobile" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="false" />
+    <Property Name="Type" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="fkVisitStatus" Type="Int32" />
+    <Property Name="VisitStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PNC" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="View_VisitPerDoctors">
+    <Key>
+      <PropertyRef Name="pkID" />
+      <PropertyRef Name="fkDocID" />
+      <PropertyRef Name="fkVisitID" />
+      <PropertyRef Name="Duration" />
+    </Key>
+    <Property Name="pkID" Type="Int32" Nullable="false" />
+    <Property Name="fkDocID" Type="Int32" Nullable="false" />
+    <Property Name="fkVisitID" Type="Int32" Nullable="false" />
+    <Property Name="Duration" Type="Int64" Nullable="false" />
+  </EntityType>
 </Schema>
