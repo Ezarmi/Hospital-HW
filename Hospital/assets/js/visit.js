@@ -5,16 +5,16 @@
             for (var item in res) {
                 $("#tbl_visits").append(
                     "<tr id='tr_" + res[item].pkID + "'>" +
-                    "<td>" + res[item].pkID + "</td>" +
-                    "<td>" + res[item].Name + " " + res[item].Family + "</td>" +
-                    "<td>" + res[item].PDate + "</td>" +
-                    "<td>" + res[item].PTime + "</td>" +
-                    "<td>" + res[item].pName + " " + res[item].pFamily + "</td>" +
-                    "<td>" + res[item].pMobile + "</td>" +
-                    "<td>" + res[item].PNC + "</td>" +
-                    "<td>" + res[item].Type + "</td>" +
-                    "<td class='status' id='status_" + res[item].hashid + "'>" + res[item].VisitStatus + "</td>" +
-                    "<td><button class='btn btn-danger rv' id='remove_" + res[item].hashid + "'>" + "حذف" + "</button></td>"
+                        "<td>" + res[item].pkID + "</td>" +
+                        "<td>" + res[item].Name + " " + res[item].Family + "</td>" +
+                        "<td>" + res[item].PDate + "</td>" +
+                        "<td>" + res[item].PTime + "</td>" +
+                        "<td>" + res[item].pName + " " + res[item].pFamily + "</td>" +
+                        "<td>" + res[item].pMobile + "</td>" +
+                        "<td>" + res[item].PNC + "</td>" +
+                        "<td>" + res[item].Type + "</td>" +
+                        "<td class='status' id='status_" + res[item].hashid + "'>" + res[item].VisitStatus + "</td>" +
+                        "<td><button class='btn btn-danger rv' id='remove_" + res[item].hashid + "'>" + "حذف" + "</button></td>"
                 );
             }
 
@@ -32,10 +32,10 @@
 
         $.post("/Home/getstatus")
             .done(function (res) {
-                $(".modal-body").empty();
+                $("#chg_body").empty();
                 for (var item in res) {
 
-                    $(".modal-body").append(
+                    $("#chg_body").append(
                         "<button class='btn btn-primary chgstatus'>" + res[item].pkID + " - " + res[item].VisitStatus + "</button>" +
                         "<br><br>"
                     );
@@ -85,7 +85,10 @@
 
             });
     });
+
+
     $("table").on("click", ".rv", function () {
+
         var trid = "#" + $(this).closest('tr').attr("id");
 
         swal({
@@ -94,8 +97,9 @@
             icon: "warning",
             button: true,
             dangerMode: true,
+
         })
-            .then(function (willDelete) {
+            .then((willDelete) => {
                 if (willDelete) {
                     var vid = this.id.split("_");
                     var token = $('input[name="__RequestVerificationToken"]').val();
@@ -130,29 +134,72 @@ function addparam() {
             for (var item in res) {
                 $('#dep_add').append(
 
-                    "<option>" + res[item].pkID + "-" + res[item].skill + "</option>"
+                    "<option>" + res[item].pkID + "-" + res[item].Skill + "</option>"
 
                 );
             }
-        })
+        });
+
+    //These Are add By MySelf
+    $("#dep_add").on('change', function (e) {
+        var dep = $("#dep_add").val();
+        var dep2 = dep.split("-");
+
+        var token = $('input[name="__RequestVerificationToken"]').val();
+
+        $.post("/Home/getdocs", { dep: dep2[0], __RequestVerificationToken: token })
+            .done(function (res) {
+
+                $("#doctors_add").empty();
+                $("#doctors_add").append("<option>" + "انتخاب کنید" + "</option>");
+
+                for (var item in res) {
+                    $("#doctors_add").append(
+                        "<option>" + res[item].pkID + "-" + res[item].Name + " " + res[item].Family + "</option>"
+                    );
+                }
+
+            });
+    });
+    $("#doctors_add").on('change', function (e) {
+        $.post("/Home/getVisitTypes")
+            .done(function (res) {
+                $("#visittype_add").empty();
+                $("#visittype_add").append("<option>" + "انتخاب کنید" + "</option>");
+
+                for (var item in res) {
+                    $("#visittype_add").append(
+                        "<option>" + res[item].pkID + "-" + res[item].Type + "</option>"
+                    );
+                }
+
+            });
+    });
     $("#addsession").modal('show');
 }
 
 function add_visit() {
+    
     $("#serverstatus").html("در حال ارتباط با سرور...");
     $("#serverstatus").css("color", "blue");
     $("#btn_add_visit").html("<i class='fa fa-spinner fa-spin'></i>");
     $("#btn_add_visit").prop("disabled", true);
-
+    
     var docid = $("#doctors_add").val().split('-');
     var visitid = $("#visittype_add").val().split('-');
 
     var token = $('input[name="__RequestVerificationToke"]').val();
 
+    alert(docid[0]);
+    alert(visitid[0]);
+    alert($("#visitdatetime_add").val());
+    alert($("#pid_add").val());
+
     $.post("/Home/addvisit", { docid: docid[0], visitid: visitid[0], visitdatetime: $("#visitdatetime_add").val(), pid: $("#pid_add").val(), __RequestVerificationToke: token })
         .done(function (res) {
             switch (res.status) {
                 case 1:
+                    alert("hi");
                     $("#serverstatus").html("نوبت ایجاد شد");
                     $("#serverstatus").css("color", "green");
                     $("#tbl_visits").append(

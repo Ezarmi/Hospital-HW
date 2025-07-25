@@ -32,10 +32,18 @@ namespace Hospital.Controllers
             return View();
         }
 
+        public ActionResult getVisitTypes()
+        {
+            var visittype_3 = context.tbl_VisitType.Where(x => x.pkID !=null).Select(x => new {x.pkID, x.Type}).ToList();
+
+
+            return Json(visittype_3, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult getdep()
         {
-            var dep = context.tbl_Skills.Select(x => new { x.pkID, x.Skill }).ToList();
+            var dep = context.tbl_Skills.Where(x=> x.pkID!=6).Select(x=> new {x.pkID, x.Skill}).ToList();
 
             return Json(dep, JsonRequestBehavior.AllowGet);
         }
@@ -47,7 +55,6 @@ namespace Hospital.Controllers
 
             return Json(docs, JsonRequestBehavior.AllowGet);
         }
-
         public ActionResult getvisit(int doc)
         {
             var visit = context.View_Visit.Where(x => x.fkDocID == doc && x.fkPID == null).Select(x => new { x.pkID, x.PDate, x.PTime }).ToList();
