@@ -1,26 +1,42 @@
-﻿@{
+﻿@using Hospital.Models;
+@{
+
+
     string username = "";
 
-    //if (Session["userid"] == null)
-    //{
-    //    Response.Redirect("~/Home/login");
-    //}
 
-    if (Request.Cookies["iid"] == null || Request.Cookies["iid"].Value == null)
+    //if (Session["userid"] == null)
+
+    // {
+
+    //     Response.Redirect("~/Home/login");
+    // }
+
+
+    if (Request.Cookies["iid"] == null)
     {
         Response.Redirect("~/Home/login");
     }
     else
     {
-        Response.Cookies["iid"].Value = Response.Cookies["iid"].Value;
-        Response.Cookies["iid"].Expires = DateTime.Now.AddDays(10);
+        if (Request.Cookies["iid"].Value == null)
+        {
+            Response.Redirect("~/Home/login");
+        }
+        //Response.Cookies["iid"].Value = Request.Cookies["iid"].Value;
+        // Response.Cookies["iid"].Expires = DateTime.Now.AddDays(10);
 
         if (Session["username"] == null)
         {
             Html.RenderAction("setname", "Home");
+
+
         }
+
         username = Session["username"].ToString();
     }
+
+
 }
 
 <!DOCTYPE html>
@@ -36,6 +52,7 @@
     <!-- Bootstrap rtl -->
     <link rel="stylesheet" href="~/assets/dist/css/rtl.css">
     <!-- Font Awesome -->
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="~/assets/bower_components/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="~/assets/bower_components/Ionicons/css/ionicons.min.css">
@@ -44,10 +61,9 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="~/assets/dist/css/skins/_all-skins.min.css">
-    <link href="~/assets/css/jquery.Bootstrap-PersianDateTimePicker.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assets/css/jquery.Bootstrap-PersianDateTimePicker.css" />
 
     <link rel="stylesheet" href="~/assets/css/ft.css" />
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -58,13 +74,12 @@
 
     <![endif]-->
     <!-- Google Font -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 
     @Html.AntiForgeryToken()
-
-    <!--Modals-->
 
     <div class="modal fade" id="changestatus" role="dialog">
         <div class="modal-dialog">
@@ -98,20 +113,20 @@
                 </div>
                 <div class="modal-body">
                     <select id="dep_add"></select>
-                    <select id="doctors_add"><option>دکتر</option></select>
+                    <select id="doctors_add"> <option>دکتر</option></select>
                     <select id="visittype_add"><option>نوع نوبت</option></select>
-                    <input id="pid_add" type="number" size="10" placeholder="کد ملی" />
+                    <input id="pid_add" type="number" size="10" placeholder="کدملی" />
                     <div class="modal-add-time">
 
                         <div class="input-group">
                             <div class="input-group-addon" data-mddatetimepicker="true" data-targetselector="#visitdatetime_add" data-trigger="click" data-enabletimepicker="true">
                                 <span class="fa fa-calendar"></span>
                             </div>
-                            <input type="text" class="form-control" id="visitdatetime_add" placeholder="تاریخ به همراه زمان" />
+                            <input type="text" class="form-control" id="visitdatetime_add" placeholder="تاریخ به همراه زمان" disabled />
                         </div>
                     </div>
 
-                    
+
                 </div>
                 <div class="modal-footer" style="text-align:center">
                     <p id="chg" style="display:none"></p>
@@ -124,12 +139,17 @@
         </div>
     </div>
 
+
+
+
+
+
     <!-- Site wrapper -->
     <div class="wrapper">
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="~/assets/index2.html" class="logo">
+            <a href="../../index2.html" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini">پنل</span>
                 <!-- logo for regular state and mobile devices -->
@@ -354,13 +374,13 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="~/assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                                <img src="../assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                                 <span class="hidden-xs">@username</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img src="~/assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                    <img src="../assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                                     <p>
                                         @username
@@ -408,7 +428,7 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-right image">
-                        <img src="~/assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="../assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-right info">
                         <p>@username</p>
@@ -432,14 +452,23 @@
                     <li class="header">منو</li>
                     <li>
                         <a href="/Home/recept">
-                            <i class="fa fa-dashboard"></i> <span>@Hospital.res.res1.m_dashbord</span>
+                            <i class="fa fa-dashboard"></i> <span>>@Hospital.res.res1.m_dashbord</span>
+
                         </a>
+
                     </li>
+
                     <li>
                         <a href="/Home/visit_management">
                             <i class="fa fa-clock-o"></i> <span>@Hospital.res.res1.m_visit</span>
+
                         </a>
+
                     </li>
+
+
+
+
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -461,7 +490,12 @@
             </section>
 
             <!-- Main content -->
-            @RenderBody()
+            <section class="content">
+
+
+                @RenderBody()
+
+            </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -679,23 +713,31 @@
     <script src="~/assets/dist/js/demo.js"></script>
     <script src="~/assets/js/ft.js"></script>
 
-    <script src="~/assets/js/calendar.js"></script>
+    <script src="~/assets/js/jalaali.js"></script>
     <script src="~/assets/js/jquery.Bootstrap-PersianDateTimePicker.js"></script>
+
 
     @RenderSection("script", required: false)
 
     <script>
         $(document).ready(function () {
             $('.sidebar-menu').tree()
-        });
-    </script>
+        })</script>
+
     <script>
+
         $(document).ready(function () {
+
+
 
             var a = 'li:contains(' + '@ViewBag.title' + ')';
 
-           $(a).addClass("active");
+
+
+            $(a).addClass("active");
         });
+
+
     </script>
 
     <script type="text/javascript">
@@ -710,12 +752,11 @@
             alert(value);
         });
         $('[data-name="disable-button"]').click(function () {
-            $('[data-moddatetimpicker="true"][data-targetselector="#input1"]').MdPersianDateTimePicker('disable', true);
+            $('[data-mddatetimepicker="true"][data-targetselector="#input1"]').MdPersianDateTimePicker('disable', true);
         });
         $('[data-name="enable-button"]').click(function () {
-            $('[data-moddatetimpicker="true"][data-targetselector="#input1"]').MdPersianDateTimePicker('disable', false);
-        });
-    </script>
+            $('[data-mddatetimepicker="true"][data-targetselector="#input1"]').MdPersianDateTimePicker('disable', false);
+        });</script>
 
 </body>
 </html>

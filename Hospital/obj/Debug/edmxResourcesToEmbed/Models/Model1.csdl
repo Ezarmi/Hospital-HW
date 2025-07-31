@@ -208,10 +208,12 @@
       <PropertyRef Name="fkDocID" />
       <PropertyRef Name="fkVisitID" />
       <PropertyRef Name="Duration" />
+      <PropertyRef Name="Type" />
     </Key>
     <Property Name="pkID" Type="Int32" Nullable="false" />
     <Property Name="fkDocID" Type="Int32" Nullable="false" />
     <Property Name="fkVisitID" Type="Int32" Nullable="false" />
     <Property Name="Duration" Type="Int64" Nullable="false" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

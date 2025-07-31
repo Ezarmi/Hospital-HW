@@ -115,11 +115,13 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
             <PropertyRef Name="fkDocID" />
             <PropertyRef Name="fkVisitID" />
             <PropertyRef Name="Duration" />
+            <PropertyRef Name="Type" />
           </Key>
           <Property Name="pkID" Type="int" Nullable="false" />
           <Property Name="fkDocID" Type="int" Nullable="false" />
           <Property Name="fkVisitID" Type="int" Nullable="false" />
           <Property Name="Duration" Type="bigint" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <Association Name="FK_Table_1_Table_1">
           <End Role="tbl_Skills" Type="Self.tbl_Skills" Multiplicity="1" />
@@ -217,7 +219,8 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
     [View_VisitPerDoctors].[pkID] AS [pkID], 
     [View_VisitPerDoctors].[fkDocID] AS [fkDocID], 
     [View_VisitPerDoctors].[fkVisitID] AS [fkVisitID], 
-    [View_VisitPerDoctors].[Duration] AS [Duration]
+    [View_VisitPerDoctors].[Duration] AS [Duration], 
+    [View_VisitPerDoctors].[Type] AS [Type]
     FROM [dbo].[View_VisitPerDoctors] AS [View_VisitPerDoctors]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Table_1_Table_1" Association="Self.FK_Table_1_Table_1">
@@ -453,11 +456,13 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
             <PropertyRef Name="fkDocID" />
             <PropertyRef Name="fkVisitID" />
             <PropertyRef Name="Duration" />
+            <PropertyRef Name="Type" />
           </Key>
           <Property Name="pkID" Type="Int32" Nullable="false" />
           <Property Name="fkDocID" Type="Int32" Nullable="false" />
           <Property Name="fkVisitID" Type="Int32" Nullable="false" />
           <Property Name="Duration" Type="Int64" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -569,6 +574,7 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
           <EntitySetMapping Name="View_VisitPerDoctors">
             <EntityTypeMapping TypeName="hospitalModel.View_VisitPerDoctors">
               <MappingFragment StoreEntitySet="View_VisitPerDoctors">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Duration" ColumnName="Duration" />
                 <ScalarProperty Name="fkVisitID" ColumnName="fkVisitID" />
                 <ScalarProperty Name="fkDocID" ColumnName="fkDocID" />

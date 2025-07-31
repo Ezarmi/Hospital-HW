@@ -105,6 +105,7 @@
     <EntitySetMapping Name="View_VisitPerDoctors">
       <EntityTypeMapping TypeName="hospitalModel.View_VisitPerDoctors">
         <MappingFragment StoreEntitySet="View_VisitPerDoctors">
+          <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="Duration" ColumnName="Duration" />
           <ScalarProperty Name="fkVisitID" ColumnName="fkVisitID" />
           <ScalarProperty Name="fkDocID" ColumnName="fkDocID" />

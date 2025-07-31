@@ -18,5 +18,6 @@ namespace Hospital.Models
         public int fkDocID { get; set; }
         public int fkVisitID { get; set; }
         public long Duration { get; set; }
+        public string Type { get; set; }
     }
 }

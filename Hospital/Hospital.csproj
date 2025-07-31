@@ -9683,7 +9683,7 @@
     <Content Include="assets\img\testimonials\testimonials-4.jpg" />
     <Content Include="assets\img\testimonials\testimonials-5.jpg" />
     <Content Include="assets\JQuery\JQuery 3.7.1.js" />
-    <Content Include="assets\js\calendar.js" />
+    <Content Include="assets\js\jalaali.js" />
     <Content Include="assets\js\ft.js" />
     <Content Include="assets\js\jquery.Bootstrap-PersianDateTimePicker.js" />
     <Content Include="assets\js\m2.js" />
@@ -10846,6 +10846,7 @@
     <Content Include="Views\Home\recept.cshtml" />
     <Content Include="Views\Home\visit_management.cshtml" />
     <Content Include="Views\Home\login.cshtml" />
+    <Content Include="Views\Home\datetimepicker.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
