@@ -1,4 +1,4 @@
-﻿/*
+/*
   Expose functions.
   https://github.com/jalaali/jalaali-js
 */
@@ -70,7 +70,7 @@ function jalaaliMonthLength(jy, jm) {
   @see: http://www.fourmilab.ch/documents/calendar/
 */
 function jalCal(jy) {
-    // Jalaali years starting the 33-year rule.
+  // Jalaali years starting the 33-year rule.
     var breaks = [-61, 9, 38, 199, 426, 686, 756, 818, 1111, 1181, 1210, 1635, 2060, 2097, 2192, 2262, 2324, 2394, 2456, 3178],
         bl = breaks.length,
         gy = jy + 621,
@@ -85,34 +85,34 @@ function jalCal(jy) {
     if (jy < jp || jy >= breaks[bl - 1])
         throw new Error('Invalid Jalaali year ' + jy);
 
-    // Find the limiting years for the Jalaali year jy.
-    for (i = 1; i < bl; i += 1) {
-        jm = breaks[i];
-        jump = jm - jp;
-        if (jy < jm)
-            break;
-        leapJ = leapJ + div(jump, 33) * 8 + div(mod(jump, 33), 4);
-        jp = jm;
-    }
+  // Find the limiting years for the Jalaali year jy.
+  for (i = 1; i < bl; i += 1) {
+      jm = breaks[i];
+      jump = jm - jp;
+      if (jy < jm)
+          break;
+      leapJ = leapJ + div(jump, 33) * 8 + div(mod(jump, 33), 4);
+      jp = jm;
+  }
     n = jy - jp;
 
-    // Find the number of leap years from AD 621 to the beginning
-    // of the current Jalaali year in the Persian calendar.
+  // Find the number of leap years from AD 621 to the beginning
+  // of the current Jalaali year in the Persian calendar.
     leapJ = leapJ + div(n, 33) * 8 + div(mod(n, 33) + 3, 4);
     if (mod(jump, 33) === 4 && jump - n === 4)
         leapJ += 1;
 
-    // And the same in the Gregorian calendar (until the year gy).
-    var leapG = div(gy, 4) - div((div(gy, 100) + 1) * 3, 4) - 150;
+  // And the same in the Gregorian calendar (until the year gy).
+  var leapG = div(gy, 4) - div((div(gy, 100) + 1) * 3, 4) - 150;
 
-    // Determine the Gregorian date of Farvardin the 1st.
-    var march = 20 + leapJ - leapG;
+  // Determine the Gregorian date of Farvardin the 1st.
+  var march = 20 + leapJ - leapG;
 
-    // Find how many years have passed since the last leap year.
+  // Find how many years have passed since the last leap year.
     if (jump - n < 6)
         n = n - jump + div(jump + 4, 33) * 33;
     leap = mod(mod(n + 1, 33) - 1, 4);
-    if (leap === -1) leap = 4;
+  if (leap === -1) leap = 4;
 
     return {
         leap: leap,
@@ -152,29 +152,29 @@ function d2j(jdn) {
         jm,
         k;
 
-    // Find number of days that passed since 1 Farvardin.
+  // Find number of days that passed since 1 Farvardin.
     k = jdn - jdn1F;
-    if (k >= 0) {
-        if (k <= 185) {
-            // The first 6 months.
-            jm = 1 + div(k, 31);
-            jd = mod(k, 31) + 1;
-            return {
-                jy: jy,
-                jm: jm,
-                jd: jd
-            };
-        } else {
-            // The remaining months.
-            k -= 186;
-        }
+  if (k >= 0) {
+    if (k <= 185) {
+      // The first 6 months.
+        jm = 1 + div(k, 31);
+        jd = mod(k, 31) + 1;
+        return {
+            jy: jy,
+            jm: jm,
+            jd: jd
+        };
     } else {
-        // Previous Jalaali year.
-        jy -= 1;
-        k += 179;
-        if (r.leap === 1)
-            k += 1;
+      // The remaining months.
+        k -= 186;
     }
+  } else {
+    // Previous Jalaali year.
+      jy -= 1;
+      k += 179;
+      if (r.leap === 1)
+          k += 1;
+  }
     jm = 7 + div(k, 30);
     jd = mod(k, 30) + 1;
     return {
@@ -219,15 +219,15 @@ function d2g(jdn) {
     var j;
     j = 4 * jdn + 139361631;
     j = j + div(div(4 * jdn + 183187720, 146097) * 3, 4) * 4 - 3908;
-    var i = div(mod(j, 1461), 4) * 5 + 308;;
-    var gd = div(mod(i, 153), 5) + 1;
-    var gm = mod(div(i, 153), 12) + 1;
-    var gy = div(j, 1461) - 100100 + div(8 - gm, 6);
-    return {
-        gy: gy,
-        gm: gm,
-        gd: gd
-    }
+  var i = div(mod(j, 1461), 4) * 5 + 308;;
+  var gd = div(mod(i, 153), 5) + 1;
+  var gm = mod(div(i, 153), 12) + 1;
+  var gy = div(j, 1461) - 100100 + div(8 - gm, 6);
+  return {
+      gy: gy,
+      gm: gm,
+      gd: gd
+  }
 }
 
 /*

@@ -5,31 +5,31 @@
         .done(function (res) {
 
 
-
+            
 
             for (var item in res) {
 
-
+               
 
 
                 $("#tbl_visits").append(
                     "<tr id='tr_" + res[item].pkID + "'>" +
-                    "<td>" + res[item].pkID + "</td>" +
-                    "<td>" + res[item].Name + " " + res[item].Family + "</td>" +
-                    "<td>" + res[item].PDate + "</td>" +
-                    "<td>" + res[item].PTime + "</td>" +
-                    "<td>" + res[item].pName + " " + res[item].pFamily + "</td>" +
-                    "<td>" + res[item].pMobile + "</td>" +
-                    "<td>" + res[item].PNC + "</td>" +
-                    "<td>" + res[item].Type + "</td>" +
-                    "<td class='status' id=status_" + res[item].hashid + ">" + res[item].VisitStatus + "</td>" +
-                    "<td><button class='btn btn-danger rv' id='remove_" + res[item].hashid + "'>" + "حذف" + "</button></td>"
+                        "<td>" + res[item].pkID + "</td>" +
+                        "<td>" + res[item].Name + " " + res[item].Family + "</td>" +
+                        "<td>" + res[item].PDate + "</td>" +
+                        "<td>" + res[item].PTime + "</td>" +
+                        "<td>" + res[item].pName + " " + res[item].pFamily + "</td>" +
+                        "<td>" + res[item].pMobile + "</td>" +
+                        "<td>" + res[item].PNC + "</td>" +
+                        "<td>" + res[item].Type + "</td>" +
+                        "<td class='status' id=status_" + res[item].hashid + ">" + res[item].VisitStatus + "</td>"+
+                        "<td><button class='btn btn-danger rv' id='remove_" + res[item].hashid+"'>"+ "حذف" +"</button></td>"
+
+                   
 
 
 
-
-
-
+                   
 
 
                 );
@@ -65,7 +65,7 @@
                 $(".modal-body").empty();
                 for (var item in res) {
 
-
+                   
 
                     $(".modal-body").append(
                         "<button class='btn btn-primary chgstatus'>" + res[item].pkID + " - " + res[item].VisitStatus + "</button>" +
@@ -109,28 +109,28 @@
         var nid = $("#chg").html();
 
         var pstatus = document.getElementById(nid).innerHTML;
-
+      
         document.getElementById(nid).innerHTML = "...تغییر...";
 
         var id = $("#chg").html().split("_");
 
         var token = $('input[name="__RequestVerificationToken"]').val();
 
-        $.post("/Home/setstatus", { state: state[0], sid: id[1], __RequestVerificationToken: token })
+        $.post("/Home/setstatus", { state: state[0], sid: id[1], __RequestVerificationToken:token})
 
             .done(function (res) {
 
                 if (res.status == 1) {
-
+                    
                     document.getElementById(nid).innerHTML = res.sname;
                 }
 
-
-            })
-
-
+                
+             })
 
 
+
+            
 
             .fail(function () {
 
@@ -139,7 +139,7 @@
             })
 
             .always(function () {
-
+                 
                 $("#changestatus").modal('hide');
             });
 
@@ -223,7 +223,7 @@
                 for (var item in res) {
 
                     $("#visittype_add").append(
-                        "<option>" + res[item].fkVisitID + " - " + res[item].Type + "</option>"
+                        "<option>" + res[item].fkVisitID + " - " + res[item].Type+"</option>"
 
 
                     );
@@ -253,8 +253,8 @@
 
 
     $("table").on('click', '.rv', function () {
-        var trid = "#" + $(this).closest('tr').attr("id");
-
+        var trid ="#"+ $(this).closest('tr').attr("id");
+      
         swal({
             title: "هشدار",
             text: "آیا برای پاک کردن این نوبت اطمینان دارید",
@@ -272,7 +272,7 @@
                         .done(function (res) {
 
                             if (res) {
-
+                              
                                 swal("نوبت حذف شد", {
                                     icon: "success",
                                 });
@@ -301,7 +301,7 @@
 
 
 
-
+        
     });
 
 });
@@ -324,7 +324,7 @@ function addparam() {
 
                 $("#dep_add").append(
 
-                    "<option>" + res[item].pkID + "-" + res[item].Skill + "</option>"
+                    "<option>" + res[item].pkID+"-"+res[item].Skill+"</option>"
 
 
 
@@ -351,7 +351,7 @@ function add_visit() {
 
 
     var token = $('input[name="__RequestVerificationToken"]').val();
-
+    
     $.post("/Home/addvisit", { docid: docid[0], visitid: visitid[0], visitdatetime: $("#visitdatetime_add").val(), pid: $("#pid_add").val(), __RequestVerificationToken: token })
         .done(function (res) {
 
@@ -401,7 +401,7 @@ function add_visit() {
 
 
 function removevisit(e) {
-
+    
     swal({
         title: "هشدار",
         text: "آیا برای پاک کردن این نوبت اطمینان دارید",
@@ -415,7 +415,7 @@ function removevisit(e) {
                 var vid = e.split("_");
                 var token = $('input[name="__RequestVerificationToken"]').val();
                 $.post("/Home/removevisit", { vid: vid[1], __RequestVerificationToken: token })
-
+                    
                     .done(function (res) {
 
                         if (res) {
@@ -437,9 +437,9 @@ function removevisit(e) {
 
                     });
 
-
-            }
-
-
+                
+            } 
+               
+            
         });
 }

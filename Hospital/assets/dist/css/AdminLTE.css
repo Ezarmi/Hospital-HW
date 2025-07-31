@@ -4975,3 +4975,7 @@ table.text-center th {
     white-space: normal !important;
   }
 }
+
+.modal-add-time {
+    margin-top: 10px;
+}

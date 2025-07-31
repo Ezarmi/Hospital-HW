@@ -43,7 +43,7 @@
 
         var token = $('input[name="__RequestVerificationToken"]').val();
 
-        $.post("/Home/getdocs", { dep: dep2[0], __RequestVerificationToken: token })
+        $.post("/Home/getdocs", { dep:dep2[0],__RequestVerificationToken:token })
 
             .done(function (res) {
 
@@ -78,7 +78,7 @@
             });
 
 
-
+       
 
 
     });
@@ -131,7 +131,7 @@
     });
 
 
-
+    
 
 
     $("#name").focus(function () {
@@ -140,7 +140,7 @@
 
     });
 
-
+   
 
 
     $("#family").focus(function () {
@@ -149,7 +149,7 @@
 
     });
 
-
+    
 
 
     $("#phone").focus(function () {
@@ -158,7 +158,7 @@
 
     });
 
-
+   
 
 
     $("#visit").focus(function () {
@@ -167,7 +167,7 @@
 
     });
 
-
+  
     $(".valiid").blur(function () {
 
         var valid = validtion(this.id);
@@ -199,7 +199,7 @@ function setvisit() {
     var valid3 = validtion("phone");
     var valid4 = validtion("visit");
 
-
+   
 
 
     if (valid1 && valid2 && valid3 && valid4) {
@@ -251,7 +251,7 @@ function setvisit() {
 
 function validtion(itemm) {
 
-
+   
 
     var valid = true;
 
@@ -275,11 +275,11 @@ function validtion(itemm) {
 
 
             }
+           
 
+                
 
-
-
-
+            
 
             break;
         case "family":
@@ -329,10 +329,10 @@ function validtion(itemm) {
 
     }
 
+   
 
 
-
-
+    
 
     if (!valid) {
 
@@ -346,10 +346,10 @@ function validtion(itemm) {
         $('#' + itemm).addClass("inputcorrect");
     }
 
+   
 
 
-
-
+  
 
     return valid;
 

@@ -19,10 +19,9 @@
     font-family: Tahoma;
     font-size: 12px;
 }
-
-    [data-name="md-datetimepicker-title"][data-isgregorian="true"] {
-        direction: ltr;
-    }
+[data-name="md-datetimepicker-title"][data-isgregorian="true"] {
+    direction: ltr;
+}
 
 [data-name="md-persiandatetimepicker"] {
 }
@@ -58,7 +57,7 @@
         overflow: auto;
     }
 
-    [data-name="md-persiandatetimepicker"] table[data-name="md-persiandatetimepicker-headertable"] .dropdown-menu li {
+    [data-name="md-persiandatetimepicker"] table[data-name="md-persiandatetimepicker-headertable"] .dropdown-menu li{
         text-align: center;
     }
 
