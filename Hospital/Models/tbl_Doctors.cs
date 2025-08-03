@@ -18,6 +18,7 @@ namespace Hospital.Models
         public tbl_Doctors()
         {
             this.tbl_Visit = new HashSet<tbl_Visit>();
+            this.tbl_VisitPerDoctors = new HashSet<tbl_VisitPerDoctors>();
         }
     
         public int pkID { get; set; }
@@ -30,5 +31,7 @@ namespace Hospital.Models
         public virtual tbl_Skills tbl_Skills { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_Visit> tbl_Visit { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_VisitPerDoctors> tbl_VisitPerDoctors { get; set; }
     }
 }

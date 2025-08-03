@@ -9,25 +9,32 @@ using System.Web.Security;
 using System.Text;
 
 
-namespace Hospital.Controllers
+namespace hospital.Controllers
 {
     public class HomeController : Controller
     {
         hdata context = new hdata();
 
+
+
         // GET: Home
         public ActionResult Index()
         {
             int docs = context.tbl_Doctors.Count();
+
             int dep = context.tbl_Skills.Count();
+
             int awards = context.tbl_Awards.Count();
             int research = context.tbl_Research.Count();
+
+            var skills = context.tbl_Skills.ToList();
 
             ViewBag.docs = docs;
             ViewBag.dep = dep;
             ViewBag.awards = awards;
             ViewBag.research = research;
 
+            ViewBag.skills = skills;
 
             return View();
         }
@@ -35,11 +42,12 @@ namespace Hospital.Controllers
         [HttpPost]
         public ActionResult getdep()
         {
+
             var dep = context.tbl_Skills.Where(x => x.pkID != 6).Select(x => new { x.pkID, x.Skill }).ToList();
 
             return Json(dep, JsonRequestBehavior.AllowGet);
-        }
 
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult getdocs(int dep)
@@ -47,13 +55,18 @@ namespace Hospital.Controllers
             var docs = context.tbl_Doctors.Where(x => x.fkSkill == dep).Select(x => new { x.pkID, x.Name, x.Family }).ToList();
 
             return Json(docs, JsonRequestBehavior.AllowGet);
+
         }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult getVisitTypes(int dep)
+        public ActionResult getvisittype(int dep)
         {
+
             var visittype = context.View_VisitPerDoctors.Where(x => x.fkDocID == dep).Select(x => new { x.fkVisitID, x.Type }).ToList();
             return Json(visittype, JsonRequestBehavior.AllowGet);
+
         }
 
         public ActionResult datetimepicker()
@@ -66,6 +79,8 @@ namespace Hospital.Controllers
         public ActionResult addvisit(int docid, int visitid, string visitdatetime, string pid)
         {
             int intpid = 0;
+
+
 
             if (pid != "")
             {
@@ -85,6 +100,8 @@ namespace Hospital.Controllers
             string[] vtime = vdatetime[1].Split(':');
 
             string s = vdate[0];
+
+
 
             int y = MyExtensions.PersianToEnglish(vdate[0]);
             int m = MyExtensions.PersianToEnglish(vdate[1]);
@@ -110,6 +127,7 @@ namespace Hospital.Controllers
                 {
                     return Json(new { status = 4, nv = 0 }, JsonRequestBehavior.AllowGet);
                 }
+
             }
             tbl_Visit nv = new tbl_Visit();
 
@@ -134,25 +152,33 @@ namespace Hospital.Controllers
 
             var idtext = Encoding.UTF8.GetBytes(thisvisit.pkID.ToString());
             var encryptedID = Convert.ToBase64String(MachineKey.Protect(idtext, "alirezaomg"));
+            thisvisit.hashid = encryptedID;
 
             return Json(new { status = 1, nv = thisvisit }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult getvisit(int doc)
         {
+
             var visit = context.View_Visit.Where(x => x.fkDocID == doc && x.fkPID == null).Select(x => new { x.pkID, x.PDate, x.PTime }).ToList();
 
+
+
             return Json(visit, JsonRequestBehavior.AllowGet);
+
+
         }
+
 
         public ActionResult setvisit(int vn, string namee, string phone, string family)
         {
             var c = context.tbl_Visit.Where(x => x.pkID == vn).SingleOrDefault();
-
             int statee = 0;
 
             if (c.fkPID == null)
             {
+
+
 
                 int pid = 0;
                 var p = context.tbl_Patient.Where(x => x.Mobile == phone).SingleOrDefault();
@@ -167,14 +193,16 @@ namespace Hospital.Controllers
 
                     context.tbl_Patient.Add(newp);
                     context.SaveChanges();
-
                     var np = context.tbl_Patient.Where(x => x.Mobile == phone).SingleOrDefault();
                     pid = np.pkID;
                 }
+
                 else
                 {
                     pid = p.pkID;
                 }
+
+
 
                 var v = context.tbl_Visit.Where(x => x.pkID == vn).SingleOrDefault();
 
@@ -183,28 +211,48 @@ namespace Hospital.Controllers
                 v.EDate = v.SDate.AddMinutes(20);
 
                 context.SaveChanges();
-                statee = 2; //نوبت دهی انجام شد
+                statee = 2; // نوبت دهی انجام شد
             }
+
             else
             {
-                statee = 1; //نوبت پر است
+                statee = 1; // نوبت پر است
             }
 
             return Json(statee, JsonRequestBehavior.AllowGet);
+
 
         }
 
         public ActionResult recept()
         {
-            //Session.Timeout = 60;
+
+
+
             ViewBag.title = Hospital.res.res1.m_dashbord;
             return View();
         }
+
+
+
         public ActionResult visit_management()
         {
+
             ViewBag.title = Hospital.res.res1.m_visit;
             return View();
         }
+
+
+        public ActionResult visit_type()
+        {
+
+            ViewBag.title = Hospital.res.res1.m_visit_type;
+            return View();
+
+
+        }
+
+
 
         public ActionResult login()
         {
@@ -218,29 +266,38 @@ namespace Hospital.Controllers
             Session.Timeout = 30;
             int status = 0;
             var user = context.tbl_Doctors.Where(x => x.PersonalNum == pn).SingleOrDefault();
+
             if (user != null)
             {
                 if (user.Password == pass)
                 {
-                    // Session["userid"] = user.pkID;
-
+                    //Session["userid"] = user.pkID;
                     var cookieText = Encoding.UTF8.GetBytes(user.pkID.ToString());
                     var encryptedValue = Convert.ToBase64String(MachineKey.Protect(cookieText, "alirezaomg"));
+
+
 
                     Response.Cookies["iid"].Value = encryptedValue;
                     Response.Cookies["iid"].Expires = DateTime.Now.AddDays(500);
 
-                    status = 1;//login ok
+                    status = 1; //login ok
                 }
                 else
                 {
-                    status = 2;//wrong pass
+                    status = 2; //wrong pass
+
+
                 }
+
+
             }
+
             else
             {
-                status = 3; //dosen't match pn
+                status = 3; //dosent match pn
             }
+
+
             return Json(status, JsonRequestBehavior.AllowGet);
         }
 
@@ -250,16 +307,19 @@ namespace Hospital.Controllers
 
             foreach (var item in visits)
             {
-                var idText = Encoding.UTF8.GetBytes(item.pkID.ToString());
-                var encryptedID = Convert.ToBase64String(MachineKey.Protect(idText, "alirezaomg"));
+
+                var idtext = Encoding.UTF8.GetBytes(item.pkID.ToString());
+                var encryptedID = Convert.ToBase64String(MachineKey.Protect(idtext, "alirezaomg"));
                 item.hashid = encryptedID;
             }
+
 
             return Json(visits, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public ActionResult removevisit(string vid)
         {
             var bytes = Convert.FromBase64String(vid);
@@ -267,6 +327,7 @@ namespace Hospital.Controllers
             string result = Encoding.UTF8.GetString(output);
 
             int id = int.Parse(result);
+
             var visit = context.tbl_Visit.Where(x => x.pkID == id).SingleOrDefault();
 
             context.tbl_Visit.Remove(visit);
@@ -274,8 +335,11 @@ namespace Hospital.Controllers
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
+
         public ActionResult getstatus()
         {
+
+
             var status = context.tbl_VisitStatus.Select(x => new { x.pkID, x.VisitStatus }).ToList();
 
             return Json(status, JsonRequestBehavior.AllowGet);
@@ -285,36 +349,89 @@ namespace Hospital.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult setstatus(int state, string sid)
         {
+
             var bytes = Convert.FromBase64String(sid);
             var output = MachineKey.Unprotect(bytes, "alirezaomg");
             string result = Encoding.UTF8.GetString(output);
 
             int id = int.Parse(result);
 
+
             int status = 0;
 
             string sname = "";
             var visit = context.tbl_Visit.Where(x => x.pkID == id).SingleOrDefault();
+
             if (visit != null)
             {
                 visit.fkVisitStatus = state;
                 context.SaveChanges();
-                status = 1; //ok
+
+                status = 1; // ok
 
                 sname = context.tbl_VisitStatus.Where(x => x.pkID == state).Select(x => x.VisitStatus).SingleOrDefault();
             }
+
+
             return Json(new { status = status, sname = sname }, JsonRequestBehavior.AllowGet);
+
         }
+
+        public ActionResult get_VPD(int doc)
+        {
+            var vt = context.tbl_VisitType.Select(x => new { x.pkID, x.Type }).ToList();
+            var vpd = context.View_VisitPerDoctors.Where(x => x.fkDocID == doc).ToList();
+            return Json(new { vt = vt, vpd = vpd }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult chg_vpd(int vpdid, bool state, int doc)
+        {
+
+            if (state)
+            {
+                tbl_VisitPerDoctors ntype = new tbl_VisitPerDoctors();
+                ntype.fkDocID = doc;
+                ntype.fkVisitID = vpdid;
+                ntype.Duration = 20;
+                context.tbl_VisitPerDoctors.Add(ntype);
+                context.SaveChanges();
+
+
+            }
+            else
+            {
+                var vpd = context.tbl_VisitPerDoctors.Where(x => x.fkDocID == doc && x.fkVisitID == vpdid).Single();
+                context.tbl_VisitPerDoctors.Remove(vpd);
+                context.SaveChanges();
+
+            }
+
+            var res = context.tbl_VisitPerDoctors.Where(x => x.fkDocID == doc && x.fkVisitID == vpdid).Select(x => new { x.fkDocID, x.fkVisitID, x.Duration }).SingleOrDefault();
+
+            if (res == null)
+            {
+                return Json("null", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
         public void logout()
         {
             Response.Cookies["iid"].Expires = DateTime.Now.AddDays(-1);
             Session.Abandon();
 
+
             Response.Redirect("/Home/login");
         }
 
+
         public void setname()
         {
+
             var bytes = Convert.FromBase64String(Request.Cookies["iid"].Value);
             var output = MachineKey.Unprotect(bytes, "alirezaomg");
             string result = Encoding.UTF8.GetString(output);
@@ -330,7 +447,7 @@ namespace Hospital.Controllers
 
     }
 
-    // This class will convert unicod to ASCII
+
     public static class MyExtensions
     {
         public static int PersianToEnglish(this string persianStr)
@@ -366,4 +483,6 @@ namespace Hospital.Controllers
             return int.Parse(persianStr);
         }
     }
+
+
 }

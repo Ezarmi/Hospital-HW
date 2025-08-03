@@ -13,12 +13,16 @@
     // }
 
 
-    if (Request.Cookies["iid"] == null || Request.Cookies["iid"].Value == null)
+    if (Request.Cookies["iid"] == null)
     {
         Response.Redirect("~/Home/login");
     }
     else
     {
+        if (Request.Cookies["iid"].Value == null)
+        {
+            Response.Redirect("~/Home/login");
+        }
         //Response.Cookies["iid"].Value = Request.Cookies["iid"].Value;
         // Response.Cookies["iid"].Expires = DateTime.Now.AddDays(10);
 
@@ -86,7 +90,7 @@
 
                     <h4 class="modal-title">تغییر وضعیت</h4>
                 </div>
-                <div class="modal-body">
+                <div id="chg_body" class="modal-body">
 
                 </div>
                 <div class="modal-footer">
@@ -118,7 +122,7 @@
                             <div class="input-group-addon" data-mddatetimepicker="true" data-targetselector="#visitdatetime_add" data-trigger="click" data-enabletimepicker="true">
                                 <span class="fa fa-calendar"></span>
                             </div>
-                            <input type="text" class="form-control" id="visitdatetime_add" placeholder="تاریخ به همراه زمان" />
+                            <input type="text" class="form-control" id="visitdatetime_add" placeholder="تاریخ به همراه زمان" disabled />
                         </div>
                     </div>
 
@@ -462,6 +466,14 @@
 
                     </li>
 
+                    <li>
+                        <a href="/Home/visit_type">
+                            <i class="fa fa-check-square"></i> <span>@Hospital.res.res1.m_visit_type</span>
+
+                        </a>
+
+                    </li>
+
 
 
 
@@ -479,9 +491,9 @@
                     <small>آماده برای پروژه شما</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
-                    <li><a href="#">مثال ها</a></li>
-                    <li class="active">صفحه خالی</li>
+                    <li><a href="recept"><i class="fa fa-dashboard"></i> خانه</a></li>
+
+                    <li class="active">@ViewBag.title</li>
                 </ol>
             </section>
 

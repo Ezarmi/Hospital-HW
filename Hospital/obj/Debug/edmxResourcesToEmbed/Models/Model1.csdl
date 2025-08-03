@@ -12,6 +12,7 @@
     <NavigationProperty Name="tbl_Visit" Relationship="hospitalModel.FK_tbl_Visit_To_tbl_Doctors" FromRole="tbl_Doctors" ToRole="tbl_Visit" />
     <Property Name="PersonalNum" Type="Int32" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbl_VisitPerDoctors" Relationship="hospitalModel.FK_tbl_VisitPerDoctors_tbl_Doctors" FromRole="tbl_Doctors" ToRole="tbl_VisitPerDoctors" />
   </EntityType>
   <EntityType Name="tbl_Skills">
     <Key>
@@ -64,6 +65,15 @@
     </AssociationSet>
     <EntitySet Name="View_Visit" EntityType="hospitalModel.View_Visit" />
     <EntitySet Name="View_VisitPerDoctors" EntityType="hospitalModel.View_VisitPerDoctors" />
+    <EntitySet Name="tbl_VisitPerDoctors" EntityType="hospitalModel.tbl_VisitPerDoctors" />
+    <AssociationSet Name="FK_tbl_VisitPerDoctors_tbl_Doctors" Association="hospitalModel.FK_tbl_VisitPerDoctors_tbl_Doctors">
+      <End Role="tbl_Doctors" EntitySet="tbl_Doctors" />
+      <End Role="tbl_VisitPerDoctors" EntitySet="tbl_VisitPerDoctors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_VisitPerDoctors_tbl_VisitType" Association="hospitalModel.FK_tbl_VisitPerDoctors_tbl_VisitType">
+      <End Role="tbl_VisitType" EntitySet="tbl_VisitType" />
+      <End Role="tbl_VisitPerDoctors" EntitySet="tbl_VisitPerDoctors" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="tbl_Awards">
     <Key>
@@ -138,6 +148,7 @@
     <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="tbl_Visit" Relationship="hospitalModel.FK_tbl_Visit_To_VisitType" FromRole="tbl_VisitType" ToRole="tbl_Visit" />
+    <NavigationProperty Name="tbl_VisitPerDoctors" Relationship="hospitalModel.FK_tbl_VisitPerDoctors_tbl_VisitType" FromRole="tbl_VisitType" ToRole="tbl_VisitPerDoctors" />
   </EntityType>
   <Association Name="FK_tbl_Visit_To_VisitType">
     <End Type="hospitalModel.tbl_VisitType" Role="tbl_VisitType" Multiplicity="0..1" />
@@ -209,11 +220,48 @@
       <PropertyRef Name="fkVisitID" />
       <PropertyRef Name="Duration" />
       <PropertyRef Name="Type" />
+      <PropertyRef Name="visit_type_ID" />
     </Key>
     <Property Name="pkID" Type="Int32" Nullable="false" />
     <Property Name="fkDocID" Type="Int32" Nullable="false" />
     <Property Name="fkVisitID" Type="Int32" Nullable="false" />
     <Property Name="Duration" Type="Int64" Nullable="false" />
     <Property Name="Type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="visit_type_ID" Type="Int32" Nullable="false" />
   </EntityType>
+  <EntityType Name="tbl_VisitPerDoctors">
+    <Key>
+      <PropertyRef Name="pkID" />
+    </Key>
+    <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fkDocID" Type="Int32" Nullable="false" />
+    <Property Name="fkVisitID" Type="Int32" Nullable="false" />
+    <Property Name="Duration" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="tbl_Doctors" Relationship="hospitalModel.FK_tbl_VisitPerDoctors_tbl_Doctors" FromRole="tbl_VisitPerDoctors" ToRole="tbl_Doctors" />
+    <NavigationProperty Name="tbl_VisitType" Relationship="hospitalModel.FK_tbl_VisitPerDoctors_tbl_VisitType" FromRole="tbl_VisitPerDoctors" ToRole="tbl_VisitType" />
+  </EntityType>
+  <Association Name="FK_tbl_VisitPerDoctors_tbl_Doctors">
+    <End Type="hospitalModel.tbl_Doctors" Role="tbl_Doctors" Multiplicity="1" />
+    <End Type="hospitalModel.tbl_VisitPerDoctors" Role="tbl_VisitPerDoctors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Doctors">
+        <PropertyRef Name="pkID" />
+      </Principal>
+      <Dependent Role="tbl_VisitPerDoctors">
+        <PropertyRef Name="fkDocID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_VisitPerDoctors_tbl_VisitType">
+    <End Type="hospitalModel.tbl_VisitType" Role="tbl_VisitType" Multiplicity="1" />
+    <End Type="hospitalModel.tbl_VisitPerDoctors" Role="tbl_VisitPerDoctors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_VisitType">
+        <PropertyRef Name="pkID" />
+      </Principal>
+      <Dependent Role="tbl_VisitPerDoctors">
+        <PropertyRef Name="fkVisitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

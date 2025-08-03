@@ -123,4 +123,7 @@
   <data name="m_visit" xml:space="preserve">
     <value>مدیریت نوبت‌ها</value>
   </data>
+  <data name="m_visit_type" xml:space="preserve">
+    <value>نوع نوبت</value>
+  </data>
 </root>

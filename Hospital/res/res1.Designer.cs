@@ -77,5 +77,14 @@ namespace Hospital.res {
                 return ResourceManager.GetString("m_visit", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نوع نوبت.
+        /// </summary>
+        public static string m_visit_type {
+            get {
+                return ResourceManager.GetString("m_visit_type", resourceCulture);
+            }
+        }
     }
 }

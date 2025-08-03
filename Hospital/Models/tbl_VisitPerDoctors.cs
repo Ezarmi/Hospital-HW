@@ -12,13 +12,14 @@ namespace Hospital.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class View_VisitPerDoctors
+    public partial class tbl_VisitPerDoctors
     {
         public int pkID { get; set; }
         public int fkDocID { get; set; }
         public int fkVisitID { get; set; }
         public long Duration { get; set; }
-        public string Type { get; set; }
-        public int visit_type_ID { get; set; }
+    
+        public virtual tbl_Doctors tbl_Doctors { get; set; }
+        public virtual tbl_VisitType tbl_VisitType { get; set; }
     }
 }
