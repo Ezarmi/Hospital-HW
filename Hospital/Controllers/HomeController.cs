@@ -419,6 +419,46 @@ namespace hospital.Controllers
 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult addVisitType(string vt)
+        {
+            var res = context.tbl_VisitType.Where(x => x.Type == vt).SingleOrDefault();
+            if (res != null) { return Json(new { state = false, vt = "نوبت تکراری است" }, JsonRequestBehavior.AllowGet); }
+            tbl_VisitType nvt = new tbl_VisitType();
+            nvt.Type = vt;
+            context.tbl_VisitType.Add(nvt);
+            context.SaveChanges();
+
+            return Json(new { state = true, vt = vt }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public ActionResult deleteVisitType(string vt)
+        {
+            try
+            {
+
+                var res = context.tbl_VisitType.Where(x => x.Type == vt).Single();
+                context.tbl_VisitType.Remove(res);
+                context.SaveChanges();
+                return Json(new { state = true, vt = vt }, JsonRequestBehavior.AllowGet);
+
+            }
+
+            catch (Exception e)
+            {
+                return Json(new { state = false, vt = e.HResult }, JsonRequestBehavior.AllowGet);
+            }
+
+
+
+        }
+
+
+
         public void logout()
         {
             Response.Cookies["iid"].Expires = DateTime.Now.AddDays(-1);

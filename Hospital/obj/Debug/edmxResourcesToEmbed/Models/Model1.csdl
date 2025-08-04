@@ -64,7 +64,6 @@
       <End Role="tbl_Visit" EntitySet="tbl_Visit" />
     </AssociationSet>
     <EntitySet Name="View_Visit" EntityType="hospitalModel.View_Visit" />
-    <EntitySet Name="View_VisitPerDoctors" EntityType="hospitalModel.View_VisitPerDoctors" />
     <EntitySet Name="tbl_VisitPerDoctors" EntityType="hospitalModel.tbl_VisitPerDoctors" />
     <AssociationSet Name="FK_tbl_VisitPerDoctors_tbl_Doctors" Association="hospitalModel.FK_tbl_VisitPerDoctors_tbl_Doctors">
       <End Role="tbl_Doctors" EntitySet="tbl_Doctors" />
@@ -74,6 +73,7 @@
       <End Role="tbl_VisitType" EntitySet="tbl_VisitType" />
       <End Role="tbl_VisitPerDoctors" EntitySet="tbl_VisitPerDoctors" />
     </AssociationSet>
+    <EntitySet Name="View_VisitPerDoctors" EntityType="hospitalModel.View_VisitPerDoctors" />
   </EntityContainer>
   <EntityType Name="tbl_Awards">
     <Key>
@@ -213,22 +213,6 @@
     <Property Name="VisitStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="PNC" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
   </EntityType>
-  <EntityType Name="View_VisitPerDoctors">
-    <Key>
-      <PropertyRef Name="pkID" />
-      <PropertyRef Name="fkDocID" />
-      <PropertyRef Name="fkVisitID" />
-      <PropertyRef Name="Duration" />
-      <PropertyRef Name="Type" />
-      <PropertyRef Name="visit_type_ID" />
-    </Key>
-    <Property Name="pkID" Type="Int32" Nullable="false" />
-    <Property Name="fkDocID" Type="Int32" Nullable="false" />
-    <Property Name="fkVisitID" Type="Int32" Nullable="false" />
-    <Property Name="Duration" Type="Int64" Nullable="false" />
-    <Property Name="Type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="visit_type_ID" Type="Int32" Nullable="false" />
-  </EntityType>
   <EntityType Name="tbl_VisitPerDoctors">
     <Key>
       <PropertyRef Name="pkID" />
@@ -264,4 +248,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="View_VisitPerDoctors">
+    <Key>
+      <PropertyRef Name="pkID" />
+      <PropertyRef Name="fkDocID" />
+      <PropertyRef Name="fkVisitID" />
+      <PropertyRef Name="Type" />
+      <PropertyRef Name="Duration" />
+      <PropertyRef Name="visit_type_ID" />
+    </Key>
+    <Property Name="pkID" Type="Int32" Nullable="false" />
+    <Property Name="fkDocID" Type="Int32" Nullable="false" />
+    <Property Name="fkVisitID" Type="Int32" Nullable="false" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Duration" Type="Int64" Nullable="false" />
+    <Property Name="visit_type_ID" Type="Int32" Nullable="false" />
+  </EntityType>
 </Schema>

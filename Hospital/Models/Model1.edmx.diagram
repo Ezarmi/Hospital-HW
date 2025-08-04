@@ -19,10 +19,10 @@
         <EntityTypeShape EntityType="hospitalModel.tbl_VisitStatus" Width="1.5" PointX="0.75" PointY="7.875" />
         <AssociationConnector Association="hospitalModel.FK_tbl_Visit_To_VisitStatus" />
         <EntityTypeShape EntityType="hospitalModel.View_Visit" Width="1.5" PointX="7.5" PointY="0.5" />
-        <EntityTypeShape EntityType="hospitalModel.View_VisitPerDoctors" Width="1.5" PointX="9.25" PointY="0.5" />
         <EntityTypeShape EntityType="hospitalModel.tbl_VisitPerDoctors" Width="1.5" PointX="3" PointY="5.25" />
         <AssociationConnector Association="hospitalModel.FK_tbl_VisitPerDoctors_tbl_Doctors" />
         <AssociationConnector Association="hospitalModel.FK_tbl_VisitPerDoctors_tbl_VisitType" />
+        <EntityTypeShape EntityType="hospitalModel.View_VisitPerDoctors" Width="1.5" PointX="9.125" PointY="0.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

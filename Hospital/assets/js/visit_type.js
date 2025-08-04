@@ -104,7 +104,7 @@
 
                 $("#tbl_type").empty();
 
-                console.log(res.vpd);
+                console.log(res);
 
                 for (var item in res.vt) {
 
@@ -200,3 +200,92 @@
 
 
 });
+
+
+function addparam() {
+    swal("نوع نوبتی که قصد ایجادش را دارید وارد کنید", {
+        content: {
+            element: "input",
+            attributes: {
+                placeholder: "نوع نوبت",
+                type: "text",
+            },
+        },
+    })
+        .then((value) => {
+            if (value != null) {
+                if (value != "") {
+                    var token = $('input[name="__RequestVerificationToken"]').val();
+                    $.post("/Home/addVisitType", { vt: value, __RequestVerificationToken: token })
+
+                        .done(function (res) {
+
+                            if (res.state) {
+                                swal("عملیات موفق", "نوع نوبت " + res.vt + " ایجاد شد", "success");
+                            }
+                            else {
+                                swal("عملیات ناموفق", res.vt, "error");
+                            }
+
+                        })
+                        .fail(function () {
+                            swal("عملیات ناموفق", "خطا در برقراری ارتباط با سرور", "error");
+                        });
+
+                }
+                else {
+                    swal("توجه", "نوع نوبت را وارد کنید", "info");
+                }
+            }
+        });
+}
+
+
+
+
+function deleteparam() {
+    swal("نوع نوبتی که مایل به حذف آن هستید را وارد کنید", {
+        content: {
+            element: "input",
+            attributes: {
+                placeholder: "نوع نوبت",
+                type: "text",
+            },
+        },
+    })
+        .then((value) => {
+            if (value != null) {
+
+                if (value != "") {
+                    var token = $('input[name="__RequestVerificationToken"]').val();
+                    $.post("/Home/deleteVisitType", { vt: value, __RequestVerificationToken: token })
+
+                        .done(function (res) {
+
+                            if (res.state) {
+                                swal("عملیات موفق", "نوع نوبت " + res.vt + " حذف شد", "success");
+                            }
+                            else {
+
+                                switch (res.vt) {
+                                    case -2146233079: swal("عملیات ناموفق", "چنین نوع نوبتی یافت نشد", "error");
+                                        break;
+                                    case -2146233087: swal("عملیات ناموفق", "این نوبت را به خاطر تعلق قادر به حذف نیستید", "error");
+                                }
+
+
+                            }
+
+                        })
+                        .fail(function () {
+                            swal("عملیات ناموفق", "خطا در برقراری ارتباط با سرور", "error");
+                        });
+
+                }
+                else {
+                    swal("توجه", "نوع نوبت را وارد کنید", "info");
+                }
+
+            }
+        });
+}
