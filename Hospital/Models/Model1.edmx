@@ -12,6 +12,15 @@
           <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="tbl_comm">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nam" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="valuee" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="dis" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbl_Doctors">
           <Key>
             <PropertyRef Name="pkID" />
@@ -220,6 +229,7 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
         </Association>
         <EntityContainer Name="hospitalModelStoreContainer">
           <EntitySet Name="tbl_Awards" EntityType="Self.tbl_Awards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_comm" EntityType="Self.tbl_comm" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Doctors" EntityType="Self.tbl_Doctors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Patient" EntityType="Self.tbl_Patient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Research" EntityType="Self.tbl_Research" Schema="dbo" store:Type="Tables" />
@@ -367,6 +377,7 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
             <End Role="tbl_VisitPerDoctors" EntitySet="tbl_VisitPerDoctors" />
           </AssociationSet>
           <EntitySet Name="View_VisitPerDoctors" EntityType="hospitalModel.View_VisitPerDoctors" />
+          <EntitySet Name="tbl_comm" EntityType="hospitalModel.tbl_comm" />
         </EntityContainer>
         <EntityType Name="tbl_Awards">
           <Key>
@@ -557,6 +568,15 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
           <Property Name="Duration" Type="Int64" Nullable="false" />
           <Property Name="visit_type_ID" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbl_comm">
+          <Key>
+            <PropertyRef Name="pkID" />
+          </Key>
+          <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nam" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="valuee" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dis" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -682,6 +702,16 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="fkVisitID" ColumnName="fkVisitID" />
                 <ScalarProperty Name="fkDocID" ColumnName="fkDocID" />
+                <ScalarProperty Name="pkID" ColumnName="pkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_comm">
+            <EntityTypeMapping TypeName="hospitalModel.tbl_comm">
+              <MappingFragment StoreEntitySet="tbl_comm">
+                <ScalarProperty Name="dis" ColumnName="dis" />
+                <ScalarProperty Name="valuee" ColumnName="valuee" />
+                <ScalarProperty Name="Nam" ColumnName="Nam" />
                 <ScalarProperty Name="pkID" ColumnName="pkID" />
               </MappingFragment>
             </EntityTypeMapping>

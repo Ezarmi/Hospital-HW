@@ -9935,6 +9935,9 @@
     <Compile Include="Models\tbl_Awards.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbl_comm.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbl_Doctors.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

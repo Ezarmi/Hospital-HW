@@ -36,5 +36,6 @@ namespace Hospital.Models
         public virtual DbSet<View_Visit> View_Visit { get; set; }
         public virtual DbSet<tbl_VisitPerDoctors> tbl_VisitPerDoctors { get; set; }
         public virtual DbSet<View_VisitPerDoctors> View_VisitPerDoctors { get; set; }
+        public virtual DbSet<tbl_comm> tbl_comm { get; set; }
     }
 }

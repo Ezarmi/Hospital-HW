@@ -23,6 +23,7 @@
         <AssociationConnector Association="hospitalModel.FK_tbl_VisitPerDoctors_tbl_Doctors" />
         <AssociationConnector Association="hospitalModel.FK_tbl_VisitPerDoctors_tbl_VisitType" />
         <EntityTypeShape EntityType="hospitalModel.View_VisitPerDoctors" Width="1.5" PointX="9.125" PointY="0.5" />
+        <EntityTypeShape EntityType="hospitalModel.tbl_comm" Width="1.5" PointX="3.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

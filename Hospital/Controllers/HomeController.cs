@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Globalization;
 using System.Web.Security;
 using System.Text;
+using System.Threading;
 
 
 namespace hospital.Controllers
@@ -34,7 +35,15 @@ namespace hospital.Controllers
             ViewBag.awards = awards;
             ViewBag.research = research;
 
+
             ViewBag.skills = skills;
+
+            var res = context.View_Comm.ToList();
+
+            string lang = deflang();
+
+            ViewBag.title = res.Where(x => x.Name == "تیتر اصلی" && x.Language == lang).Select(x => x.valuee).SingleOrDefault();
+            ViewBag.bannerimg = res.Where(x => x.Name == "عکس بنر").Select(x => x.valuee).SingleOrDefault();
 
             return View();
         }
@@ -177,49 +186,66 @@ namespace hospital.Controllers
 
             if (c.fkPID == null)
             {
+                DateTime noww = DateTime.Now;
 
-
-
-                int pid = 0;
-                var p = context.tbl_Patient.Where(x => x.Mobile == phone).SingleOrDefault();
-
-                if (p == null)
+                if (c.pb < noww || c.pb == null)
                 {
-                    tbl_Patient newp = new tbl_Patient();
 
-                    newp.Name = namee;
-                    newp.Family = family;
-                    newp.Mobile = phone;
 
-                    context.tbl_Patient.Add(newp);
+
+                    int pid = 0;
+                    var p = context.tbl_Patient.Where(x => x.Mobile == phone).SingleOrDefault();
+
+                    if (p == null)
+                    {
+                        tbl_Patient newp = new tbl_Patient();
+
+                        newp.Name = namee;
+                        newp.Family = family;
+                        newp.Mobile = phone;
+
+                        context.tbl_Patient.Add(newp);
+                        context.SaveChanges();
+                        var np = context.tbl_Patient.Where(x => x.Mobile == phone).SingleOrDefault();
+                        pid = np.pkID;
+                    }
+
+                    else
+                    {
+                        pid = p.pkID;
+                    }
+
+
+
+                    var v = context.tbl_Visit.Where(x => x.pkID == vn).SingleOrDefault();
+
+
+                    //v.fkVTID = 1;
+                    //v.EDate = v.SDate.AddMinutes(20);
+                    v.pb = DateTime.Now.AddMinutes(2);
+                    v.fkReserverID = pid;
+
                     context.SaveChanges();
-                    var np = context.tbl_Patient.Where(x => x.Mobile == phone).SingleOrDefault();
-                    pid = np.pkID;
-                }
+                    statee = 2; // نوبت رزرو شد
 
+                    int amount = context.tbl_VisitPerDoctors.Where(x => x.fkDocID == v.fkDocID && x.fkVisitID == v.fkVTID).Select(x => x.amount).Single();
+
+                    return Json(new { statee = statee, vn = v.pkID, pid = pid, amount = amount }, JsonRequestBehavior.AllowGet);
+                }
                 else
                 {
-                    pid = p.pkID;
+                    statee = 3; //درحال خرید
+                    return Json(new { statee = statee, vn = 0, pid = 0 }, JsonRequestBehavior.AllowGet);
                 }
-
-
-
-                var v = context.tbl_Visit.Where(x => x.pkID == vn).SingleOrDefault();
-
-                v.fkPID = pid;
-                v.fkVTID = 1;
-                v.EDate = v.SDate.AddMinutes(20);
-
-                context.SaveChanges();
-                statee = 2; // نوبت دهی انجام شد
             }
 
             else
             {
                 statee = 1; // نوبت پر است
+                return Json(new { statee = statee, vn = 0, pid = 0 }, JsonRequestBehavior.AllowGet);
             }
 
-            return Json(statee, JsonRequestBehavior.AllowGet);
+
 
 
         }
@@ -300,6 +326,16 @@ namespace hospital.Controllers
 
             return Json(status, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult chlang(string lang)
+        {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(lang);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+            Response.Cookies["lang"].Value = lang;
+            Response.Cookies["lang"].Expires = DateTime.Now.AddDays(500);
+            return RedirectToAction("index");
+        }
+
 
         public ActionResult getvisits()
         {
@@ -481,6 +517,28 @@ namespace hospital.Controllers
             var user = context.tbl_Doctors.Where(x => x.pkID == userid).SingleOrDefault();
 
             Session["username"] = user.Name + " " + user.Family;
+        }
+
+        public string deflang()
+        {
+            if (Request.Cookies["lang"] != null)
+            {
+                if (Request.Cookies["lang"].Value != null)
+                {
+                    return Request.Cookies["lang"].Value;
+                }
+                else
+                {
+                    return "fa";
+                }
+
+
+            }
+            else
+            {
+                return "fa";
+            }
+
         }
 
 
