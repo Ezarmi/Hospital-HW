@@ -228,3 +228,9 @@ C:\Users\Ezarm\Dropbox\Documents\Projects\HW Project\Hospital-HW\Hospital\obj\De
 C:\Users\Ezarm\Dropbox\Documents\Projects\HW Project\Hospital-HW\Hospital\obj\Debug\Hospital.pdb
 C:\Users\Ezarm\Dropbox\Documents\Projects\HW Project\Hospital-HW\Hospital\obj\Debug\Hospital.res.res1.resources
 C:\Users\Ezarm\Dropbox\Documents\Projects\HW Project\Hospital-HW\Hospital\obj\Debug\Hospital.csproj.GenerateResource.cache
+C:\Users\Ezarm\Documents\Project\Hospital-HW\Hospital\obj\Debug\hospital.csproj.AssemblyReference.cache
+C:\Users\Ezarm\Documents\Project\Hospital-HW\Hospital\obj\Debug\Hospital.res.res1.resources
+C:\Users\Ezarm\Documents\Project\Hospital-HW\Hospital\obj\Debug\hospital.csproj.GenerateResource.cache
+C:\Users\Ezarm\Documents\Project\Hospital-HW\Hospital\obj\Debug\hospital.csproj.CoreCompileInputs.cache
+C:\Users\Ezarm\Documents\Project\Hospital-HW\Hospital\obj\Debug\Hospital.dll
+C:\Users\Ezarm\Documents\Project\Hospital-HW\Hospital\obj\Debug\Hospital.pdb
