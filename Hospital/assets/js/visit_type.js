@@ -94,7 +94,7 @@
 
         var dep2 = dep.split("-");
 
-
+        
 
         $.post("/Home/get_VPD", { doc: dep2[0] })
 
@@ -105,14 +105,14 @@
                 $("#tbl_type").empty();
 
                 console.log(res);
-
+               
                 for (var item in res.vt) {
 
                     $("#tbl_type").append(
                         "<tr>" +
-                        "<td><input class='chbox' type='checkbox' id='chb_" + res.vt[item].pkID + "'></td>" +
+                        "<td><input class='chbox' type='checkbox' id='chb_" + res.vt[item].pkID +"'></td>" +
                         "<td>" + res.vt[item].Type + "</td>" +
-                        "<td><input type='number' id='min_" + res.vt[item].pkID + "'></td>"
+                        "<td><input type='number' id='min_" + res.vt[item].pkID + "'></td>" 
 
 
                     );
@@ -147,9 +147,9 @@
     });
 
 
-    $('table').on('change', '.chbox', function (e) {               //get dep
+    $('table').on('change','.chbox', function (e) {               //get dep
 
-
+      
 
         $(this).css("display", "none");
 
@@ -161,9 +161,9 @@
         var doc2 = doc.split("-");
 
         var state = $(this).is(':checked');
+       
 
-
-        $.post("/Home/chg_vpd", { vpdid: vpid2[1], state: state, doc: doc2[0] })
+         $.post("/Home/chg_vpd", { vpdid: vpid2[1],state:state,doc:doc2[0] })
 
             .done(function (res) {
 
@@ -273,7 +273,7 @@ function deleteparam() {
                                     case -2146233087: swal("عملیات ناموفق", "این نوبت را به خاطر تعلق قادر به حذف نیستید", "error");
                                 }
 
-
+                                
                             }
 
                         })

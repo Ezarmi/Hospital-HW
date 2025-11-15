@@ -1,8 +1,8 @@
 ﻿@using Hospital.Models;
-@{
+@{ 
 
 
-    string username = "";
+    string username="";
 
 
     //if (Session["userid"] == null)
@@ -13,7 +13,7 @@
     // }
 
 
-    if (Request.Cookies["iid"] == null)
+    if (Request.Cookies["iid"] ==null)
     {
         Response.Redirect("~/Home/login");
     }
@@ -37,7 +37,7 @@
     }
 
 
-}
+    }
 
 <!DOCTYPE html>
 <html>
@@ -115,7 +115,7 @@
                     <select id="dep_add"></select>
                     <select id="doctors_add"> <option>دکتر</option></select>
                     <select id="visittype_add"><option>نوع نوبت</option></select>
-                    <input id="pid_add" type="number" size="10" placeholder="کدملی" />
+                    <input id="pid_add" type="number" size="10" placeholder="کدملی"/>
                     <div class="modal-add-time">
 
                         <div class="input-group">
@@ -126,12 +126,12 @@
                         </div>
                     </div>
 
-
+                   
                 </div>
                 <div class="modal-footer" style="text-align:center">
                     <p id="chg" style="display:none"></p>
                     <button type="button" class="btn btn-default pull-right" data-dismiss="modal">بستن</button>
-                    <span id="serverstatus"></span>
+                   <span id="serverstatus"></span>
                     <button id="btn_add_visit" type="button" class="btn btn-success pull-left" onclick="add_visit()">ثبت نوبت</button>
                 </div>
             </div>
@@ -492,7 +492,7 @@
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="recept"><i class="fa fa-dashboard"></i> خانه</a></li>
-
+                   
                     <li class="active">@ViewBag.title</li>
                 </ol>
             </section>
@@ -749,7 +749,7 @@
     </script>
 
     <script type="text/javascript">
-        $('#input1').change(function () {
+    $('#input1').change(function () {
             var $this = $(this),
                 value = $this.val();
             alert(value);

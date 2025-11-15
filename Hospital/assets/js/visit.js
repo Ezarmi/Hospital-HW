@@ -62,12 +62,12 @@
 
 
 
-                $(".modal-body").empty();
+                $("#chg_body").empty();
                 for (var item in res) {
 
                    
 
-                    $(".modal-body").append(
+                    $("#chg_body").append(
                         "<button class='btn btn-primary chgstatus'>" + res[item].pkID + " - " + res[item].VisitStatus + "</button>" +
                         "<br><br>"
 
@@ -380,6 +380,14 @@ function add_visit() {
 
                 case 2:
                     $("#serverstatus").html("کد ملی یافت نشد");
+                    $("#serverstatus").css("color", "red");
+                    break;
+                case 3:
+                    $("#serverstatus").html("وقت دکتر آزاد نیست");
+                    $("#serverstatus").css("color", "red");
+                    break;
+                case 4:
+                    $("#serverstatus").html("وقت بیمار آزاد نیست");
                     $("#serverstatus").css("color", "red");
                     break;
             }

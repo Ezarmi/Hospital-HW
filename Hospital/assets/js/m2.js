@@ -210,13 +210,18 @@ function setvisit() {
                 console.log(res);
 
 
-                switch (res) {
+                switch (res.statee) {
 
-                    case 1: swal("عملیات ناموفق", "چنین نوبتی وجود ندارد", "error");
+                    case 1: swal("عملیات ناموفق", "نوبت مورد نظر رزرو شد", "error");
                         break;
-                    case 2: swal("عملیات موفق", "نوبت شما با موفقیت ثبت شد", "success");
-                        break;
+                    case 2:
 
+                        pay(res.amount, res.vn, res.pid);
+
+
+                        break;
+                    case 3: swal("توجه", "این نوبت در حال رزرو توسط شخص دیگریست. لطفا برای به روز رسانی نوبتها فیلد دکتر را مجدد انتخاب کنید", "info");
+                        break;
                 }
 
 
@@ -244,6 +249,48 @@ function setvisit() {
 
         swal("عملیات ناموفق", "لطفا خطاهای ورودی را تصحیح کنید", "error");
     }
+
+
+}
+
+
+
+function pay(amount, vn, pid) {
+
+    var token = $('input[name="__RequestVerificationToken"]').val();
+
+    $.post("/pay/submit", { vn: vn, pid: pid, amount: amount, __RequestVerificationToken:token })
+
+        .done(function (res) {
+
+            if (res.success) {
+
+                window.location.href = res.message;
+
+            }
+
+            else {
+                swal("عملیات ناموفق", "خطا شماره " + res.message, "error");
+            }
+            
+
+
+
+
+
+
+        })
+
+        .fail(function () {
+
+            alert("خطا در برقراری ارتباط با سرور");
+
+        })
+
+        .always(function () {
+
+
+        });
 
 
 }

@@ -3,19 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Ezarm\\Documents\\Project\\Hospital-HW\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8C52B709-3A3A-4B57-A782-CF4F99B9F188}|Hospital\\hospital.csproj|c:\\users\\ezarm\\documents\\project\\hospital-hw\\hospital\\views\\shared\\layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C52B709-3A3A-4B57-A782-CF4F99B9F188}|Hospital\\hospital.csproj|solutionrelative:hospital\\views\\shared\\layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C52B709-3A3A-4B57-A782-CF4F99B9F188}|Hospital\\hospital.csproj|c:\\users\\ezarm\\documents\\project\\hospital-hw\\hospital\\assets\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{8C52B709-3A3A-4B57-A782-CF4F99B9F188}|Hospital\\hospital.csproj|solutionrelative:hospital\\assets\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8C52B709-3A3A-4B57-A782-CF4F99B9F188}|Hospital\\hospital.csproj|c:\\users\\ezarm\\documents\\project\\hospital-hw\\hospital\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8C52B709-3A3A-4B57-A782-CF4F99B9F188}|Hospital\\hospital.csproj|solutionrelative:hospital\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__USERS_EZARM_ONEDRIVE_DOCUMENTS_PROJECTS_HW_PROJECT_HOSPITAL_HOSPITAL_APP_DATA_DATABASE1.MDF/True/SqlTable/dbo.tbl_Doctors.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+      "AbsoluteMoniker": "D:0:0:{8C52B709-3A3A-4B57-A782-CF4F99B9F188}|Hospital\\Hospital.csproj|C:\\Users\\Ezarm\\Documents\\Project\\Hospital-HW\\hospital\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C52B709-3A3A-4B57-A782-CF4F99B9F188}|Hospital\\Hospital.csproj|solutionrelative:hospital\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8C52B709-3A3A-4B57-A782-CF4F99B9F188}|Hospital\\Hospital.csproj|C:\\Users\\Ezarm\\Documents\\Project\\Hospital-HW\\hospital\\assets\\js\\m2.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{8C52B709-3A3A-4B57-A782-CF4F99B9F188}|Hospital\\Hospital.csproj|solutionrelative:hospital\\assets\\js\\m2.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8C52B709-3A3A-4B57-A782-CF4F99B9F188}|Hospital\\Hospital.csproj|C:\\Users\\Ezarm\\Documents\\Project\\Hospital-HW\\hospital\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C52B709-3A3A-4B57-A782-CF4F99B9F188}|Hospital\\Hospital.csproj|solutionrelative:hospital\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -25,20 +30,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "dbo.tbl_Doctors.sql",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__USERS_EZARM_ONEDRIVE_DOCUMENTS_PROJECTS_HW_PROJECT_HOSPITAL_HOSPITAL_APP_DATA_DATABASE1.MDF/True/SqlTable/dbo.tbl_Doctors.sql",
-              "ToolTip": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__USERS_EZARM_ONEDRIVE_DOCUMENTS_PROJECTS_HW_PROJECT_HOSPITAL_HOSPITAL_APP_DATA_DATABASE1.MDF/True/SqlTable/dbo.tbl_Doctors.sql",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-06-02T10:46:06.65Z"
+              "DocumentIndex": 0,
+              "Title": "layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Ezarm\\Documents\\Project\\Hospital-HW\\Hospital\\Views\\shared\\layout.cshtml",
+              "RelativeDocumentMoniker": "Hospital\\Views\\shared\\layout.cshtml",
+              "ToolTip": "C:\\Users\\Ezarm\\Documents\\Project\\Hospital-HW\\Hospital\\Views\\shared\\layout.cshtml",
+              "RelativeToolTip": "Hospital\\Views\\shared\\layout.cshtml",
+              "ViewState": "AgIAAL8BAADg8v////8fwNEBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-08T16:39:00.492Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
+              "Title": "style.css",
+              "DocumentMoniker": "C:\\Users\\Ezarm\\Documents\\Project\\Hospital-HW\\Hospital\\assets\\css\\style.css",
+              "RelativeDocumentMoniker": "Hospital\\assets\\css\\style.css",
+              "ToolTip": "C:\\Users\\Ezarm\\Documents\\Project\\Hospital-HW\\Hospital\\assets\\css\\style.css",
+              "RelativeToolTip": "Hospital\\assets\\css\\style.css",
+              "ViewState": "AgIAAAkAAACALjMzMzMbwB8AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-11-08T16:33:37.267Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "m2.js",
               "DocumentMoniker": "C:\\Users\\Ezarm\\Documents\\Project\\Hospital-HW\\Hospital\\assets\\js\\m2.js",
               "RelativeDocumentMoniker": "Hospital\\assets\\js\\m2.js",
@@ -46,17 +68,18 @@
               "RelativeToolTip": "Hospital\\assets\\js\\m2.js",
               "ViewState": "AgIAAAwAAACwMjMzMzMLwCMAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-06-01T10:23:56.63Z"
+              "WhenOpened": "2025-06-01T10:23:56.63Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Ezarm\\Documents\\Project\\Hospital-HW\\Hospital\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "Hospital\\Views\\Home\\Index.cshtml",
               "ToolTip": "C:\\Users\\Ezarm\\Documents\\Project\\Hospital-HW\\Hospital\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "Hospital\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAIoDAAAAAQAAAAABwJEDAABkAAAAAAAAAA==",
+              "ViewState": "AgIAAGkAAAAAAAAAAIAwwHgAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-05-27T14:39:10.145Z",
               "EditorCaption": ""
@@ -69,9 +92,10 @@
               "RelativeDocumentMoniker": "Hospital\\Controllers\\HomeController.cs",
               "ToolTip": "C:\\Users\\Ezarm\\Documents\\Project\\Hospital-HW\\Hospital\\Controllers\\HomeController.cs",
               "RelativeToolTip": "Hospital\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAABIAAADAMTMzM7MqwCQAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAADAMTMzM7MqwCQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T14:35:01.599Z"
+              "WhenOpened": "2025-05-27T14:35:01.599Z",
+              "EditorCaption": ""
             }
           ]
         }

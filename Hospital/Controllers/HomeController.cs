@@ -42,8 +42,8 @@ namespace hospital.Controllers
 
             string lang = deflang();
 
-            ViewBag.title = res.Where(x => x.Name == "تیتر اصلی" && x.Language == lang).Select(x => x.valuee).SingleOrDefault();
-            ViewBag.bannerimg = res.Where(x => x.Name == "عکس بنر").Select(x => x.valuee).SingleOrDefault();
+            ViewBag.title = res.Where(x => x.Name == "تیتر اصلی" && x.Language==lang).Select(x=> x.valuee).SingleOrDefault();
+           ViewBag.bannerimg = res.Where(x => x.Name == "عکس بنر").Select(x => x.valuee).SingleOrDefault();
 
             return View();
         }
@@ -51,8 +51,8 @@ namespace hospital.Controllers
         [HttpPost]
         public ActionResult getdep()
         {
-
-            var dep = context.tbl_Skills.Where(x => x.pkID != 6).Select(x => new { x.pkID, x.Skill }).ToList();
+            
+            var dep = context.tbl_Skills.Where(x=> x.pkID!=6).Select(x=> new {x.pkID,x.Skill}).ToList();
 
             return Json(dep, JsonRequestBehavior.AllowGet);
 
@@ -73,7 +73,7 @@ namespace hospital.Controllers
         public ActionResult getvisittype(int dep)
         {
 
-            var visittype = context.View_VisitPerDoctors.Where(x => x.fkDocID == dep).Select(x => new { x.fkVisitID, x.Type }).ToList();
+            var visittype = context.View_VisitPerDoctors.Where(x => x.fkDocID == dep).Select(x=> new {x.fkVisitID,x.Type}).ToList();
             return Json(visittype, JsonRequestBehavior.AllowGet);
 
         }
@@ -85,7 +85,7 @@ namespace hospital.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult addvisit(int docid, int visitid, string visitdatetime, string pid)
+        public ActionResult addvisit(int docid, int visitid, string visitdatetime,string pid)
         {
             int intpid = 0;
 
@@ -96,7 +96,7 @@ namespace hospital.Controllers
                 var p = context.tbl_Patient.Where(x => x.NationalCode == pid).SingleOrDefault();
                 if (p == null)
                 {
-                    return Json(new { status = 2, nv = 0 }, JsonRequestBehavior.AllowGet);
+                    return Json(new {status=2,nv=0 }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -112,7 +112,7 @@ namespace hospital.Controllers
 
 
 
-            int y = MyExtensions.PersianToEnglish(vdate[0]);
+            int y =MyExtensions.PersianToEnglish(vdate[0]);
             int m = MyExtensions.PersianToEnglish(vdate[1]);
             int d = MyExtensions.PersianToEnglish(vdate[2]);
             int h = MyExtensions.PersianToEnglish(vtime[0]);
@@ -124,7 +124,7 @@ namespace hospital.Controllers
 
             double duration = context.View_VisitPerDoctors.Where(x => x.fkDocID == docid && x.fkVisitID == visitid).Select(x => x.Duration).Single();
 
-            var overlap1 = context.tbl_Visit.Where(x => x.fkDocID == docid && x.SDate <= a && x.EDate > a).ToList();
+            var overlap1 = context.tbl_Visit.Where(x => x.fkDocID==docid && x.SDate <= a && x.EDate > a).ToList();
             if (overlap1.Count != 0)
             {
                 return Json(new { status = 3, nv = 0 }, JsonRequestBehavior.AllowGet);
@@ -136,7 +136,7 @@ namespace hospital.Controllers
                 {
                     return Json(new { status = 4, nv = 0 }, JsonRequestBehavior.AllowGet);
                 }
-
+                 
             }
             tbl_Visit nv = new tbl_Visit();
 
@@ -162,16 +162,16 @@ namespace hospital.Controllers
             var idtext = Encoding.UTF8.GetBytes(thisvisit.pkID.ToString());
             var encryptedID = Convert.ToBase64String(MachineKey.Protect(idtext, "alirezaomg"));
             thisvisit.hashid = encryptedID;
-
-            return Json(new { status = 1, nv = thisvisit }, JsonRequestBehavior.AllowGet);
+            
+            return Json(new { status = 1,nv=thisvisit }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult getvisit(int doc)
         {
+         
+           var visit = context.View_Visit.Where(x => x.fkDocID == doc && x.fkPID == null).Select(x => new { x.pkID, x.PDate, x.PTime }).ToList();
 
-            var visit = context.View_Visit.Where(x => x.fkDocID == doc && x.fkPID == null).Select(x => new { x.pkID, x.PDate, x.PTime }).ToList();
-
-
+           
 
             return Json(visit, JsonRequestBehavior.AllowGet);
 
@@ -188,7 +188,7 @@ namespace hospital.Controllers
             {
                 DateTime noww = DateTime.Now;
 
-                if (c.pb < noww || c.pb == null)
+                if (c.pb < noww || c.pb==null)
                 {
 
 
@@ -230,7 +230,7 @@ namespace hospital.Controllers
 
                     int amount = context.tbl_VisitPerDoctors.Where(x => x.fkDocID == v.fkDocID && x.fkVisitID == v.fkVTID).Select(x => x.amount).Single();
 
-                    return Json(new { statee = statee, vn = v.pkID, pid = pid, amount = amount }, JsonRequestBehavior.AllowGet);
+                    return Json(new { statee = statee, vn = v.pkID, pid = pid,amount=amount }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -245,8 +245,8 @@ namespace hospital.Controllers
                 return Json(new { statee = statee, vn = 0, pid = 0 }, JsonRequestBehavior.AllowGet);
             }
 
-
-
+               
+            
 
         }
 
@@ -258,7 +258,7 @@ namespace hospital.Controllers
             ViewBag.title = Hospital.res.res1.m_dashbord;
             return View();
         }
-
+          
 
 
         public ActionResult visit_management()
@@ -269,8 +269,7 @@ namespace hospital.Controllers
         }
 
 
-        public ActionResult visit_type()
-        {
+        public ActionResult visit_type() {
 
             ViewBag.title = Hospital.res.res1.m_visit_type;
             return View();
@@ -287,7 +286,7 @@ namespace hospital.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult login_check(int pn, string pass)
+        public ActionResult login_check(int pn,string pass)
         {
             Session.Timeout = 30;
             int status = 0;
@@ -308,15 +307,14 @@ namespace hospital.Controllers
 
                     status = 1; //login ok
                 }
-                else
-                {
+                 else {
                     status = 2; //wrong pass
+                                
+                
+                 }
 
 
                 }
-
-
-            }
 
             else
             {
@@ -335,11 +333,11 @@ namespace hospital.Controllers
             Response.Cookies["lang"].Expires = DateTime.Now.AddDays(500);
             return RedirectToAction("index");
         }
-
+         
 
         public ActionResult getvisits()
         {
-            var visits = context.View_Visit.OrderByDescending(x => x.SDate).ToList();
+            var visits = context.View_Visit.OrderByDescending(x=> x.SDate).ToList();
 
             foreach (var item in visits)
             {
@@ -372,8 +370,7 @@ namespace hospital.Controllers
         }
 
 
-        public ActionResult getstatus()
-        {
+        public ActionResult getstatus() {
 
 
             var status = context.tbl_VisitStatus.Select(x => new { x.pkID, x.VisitStatus }).ToList();
@@ -383,7 +380,7 @@ namespace hospital.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult setstatus(int state, string sid)
+        public ActionResult setstatus(int state,string sid)
         {
 
             var bytes = Convert.FromBase64String(sid);
@@ -405,11 +402,11 @@ namespace hospital.Controllers
 
                 status = 1; // ok
 
-                sname = context.tbl_VisitStatus.Where(x => x.pkID == state).Select(x => x.VisitStatus).SingleOrDefault();
+                sname = context.tbl_VisitStatus.Where(x => x.pkID == state).Select(x=> x.VisitStatus).SingleOrDefault();
             }
+            
 
-
-            return Json(new { status = status, sname = sname }, JsonRequestBehavior.AllowGet);
+            return Json(new { status=status, sname=sname }, JsonRequestBehavior.AllowGet);
 
         }
 
@@ -420,9 +417,9 @@ namespace hospital.Controllers
             return Json(new { vt = vt, vpd = vpd }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult chg_vpd(int vpdid, bool state, int doc)
+        public ActionResult chg_vpd(int vpdid,bool state, int doc)
         {
-
+            
             if (state)
             {
                 tbl_VisitPerDoctors ntype = new tbl_VisitPerDoctors();
@@ -432,7 +429,7 @@ namespace hospital.Controllers
                 context.tbl_VisitPerDoctors.Add(ntype);
                 context.SaveChanges();
 
-
+                
             }
             else
             {
@@ -442,7 +439,7 @@ namespace hospital.Controllers
 
             }
 
-            var res = context.tbl_VisitPerDoctors.Where(x => x.fkDocID == doc && x.fkVisitID == vpdid).Select(x => new { x.fkDocID, x.fkVisitID, x.Duration }).SingleOrDefault();
+            var res= context.tbl_VisitPerDoctors.Where(x => x.fkDocID == doc && x.fkVisitID == vpdid).Select(x=>new {x.fkDocID,x.fkVisitID,x.Duration }).SingleOrDefault();
 
             if (res == null)
             {
@@ -466,7 +463,7 @@ namespace hospital.Controllers
             context.tbl_VisitType.Add(nvt);
             context.SaveChanges();
 
-            return Json(new { state = true, vt = vt }, JsonRequestBehavior.AllowGet);
+            return Json(new { state = true, vt=vt }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -484,28 +481,28 @@ namespace hospital.Controllers
 
             }
 
-            catch (Exception e)
+            catch(Exception e)
             {
                 return Json(new { state = false, vt = e.HResult }, JsonRequestBehavior.AllowGet);
             }
-
-
-
+           
+              
+            
         }
 
-
+        
 
         public void logout()
         {
             Response.Cookies["iid"].Expires = DateTime.Now.AddDays(-1);
             Session.Abandon();
-
+           
 
             Response.Redirect("/Home/login");
         }
 
 
-        public void setname()
+       public void setname()
         {
 
             var bytes = Convert.FromBase64String(Request.Cookies["iid"].Value);
@@ -519,29 +516,28 @@ namespace hospital.Controllers
             Session["username"] = user.Name + " " + user.Family;
         }
 
-        public string deflang()
+        public string deflang() 
         {
             if (Request.Cookies["lang"] != null)
             {
                 if (Request.Cookies["lang"].Value != null)
                 {
                     return Request.Cookies["lang"].Value;
-                }
-                else
+                }else
                 {
                     return "fa";
                 }
 
-
+               
             }
             else
             {
                 return "fa";
             }
-
+           
         }
 
-
+        
 
     }
 
