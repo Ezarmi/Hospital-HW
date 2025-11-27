@@ -255,7 +255,7 @@ namespace hospital.Controllers
 
 
 
-            ViewBag.title = Hospital.res.res1.m_dashbord;
+            ViewBag.title = Hospital.res.res1.m_dashboard;
             return View();
         }
           

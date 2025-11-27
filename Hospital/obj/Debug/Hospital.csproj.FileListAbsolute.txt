@@ -234,3 +234,4 @@ C:\Users\Ezarm\Documents\Project\Hospital-HW\Hospital\obj\Debug\hospital.csproj.
 C:\Users\Ezarm\Documents\Project\Hospital-HW\Hospital\obj\Debug\hospital.csproj.CoreCompileInputs.cache
 C:\Users\Ezarm\Documents\Project\Hospital-HW\Hospital\obj\Debug\Hospital.dll
 C:\Users\Ezarm\Documents\Project\Hospital-HW\Hospital\obj\Debug\Hospital.pdb
+C:\Users\Ezarm\Documents\Project\Hospital-HW\Hospital\obj\Debug\Hospital.res.res1.fa.resources

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Hospital.res {
+namespace hospital.res {
     using System;
     
     
@@ -19,7 +19,7 @@ namespace Hospital.res {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class res1 {
@@ -39,7 +39,7 @@ namespace Hospital.res {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Hospital.res.res1", typeof(res1).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("hospital.res.res1", typeof(res1).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,16 +61,79 @@ namespace Hospital.res {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to داشبورد.
+        ///   Looks up a localized string similar to About Us.
         /// </summary>
-        public static string m_dashbord {
+        public static string i_about {
             get {
-                return ResourceManager.GetString("m_dashbord", resourceCulture);
+                return ResourceManager.GetString("i_about", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to مدیریت نوبت‌ها.
+        ///   Looks up a localized string similar to Appointment.
+        /// </summary>
+        public static string i_appointment {
+            get {
+                return ResourceManager.GetString("i_appointment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact Us.
+        /// </summary>
+        public static string i_contact {
+            get {
+                return ResourceManager.GetString("i_contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Departmants.
+        /// </summary>
+        public static string i_dep {
+            get {
+                return ResourceManager.GetString("i_dep", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doctors.
+        /// </summary>
+        public static string i_docs {
+            get {
+                return ResourceManager.GetString("i_docs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string i_home {
+            get {
+                return ResourceManager.GetString("i_home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Services.
+        /// </summary>
+        public static string i_service {
+            get {
+                return ResourceManager.GetString("i_service", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dashboard.
+        /// </summary>
+        public static string m_dashboard {
+            get {
+                return ResourceManager.GetString("m_dashboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visiy Managment.
         /// </summary>
         public static string m_visit {
             get {
@@ -79,7 +142,7 @@ namespace Hospital.res {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to نوع نوبت.
+        ///   Looks up a localized string similar to Visit Type.
         /// </summary>
         public static string m_visit_type {
             get {
