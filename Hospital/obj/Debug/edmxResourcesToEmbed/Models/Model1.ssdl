@@ -61,6 +61,18 @@
     <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Skill" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="tbl_Transfer">
+    <Key>
+      <PropertyRef Name="pkID" />
+    </Key>
+    <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fkPID" Type="int" Nullable="false" />
+    <Property Name="fkVisitID" Type="int" Nullable="false" />
+    <Property Name="amount" Type="int" Nullable="false" />
+    <Property Name="traking" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="transid" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CardNumber" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="tbl_Visit">
     <Key>
       <PropertyRef Name="pkID" />
@@ -73,6 +85,8 @@
     <Property Name="fkVTID" Type="int" />
     <Property Name="fkVisitStatus" Type="int" />
     <Property Name="hashid" Type="nvarchar" MaxLength="100" />
+    <Property Name="pb" Type="datetime" />
+    <Property Name="fkReserverID" Type="int" />
   </EntityType>
   <EntityType Name="tbl_VisitPerDoctors">
     <Key>
@@ -82,6 +96,7 @@
     <Property Name="fkDocID" Type="int" Nullable="false" />
     <Property Name="fkVisitID" Type="int" Nullable="false" />
     <Property Name="Duration" Type="bigint" Nullable="false" />
+    <Property Name="amount" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="tbl_VisitStatus">
     <Key>
@@ -194,6 +209,42 @@ warning 6002: The table/view 'C:\PROGRAM FILES\MICROSOFT VISUAL STUDIO\18\ENTERP
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tbl_Patient_tbl_Patient">
+    <End Role="tbl_Patient" Type="Self.tbl_Patient" Multiplicity="1" />
+    <End Role="tbl_Patient1" Type="Self.tbl_Patient" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Patient">
+        <PropertyRef Name="pkID" />
+      </Principal>
+      <Dependent Role="tbl_Patient1">
+        <PropertyRef Name="pkID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Transfer_tbl_Patient">
+    <End Role="tbl_Visit" Type="Self.tbl_Visit" Multiplicity="1" />
+    <End Role="tbl_Transfer" Type="Self.tbl_Transfer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Visit">
+        <PropertyRef Name="pkID" />
+      </Principal>
+      <Dependent Role="tbl_Transfer">
+        <PropertyRef Name="fkVisitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Visit_tbl_Patient1">
+    <End Role="tbl_Patient" Type="Self.tbl_Patient" Multiplicity="0..1" />
+    <End Role="tbl_Visit" Type="Self.tbl_Visit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Patient">
+        <PropertyRef Name="pkID" />
+      </Principal>
+      <Dependent Role="tbl_Visit">
+        <PropertyRef Name="fkReserverID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tbl_Visit_To_Patient">
     <End Role="tbl_Patient" Type="Self.tbl_Patient" Multiplicity="0..1" />
     <End Role="tbl_Visit" Type="Self.tbl_Visit" Multiplicity="*" />
@@ -274,6 +325,7 @@ warning 6002: The table/view 'C:\PROGRAM FILES\MICROSOFT VISUAL STUDIO\18\ENTERP
     <EntitySet Name="tbl_Patient" EntityType="Self.tbl_Patient" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_Research" EntityType="Self.tbl_Research" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_Skills" EntityType="Self.tbl_Skills" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Transfer" EntityType="Self.tbl_Transfer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_Visit" EntityType="Self.tbl_Visit" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_VisitPerDoctors" EntityType="Self.tbl_VisitPerDoctors" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_VisitStatus" EntityType="Self.tbl_VisitStatus" Schema="dbo" store:Type="Tables" />
@@ -329,6 +381,18 @@ warning 6002: The table/view 'C:\PROGRAM FILES\MICROSOFT VISUAL STUDIO\18\ENTERP
     <AssociationSet Name="FK_tbl_comm_tbl_language" Association="Self.FK_tbl_comm_tbl_language">
       <End Role="tbl_language" EntitySet="tbl_language" />
       <End Role="tbl_comm" EntitySet="tbl_comm" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Patient_tbl_Patient" Association="Self.FK_tbl_Patient_tbl_Patient">
+      <End Role="tbl_Patient" EntitySet="tbl_Patient" />
+      <End Role="tbl_Patient1" EntitySet="tbl_Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Transfer_tbl_Patient" Association="Self.FK_tbl_Transfer_tbl_Patient">
+      <End Role="tbl_Visit" EntitySet="tbl_Visit" />
+      <End Role="tbl_Transfer" EntitySet="tbl_Transfer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Visit_tbl_Patient1" Association="Self.FK_tbl_Visit_tbl_Patient1">
+      <End Role="tbl_Patient" EntitySet="tbl_Patient" />
+      <End Role="tbl_Visit" EntitySet="tbl_Visit" />
     </AssociationSet>
     <AssociationSet Name="FK_tbl_Visit_To_Patient" Association="Self.FK_tbl_Visit_To_Patient">
       <End Role="tbl_Patient" EntitySet="tbl_Patient" />

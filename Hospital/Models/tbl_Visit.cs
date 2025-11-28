@@ -14,6 +14,12 @@ namespace hospital.Models
     
     public partial class tbl_Visit
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbl_Visit()
+        {
+            this.tbl_Transfer = new HashSet<tbl_Transfer>();
+        }
+    
         public int pkID { get; set; }
         public int fkDocID { get; set; }
         public System.DateTime SDate { get; set; }
@@ -22,9 +28,14 @@ namespace hospital.Models
         public Nullable<int> fkVTID { get; set; }
         public Nullable<int> fkVisitStatus { get; set; }
         public string hashid { get; set; }
+        public Nullable<System.DateTime> pb { get; set; }
+        public Nullable<int> fkReserverID { get; set; }
     
         public virtual tbl_Doctors tbl_Doctors { get; set; }
         public virtual tbl_Patient tbl_Patient { get; set; }
+        public virtual tbl_Patient tbl_Patient1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_Transfer> tbl_Transfer { get; set; }
         public virtual tbl_VisitStatus tbl_VisitStatus { get; set; }
         public virtual tbl_VisitType tbl_VisitType { get; set; }
     }

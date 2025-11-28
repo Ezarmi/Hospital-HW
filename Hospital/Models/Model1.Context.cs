@@ -32,6 +32,7 @@ namespace hospital.Models
         public virtual DbSet<tbl_Patient> tbl_Patient { get; set; }
         public virtual DbSet<tbl_Research> tbl_Research { get; set; }
         public virtual DbSet<tbl_Skills> tbl_Skills { get; set; }
+        public virtual DbSet<tbl_Transfer> tbl_Transfer { get; set; }
         public virtual DbSet<tbl_Visit> tbl_Visit { get; set; }
         public virtual DbSet<tbl_VisitPerDoctors> tbl_VisitPerDoctors { get; set; }
         public virtual DbSet<tbl_VisitStatus> tbl_VisitStatus { get; set; }

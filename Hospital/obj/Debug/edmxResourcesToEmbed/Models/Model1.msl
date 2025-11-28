@@ -69,9 +69,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Transfer">
+      <EntityTypeMapping TypeName="Mazrouie8834_hospitalModel.tbl_Transfer">
+        <MappingFragment StoreEntitySet="tbl_Transfer">
+          <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+          <ScalarProperty Name="transid" ColumnName="transid" />
+          <ScalarProperty Name="traking" ColumnName="traking" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="fkVisitID" ColumnName="fkVisitID" />
+          <ScalarProperty Name="fkPID" ColumnName="fkPID" />
+          <ScalarProperty Name="pkID" ColumnName="pkID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tbl_Visit">
       <EntityTypeMapping TypeName="Mazrouie8834_hospitalModel.tbl_Visit">
         <MappingFragment StoreEntitySet="tbl_Visit">
+          <ScalarProperty Name="fkReserverID" ColumnName="fkReserverID" />
+          <ScalarProperty Name="pb" ColumnName="pb" />
           <ScalarProperty Name="hashid" ColumnName="hashid" />
           <ScalarProperty Name="fkVisitStatus" ColumnName="fkVisitStatus" />
           <ScalarProperty Name="fkVTID" ColumnName="fkVTID" />
@@ -86,6 +101,7 @@
     <EntitySetMapping Name="tbl_VisitPerDoctors">
       <EntityTypeMapping TypeName="Mazrouie8834_hospitalModel.tbl_VisitPerDoctors">
         <MappingFragment StoreEntitySet="tbl_VisitPerDoctors">
+          <ScalarProperty Name="amount" ColumnName="amount" />
           <ScalarProperty Name="Duration" ColumnName="Duration" />
           <ScalarProperty Name="fkVisitID" ColumnName="fkVisitID" />
           <ScalarProperty Name="fkDocID" ColumnName="fkDocID" />

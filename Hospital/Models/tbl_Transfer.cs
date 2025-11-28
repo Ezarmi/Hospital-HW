@@ -12,15 +12,16 @@ namespace hospital.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_VisitPerDoctors
+    public partial class tbl_Transfer
     {
         public int pkID { get; set; }
-        public int fkDocID { get; set; }
+        public int fkPID { get; set; }
         public int fkVisitID { get; set; }
-        public long Duration { get; set; }
         public int amount { get; set; }
+        public string traking { get; set; }
+        public string transid { get; set; }
+        public string CardNumber { get; set; }
     
-        public virtual tbl_Doctors tbl_Doctors { get; set; }
-        public virtual tbl_VisitType tbl_VisitType { get; set; }
+        public virtual tbl_Visit tbl_Visit { get; set; }
     }
 }

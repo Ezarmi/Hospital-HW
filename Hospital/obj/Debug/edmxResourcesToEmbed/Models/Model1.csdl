@@ -8,6 +8,7 @@
     <EntitySet Name="tbl_Patient" EntityType="Mazrouie8834_hospitalModel.tbl_Patient" />
     <EntitySet Name="tbl_Research" EntityType="Mazrouie8834_hospitalModel.tbl_Research" />
     <EntitySet Name="tbl_Skills" EntityType="Mazrouie8834_hospitalModel.tbl_Skills" />
+    <EntitySet Name="tbl_Transfer" EntityType="Mazrouie8834_hospitalModel.tbl_Transfer" />
     <EntitySet Name="tbl_Visit" EntityType="Mazrouie8834_hospitalModel.tbl_Visit" />
     <EntitySet Name="tbl_VisitPerDoctors" EntityType="Mazrouie8834_hospitalModel.tbl_VisitPerDoctors" />
     <EntitySet Name="tbl_VisitStatus" EntityType="Mazrouie8834_hospitalModel.tbl_VisitStatus" />
@@ -31,9 +32,21 @@
       <End Role="tbl_Doctors" EntitySet="tbl_Doctors" />
       <End Role="tbl_VisitPerDoctors" EntitySet="tbl_VisitPerDoctors" />
     </AssociationSet>
+    <AssociationSet Name="FK_tbl_Patient_tbl_Patient" Association="Mazrouie8834_hospitalModel.FK_tbl_Patient_tbl_Patient">
+      <End Role="tbl_Patient" EntitySet="tbl_Patient" />
+      <End Role="tbl_Patient1" EntitySet="tbl_Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Visit_tbl_Patient1" Association="Mazrouie8834_hospitalModel.FK_tbl_Visit_tbl_Patient1">
+      <End Role="tbl_Patient" EntitySet="tbl_Patient" />
+      <End Role="tbl_Visit" EntitySet="tbl_Visit" />
+    </AssociationSet>
     <AssociationSet Name="FK_tbl_Visit_To_Patient" Association="Mazrouie8834_hospitalModel.FK_tbl_Visit_To_Patient">
       <End Role="tbl_Patient" EntitySet="tbl_Patient" />
       <End Role="tbl_Visit" EntitySet="tbl_Visit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Transfer_tbl_Patient" Association="Mazrouie8834_hospitalModel.FK_tbl_Transfer_tbl_Patient">
+      <End Role="tbl_Visit" EntitySet="tbl_Visit" />
+      <End Role="tbl_Transfer" EntitySet="tbl_Transfer" />
     </AssociationSet>
     <AssociationSet Name="FK_tbl_Visit_To_VisitStatus" Association="Mazrouie8834_hospitalModel.FK_tbl_Visit_To_VisitStatus">
       <End Role="tbl_VisitStatus" EntitySet="tbl_VisitStatus" />
@@ -99,7 +112,10 @@
     <Property Name="Family" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="Mobile" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="false" />
     <Property Name="NationalCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-    <NavigationProperty Name="tbl_Visit" Relationship="Mazrouie8834_hospitalModel.FK_tbl_Visit_To_Patient" FromRole="tbl_Patient" ToRole="tbl_Visit" />
+    <NavigationProperty Name="tbl_Patient1" Relationship="Mazrouie8834_hospitalModel.FK_tbl_Patient_tbl_Patient" FromRole="tbl_Patient" ToRole="tbl_Patient1" />
+    <NavigationProperty Name="tbl_Patient2" Relationship="Mazrouie8834_hospitalModel.FK_tbl_Patient_tbl_Patient" FromRole="tbl_Patient1" ToRole="tbl_Patient" />
+    <NavigationProperty Name="tbl_Visit" Relationship="Mazrouie8834_hospitalModel.FK_tbl_Visit_tbl_Patient1" FromRole="tbl_Patient" ToRole="tbl_Visit" />
+    <NavigationProperty Name="tbl_Visit1" Relationship="Mazrouie8834_hospitalModel.FK_tbl_Visit_To_Patient" FromRole="tbl_Patient" ToRole="tbl_Visit" />
   </EntityType>
   <EntityType Name="tbl_Research">
     <Key>
@@ -116,6 +132,19 @@
     <Property Name="Skill" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="tbl_Doctors" Relationship="Mazrouie8834_hospitalModel.FK_Table_1_Table_1" FromRole="tbl_Skills" ToRole="tbl_Doctors" />
   </EntityType>
+  <EntityType Name="tbl_Transfer">
+    <Key>
+      <PropertyRef Name="pkID" />
+    </Key>
+    <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fkPID" Type="Int32" Nullable="false" />
+    <Property Name="fkVisitID" Type="Int32" Nullable="false" />
+    <Property Name="amount" Type="Int32" Nullable="false" />
+    <Property Name="traking" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="transid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CardNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbl_Visit" Relationship="Mazrouie8834_hospitalModel.FK_tbl_Transfer_tbl_Patient" FromRole="tbl_Transfer" ToRole="tbl_Visit" />
+  </EntityType>
   <EntityType Name="tbl_Visit">
     <Key>
       <PropertyRef Name="pkID" />
@@ -128,8 +157,12 @@
     <Property Name="fkVTID" Type="Int32" />
     <Property Name="fkVisitStatus" Type="Int32" />
     <Property Name="hashid" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="pb" Type="DateTime" Precision="3" />
+    <Property Name="fkReserverID" Type="Int32" />
     <NavigationProperty Name="tbl_Doctors" Relationship="Mazrouie8834_hospitalModel.FK_tbl_Visit_To_tbl_Doctors" FromRole="tbl_Visit" ToRole="tbl_Doctors" />
-    <NavigationProperty Name="tbl_Patient" Relationship="Mazrouie8834_hospitalModel.FK_tbl_Visit_To_Patient" FromRole="tbl_Visit" ToRole="tbl_Patient" />
+    <NavigationProperty Name="tbl_Patient" Relationship="Mazrouie8834_hospitalModel.FK_tbl_Visit_tbl_Patient1" FromRole="tbl_Visit" ToRole="tbl_Patient" />
+    <NavigationProperty Name="tbl_Patient1" Relationship="Mazrouie8834_hospitalModel.FK_tbl_Visit_To_Patient" FromRole="tbl_Visit" ToRole="tbl_Patient" />
+    <NavigationProperty Name="tbl_Transfer" Relationship="Mazrouie8834_hospitalModel.FK_tbl_Transfer_tbl_Patient" FromRole="tbl_Visit" ToRole="tbl_Transfer" />
     <NavigationProperty Name="tbl_VisitStatus" Relationship="Mazrouie8834_hospitalModel.FK_tbl_Visit_To_VisitStatus" FromRole="tbl_Visit" ToRole="tbl_VisitStatus" />
     <NavigationProperty Name="tbl_VisitType" Relationship="Mazrouie8834_hospitalModel.FK_tbl_Visit_To_VisitType" FromRole="tbl_Visit" ToRole="tbl_VisitType" />
   </EntityType>
@@ -141,6 +174,7 @@
     <Property Name="fkDocID" Type="Int32" Nullable="false" />
     <Property Name="fkVisitID" Type="Int32" Nullable="false" />
     <Property Name="Duration" Type="Int64" Nullable="false" />
+    <Property Name="amount" Type="Int32" Nullable="false" />
     <NavigationProperty Name="tbl_Doctors" Relationship="Mazrouie8834_hospitalModel.FK_tbl_VisitPerDoctors_tbl_Doctors" FromRole="tbl_VisitPerDoctors" ToRole="tbl_Doctors" />
     <NavigationProperty Name="tbl_VisitType" Relationship="Mazrouie8834_hospitalModel.FK_tbl_VisitPerDoctors_tbl_VisitType" FromRole="tbl_VisitPerDoctors" ToRole="tbl_VisitType" />
   </EntityType>
@@ -276,6 +310,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tbl_Patient_tbl_Patient">
+    <End Type="Mazrouie8834_hospitalModel.tbl_Patient" Role="tbl_Patient" Multiplicity="1" />
+    <End Type="Mazrouie8834_hospitalModel.tbl_Patient" Role="tbl_Patient1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Patient">
+        <PropertyRef Name="pkID" />
+      </Principal>
+      <Dependent Role="tbl_Patient1">
+        <PropertyRef Name="pkID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Visit_tbl_Patient1">
+    <End Type="Mazrouie8834_hospitalModel.tbl_Patient" Role="tbl_Patient" Multiplicity="0..1" />
+    <End Type="Mazrouie8834_hospitalModel.tbl_Visit" Role="tbl_Visit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Patient">
+        <PropertyRef Name="pkID" />
+      </Principal>
+      <Dependent Role="tbl_Visit">
+        <PropertyRef Name="fkReserverID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tbl_Visit_To_Patient">
     <End Type="Mazrouie8834_hospitalModel.tbl_Patient" Role="tbl_Patient" Multiplicity="0..1" />
     <End Type="Mazrouie8834_hospitalModel.tbl_Visit" Role="tbl_Visit" Multiplicity="*" />
@@ -285,6 +343,18 @@
       </Principal>
       <Dependent Role="tbl_Visit">
         <PropertyRef Name="fkPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Transfer_tbl_Patient">
+    <End Type="Mazrouie8834_hospitalModel.tbl_Visit" Role="tbl_Visit" Multiplicity="1" />
+    <End Type="Mazrouie8834_hospitalModel.tbl_Transfer" Role="tbl_Transfer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Visit">
+        <PropertyRef Name="pkID" />
+      </Principal>
+      <Dependent Role="tbl_Transfer">
+        <PropertyRef Name="fkVisitID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
