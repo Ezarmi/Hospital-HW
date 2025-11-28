@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Hospital.Models
+namespace hospital.Models
 {
     using System;
     using System.Collections.Generic;
@@ -15,8 +15,12 @@ namespace Hospital.Models
     public partial class tbl_comm
     {
         public int pkID { get; set; }
-        public string Nam { get; set; }
+        public string Name { get; set; }
         public string valuee { get; set; }
         public string dis { get; set; }
+        public int typee { get; set; }
+        public int fkLangID { get; set; }
+    
+        public virtual tbl_language tbl_language { get; set; }
     }
 }

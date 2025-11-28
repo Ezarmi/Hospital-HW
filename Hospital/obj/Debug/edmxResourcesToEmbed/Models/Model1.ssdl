@@ -1,11 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="hospitalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="Mazrouie8834_hospitalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="tbl_Awards">
     <Key>
       <PropertyRef Name="pkID" />
     </Key>
     <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tbl_comm">
+    <Key>
+      <PropertyRef Name="pkID" />
+    </Key>
+    <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="valuee" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dis" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="typee" Type="int" Nullable="false" />
+    <Property Name="fkLangID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="tbl_Doctors">
     <Key>
@@ -17,6 +28,14 @@
     <Property Name="fkSkill" Type="int" Nullable="false" />
     <Property Name="PersonalNum" Type="int" />
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_language">
+    <Key>
+      <PropertyRef Name="pkID" />
+    </Key>
+    <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Language" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LangName" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="tbl_Patient">
     <Key>
@@ -79,7 +98,29 @@
     <Property Name="Type" Type="nvarchar" MaxLength="30" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJECT\HOSPITAL-HW\HOSPITAL\APP_DATA\DATABASE1.MDF.dbo.View_Visit' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'C:\PROGRAM FILES\MICROSOFT VISUAL STUDIO\18\ENTERPRISE\COMMON7\IDE\DATABASE1.MDF.dbo.View_Comm' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_Comm">
+    <Key>
+      <PropertyRef Name="pkID" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="valuee" />
+      <PropertyRef Name="dis" />
+      <PropertyRef Name="typee" />
+      <PropertyRef Name="fkLangID" />
+      <PropertyRef Name="Language" />
+      <PropertyRef Name="LangName" />
+    </Key>
+    <Property Name="pkID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="valuee" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dis" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="typee" Type="int" Nullable="false" />
+    <Property Name="fkLangID" Type="int" Nullable="false" />
+    <Property Name="Language" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LangName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\PROGRAM FILES\MICROSOFT VISUAL STUDIO\18\ENTERPRISE\COMMON7\IDE\DATABASE1.MDF.dbo.View_Visit' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="View_Visit">
     <Key>
       <PropertyRef Name="fkDocID" />
@@ -112,7 +153,7 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
     <Property Name="PNC" Type="char" MaxLength="10" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJECT\HOSPITAL-HW\HOSPITAL\APP_DATA\DATABASE1.MDF.dbo.View_VisitPerDoctors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'C:\PROGRAM FILES\MICROSOFT VISUAL STUDIO\18\ENTERPRISE\COMMON7\IDE\DATABASE1.MDF.dbo.View_VisitPerDoctors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="View_VisitPerDoctors">
     <Key>
       <PropertyRef Name="pkID" />
@@ -138,6 +179,18 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
       </Principal>
       <Dependent Role="tbl_Doctors">
         <PropertyRef Name="fkSkill" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_comm_tbl_language">
+    <End Role="tbl_language" Type="Self.tbl_language" Multiplicity="1" />
+    <End Role="tbl_comm" Type="Self.tbl_comm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_language">
+        <PropertyRef Name="pkID" />
+      </Principal>
+      <Dependent Role="tbl_comm">
+        <PropertyRef Name="fkLangID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -213,9 +266,11 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="hospitalModelStoreContainer">
+  <EntityContainer Name="Mazrouie8834_hospitalModelStoreContainer">
     <EntitySet Name="tbl_Awards" EntityType="Self.tbl_Awards" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_comm" EntityType="Self.tbl_comm" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_Doctors" EntityType="Self.tbl_Doctors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_language" EntityType="Self.tbl_language" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_Patient" EntityType="Self.tbl_Patient" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_Research" EntityType="Self.tbl_Research" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_Skills" EntityType="Self.tbl_Skills" Schema="dbo" store:Type="Tables" />
@@ -223,6 +278,18 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
     <EntitySet Name="tbl_VisitPerDoctors" EntityType="Self.tbl_VisitPerDoctors" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_VisitStatus" EntityType="Self.tbl_VisitStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_VisitType" EntityType="Self.tbl_VisitType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="View_Comm" EntityType="Self.View_Comm" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_Comm].[pkID] AS [pkID], 
+    [View_Comm].[Name] AS [Name], 
+    [View_Comm].[valuee] AS [valuee], 
+    [View_Comm].[dis] AS [dis], 
+    [View_Comm].[typee] AS [typee], 
+    [View_Comm].[fkLangID] AS [fkLangID], 
+    [View_Comm].[Language] AS [Language], 
+    [View_Comm].[LangName] AS [LangName]
+    FROM [dbo].[View_Comm] AS [View_Comm]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="View_Visit" EntityType="Self.View_Visit" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [View_Visit].[fkDocID] AS [fkDocID], 
@@ -258,6 +325,10 @@ warning 6002: The table/view 'C:\USERS\EZARM\DROPBOX\DOCUMENTS\PROJECTS\HW PROJE
     <AssociationSet Name="FK_Table_1_Table_1" Association="Self.FK_Table_1_Table_1">
       <End Role="tbl_Skills" EntitySet="tbl_Skills" />
       <End Role="tbl_Doctors" EntitySet="tbl_Doctors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_comm_tbl_language" Association="Self.FK_tbl_comm_tbl_language">
+      <End Role="tbl_language" EntitySet="tbl_language" />
+      <End Role="tbl_comm" EntitySet="tbl_comm" />
     </AssociationSet>
     <AssociationSet Name="FK_tbl_Visit_To_Patient" Association="Self.FK_tbl_Visit_To_Patient">
       <End Role="tbl_Patient" EntitySet="tbl_Patient" />

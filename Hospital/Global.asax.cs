@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Threading;
+using System.Globalization;
 
-namespace Hospital
+namespace hospital
 {
     public class MvcApplication : System.Web.HttpApplication
     {
@@ -16,7 +16,8 @@ namespace Hospital
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
-        protected void Applicatin_BeginRequest()
+
+        protected void Application_BeginRequest()
         {
             if (Request.Cookies["lang"] != null)
             {

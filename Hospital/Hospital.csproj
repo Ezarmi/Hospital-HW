@@ -1,4 +1,5 @@
 ﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -7,22 +8,23 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8C52B709-3A3A-4B57-A782-CF4F99B9F188}</ProjectGuid>
+    <ProjectGuid>{7077DCA5-CE1B-4418-8FFB-0BA00D8BAF3A}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hospital</RootNamespace>
-    <AssemblyName>Hospital</AssemblyName>
+    <RootNamespace>hospital</RootNamespace>
+    <AssemblyName>hospital</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44385</IISExpressSSLPort>
+    <IISExpressSSLPort>44315</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>4.3</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,7 +53,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -91,6 +93,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -135,10 +138,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Database1.mdf" />
-    <Content Include="App_Data\Database1_log.ldf">
-      <DependentUpon>Database1.mdf</DependentUpon>
-    </Content>
     <Content Include="assets\bower_components\bootstrap-colorpicker\dist\css\bootstrap-colorpicker.css" />
     <Content Include="assets\bower_components\bootstrap-colorpicker\dist\css\bootstrap-colorpicker.min.css" />
     <Content Include="assets\bower_components\bootstrap-colorpicker\dist\img\bootstrap-colorpicker\alpha-horizontal.png" />
@@ -9598,10 +9597,10 @@
     <Content Include="assets\build\js\PushMenu.js" />
     <Content Include="assets\build\js\TodoList.js" />
     <Content Include="assets\build\js\Tree.js" />
-    <Content Include="assets\css\fa-style.css" />
     <Content Include="assets\css\ft.css" />
     <Content Include="assets\css\jquery.Bootstrap-PersianDateTimePicker.css" />
     <Content Include="assets\css\style.css" />
+    <Content Include="assets\css\fa-style.css" />
     <Content Include="assets\dist\css\AdminLTE.css" />
     <Content Include="assets\dist\css\AdminLTE.min.css" />
     <Content Include="assets\dist\css\alt\AdminLTE-bootstrap-social.css" />
@@ -9722,15 +9721,16 @@
     <Content Include="assets\img\testimonials\testimonials-3.jpg" />
     <Content Include="assets\img\testimonials\testimonials-4.jpg" />
     <Content Include="assets\img\testimonials\testimonials-5.jpg" />
-    <Content Include="assets\JQuery\JQuery 3.7.1.js" />
-    <Content Include="assets\js\visit_type.js" />
-    <Content Include="assets\js\jalaali.js" />
     <Content Include="assets\js\ft.js" />
+    <Content Include="assets\js\jalaali.js" />
     <Content Include="assets\js\jquery.Bootstrap-PersianDateTimePicker.js" />
     <Content Include="assets\js\m2.js" />
     <Content Include="assets\js\main.js" />
     <Content Include="assets\js\visit.js" />
+    <Content Include="assets\js\visit_type.js" />
+    <Content Include="assets\login\bg-image.jpeg" />
     <Content Include="assets\login\login.js" />
+    <Content Include="assets\login\styles.css" />
     <Content Include="assets\plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="assets\plugins\bootstrap-slider\slider.css" />
     <Content Include="assets\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.js" />
@@ -9873,12 +9873,11 @@
     <Content Include="assets\plugins\timepicker\bootstrap-timepicker.js" />
     <Content Include="assets\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="assets\plugins\timepicker\bootstrap-timepicker.min.js" />
-    <Content Include="assets\scss\Readme.txt" />
-    <Content Include="assets\sweetalert\sweetalert_1.js" />
     <Content Include="assets\vendor\animate.css\animate.compat.css" />
     <Content Include="assets\vendor\animate.css\animate.css" />
     <Content Include="assets\vendor\animate.css\animate.min.css" />
     <Content Include="assets\vendor\bootstrap-icons\bootstrap-icons.css" />
+    <Content Include="assets\vendor\bootstrap-icons\index.html" />
     <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.css" />
     <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.min.css" />
     <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.rtl.css" />
@@ -9918,20 +9917,17 @@
     <Content Include="assets\vendor\fontawesome-free\css\solid.min.css" />
     <Content Include="assets\vendor\fontawesome-free\css\svg-with-js.css" />
     <Content Include="assets\vendor\fontawesome-free\css\svg-with-js.min.css" />
-    <Content Include="assets\vendor\fontawesome-free\css\v4-font-face.css" />
-    <Content Include="assets\vendor\fontawesome-free\css\v4-font-face.min.css" />
     <Content Include="assets\vendor\fontawesome-free\css\v4-shims.css" />
     <Content Include="assets\vendor\fontawesome-free\css\v4-shims.min.css" />
-    <Content Include="assets\vendor\fontawesome-free\css\v5-font-face.css" />
-    <Content Include="assets\vendor\fontawesome-free\css\v5-font-face.min.css" />
+    <Content Include="assets\vendor\fontawesome-free\webfonts\fa-brands-400.svg" />
+    <Content Include="assets\vendor\fontawesome-free\webfonts\fa-regular-400.svg" />
+    <Content Include="assets\vendor\fontawesome-free\webfonts\fa-solid-900.svg" />
     <Content Include="assets\vendor\glightbox\css\glightbox.css" />
     <Content Include="assets\vendor\glightbox\css\glightbox.min.css" />
-    <Content Include="assets\vendor\glightbox\css\plyr.css" />
-    <Content Include="assets\vendor\glightbox\css\plyr.min.css" />
     <Content Include="assets\vendor\glightbox\js\glightbox.js" />
     <Content Include="assets\vendor\glightbox\js\glightbox.min.js" />
     <Content Include="assets\vendor\php-email-form\validate.js" />
-    <Content Include="assets\vendor\purecounter\purecounter_vanilla.js" />
+    <Content Include="assets\vendor\purecounter\purecounter.js" />
     <Content Include="assets\vendor\remixicon\remixicon.css" />
     <Content Include="assets\vendor\remixicon\remixicon.svg" />
     <Content Include="assets\vendor\remixicon\remixicon.symbol.svg" />
@@ -9940,15 +9936,15 @@
     <Content Include="Global.asax" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Content Include="Test\HtmlPage1.html" />
+    <Content Include="test\HtmlPage1.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -9958,6 +9954,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Class1.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -9973,7 +9970,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Retsendsms.cs" />
     <Compile Include="Models\tbl_Awards.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -9981,6 +9977,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_Doctors.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_language.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_Patient.cs">
@@ -10004,6 +10003,9 @@
     <Compile Include="Models\tbl_VisitType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\View_Comm.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\View_Visit.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -10012,11 +10014,15 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="res\res1.Designer.cs">
+      <DependentUpon>res1.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>res1.resx</DependentUpon>
     </Compile>
-    <Compile Include="res\res1.fa.Designer.cs" />
+    <Compile Include="res\res1.fa.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>res1.fa.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -10049,27 +10055,23 @@
     <Content Include="assets\vendor\boxicons\fonts\boxicons.ttf" />
     <Content Include="assets\vendor\boxicons\fonts\boxicons.woff" />
     <Content Include="assets\vendor\boxicons\fonts\boxicons.woff2" />
+    <Content Include="assets\vendor\fontawesome-free\webfonts\fa-brands-400.eot" />
     <Content Include="assets\vendor\fontawesome-free\webfonts\fa-brands-400.ttf" />
+    <Content Include="assets\vendor\fontawesome-free\webfonts\fa-brands-400.woff" />
     <Content Include="assets\vendor\fontawesome-free\webfonts\fa-brands-400.woff2" />
+    <Content Include="assets\vendor\fontawesome-free\webfonts\fa-regular-400.eot" />
     <Content Include="assets\vendor\fontawesome-free\webfonts\fa-regular-400.ttf" />
+    <Content Include="assets\vendor\fontawesome-free\webfonts\fa-regular-400.woff" />
     <Content Include="assets\vendor\fontawesome-free\webfonts\fa-regular-400.woff2" />
+    <Content Include="assets\vendor\fontawesome-free\webfonts\fa-solid-900.eot" />
     <Content Include="assets\vendor\fontawesome-free\webfonts\fa-solid-900.ttf" />
+    <Content Include="assets\vendor\fontawesome-free\webfonts\fa-solid-900.woff" />
     <Content Include="assets\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
-    <Content Include="assets\vendor\fontawesome-free\webfonts\fa-v4compatibility.ttf" />
-    <Content Include="assets\vendor\fontawesome-free\webfonts\fa-v4compatibility.woff2" />
     <Content Include="assets\vendor\remixicon\remixicon.eot" />
     <Content Include="assets\vendor\remixicon\remixicon.less" />
     <Content Include="assets\vendor\remixicon\remixicon.ttf" />
     <Content Include="assets\vendor\remixicon\remixicon.woff" />
     <Content Include="assets\vendor\remixicon\remixicon.woff2" />
-    <Content Include="assets\vendor\swiper\swiper-bundle.min.js.map" />
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="assets\bower_components\bootstrap-colorpicker\.bower.json" />
     <Content Include="assets\bower_components\bootstrap-colorpicker\.editorconfig" />
     <Content Include="assets\bower_components\bootstrap-colorpicker\.github\CODE_OF_CONDUCT.md" />
@@ -10891,9 +10893,16 @@
     <Content Include="assets\plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="assets\plugins\input-mask\phone-codes\phone-codes.json" />
     <Content Include="assets\dist\fonts\koodak.ttf" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\shared\layout.cshtml" />
+    <Content Include="Views\sheared\layout.cshtml" />
     <Content Include="Views\Home\recept.cshtml" />
     <Content Include="Views\Home\visit_management.cshtml" />
     <Content Include="Views\Home\login.cshtml" />
@@ -10908,24 +10917,34 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="assets\bower_components\moment\moment.d.ts" />
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="res\res1.fa.resx" />
+    <TypeScriptCompile Include="assets\bower_components\moment\moment.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="res\res1.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>res1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="res\res1.fa.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>res1.fa.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ProjectExtensions>
@@ -10934,9 +10953,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1958</DevelopmentServerPort>
+          <DevelopmentServerPort>51740</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44385/</IISUrl>
+          <IISUrl>http://localhost:44360/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

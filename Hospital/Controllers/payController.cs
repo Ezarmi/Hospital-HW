@@ -1,4 +1,4 @@
-﻿using Hospital.Models;
+﻿using hospital.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ namespace hardworker.Controllers
 {
     public class PayController : Controller
     {
-        hdata context = new hdata();
+        hdatata context = new hdatata();
         private string GatewaySend = "https://panel.aqayepardakht.ir/api/create";
         private string GatewayResult = "https://panel.aqayepardakht.ir/api/verify";
 

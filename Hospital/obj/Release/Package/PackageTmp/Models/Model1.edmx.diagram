@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2683bb80546e40ec8b4df82d97047e70" Name="Diagram1" >
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_Awards" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_comm" Width="1.5" PointX="11" PointY="1" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_Doctors" Width="1.5" PointX="3.75" PointY="7.5" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_Language" Width="1.5" PointX="8.75" PointY="1.25" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_Patient" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_Research" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_Skills" Width="1.5" PointX="1.5" PointY="8.125" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_Transfer" Width="1.5" PointX="3" PointY="3.625" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_Visit" Width="1.5" PointX="6" PointY="3" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_VisitPerDoctors" Width="1.5" PointX="6" PointY="9" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_VisitStatus" Width="1.5" PointX="3.75" PointY="1.125" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_VisitType" Width="1.5" PointX="3.75" PointY="11" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.View_Visit" Width="1.5" PointX="8.75" PointY="4.75" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.View_VisitPerDoctors" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.View_Comm" Width="1.5" PointX="10.75" PointY="4.75" />
+        <AssociationConnector Association="Mazrouie8834_hospitalModel.FK_tbl_comm_tbl_Language" />
+        <AssociationConnector Association="Mazrouie8834_hospitalModel.FK_tbl_Doctors_tbl_Skills" />
+        <AssociationConnector Association="Mazrouie8834_hospitalModel.FK_tbl_Visit_tbl_Doctors" />
+        <AssociationConnector Association="Mazrouie8834_hospitalModel.FK_tbl_VisitPerDoctors_tbl_Doctors" />
+        <AssociationConnector Association="Mazrouie8834_hospitalModel.FK_tbl_Transfer_tbl_Patient" />
+        <AssociationConnector Association="Mazrouie8834_hospitalModel.FK_tbl_Visit_tbl_Patient" />
+        <AssociationConnector Association="Mazrouie8834_hospitalModel.FK_tbl_Visit_tbl_Patient1" />
+        <AssociationConnector Association="Mazrouie8834_hospitalModel.FK_tbl_Transfer_tbl_Visit" />
+        <AssociationConnector Association="Mazrouie8834_hospitalModel.FK_tbl_Visit_tbl_VisitStatus" />
+        <AssociationConnector Association="Mazrouie8834_hospitalModel.FK_tbl_Visit_tbl_VisitType" />
+        <AssociationConnector Association="Mazrouie8834_hospitalModel.FK_tbl_VisitPerDoctors_tbl_VisitType" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

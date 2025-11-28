@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Hospital.Models;
+using hospital.Models;
 using System.Web.Mvc;
 using System.Globalization;
 using System.Web.Security;
@@ -10,17 +10,18 @@ using System.Text;
 using System.Threading;
 
 
-namespace hospital.Controllers
+namespace Hospital.Controllers
 {
     public class HomeController : Controller
     {
-        hdata context = new hdata();
+        hdatata context = new hdatata();
 
-
-
+        
+       
         // GET: Home
         public ActionResult Index()
         {
+
             int docs = context.tbl_Doctors.Count();
 
             int dep = context.tbl_Skills.Count();
@@ -255,7 +256,7 @@ namespace hospital.Controllers
 
 
 
-            ViewBag.title = Hospital.res.res1.m_dashboard;
+            ViewBag.title = hospital.res.res1.m_dashboard;
             return View();
         }
           
@@ -264,14 +265,14 @@ namespace hospital.Controllers
         public ActionResult visit_management()
         {
 
-            ViewBag.title = Hospital.res.res1.m_visit;
+            ViewBag.title = hospital.res.res1.m_visit;
             return View();
         }
 
 
         public ActionResult visit_type() {
 
-            ViewBag.title = Hospital.res.res1.m_visit_type;
+            ViewBag.title = hospital.res.res1.m_visit_type;
             return View();
 
 

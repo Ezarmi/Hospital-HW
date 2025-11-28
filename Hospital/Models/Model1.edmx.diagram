@@ -4,26 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0af7ea4eab3f4eb1bce8cbddbd44fc82" Name="Diagram1">
-        <EntityTypeShape EntityType="hospitalModel.tbl_Doctors" Width="1.5" PointX="3.375" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="hospitalModel.tbl_Skills" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <AssociationConnector Association="hospitalModel.FK_Table_1_Table_1" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="hospitalModel.tbl_Awards" Width="1.5" PointX="0.75" PointY="2.875" />
-        <EntityTypeShape EntityType="hospitalModel.tbl_Research" Width="1.5" PointX="3.375" PointY="3.25" />
-        <EntityTypeShape EntityType="hospitalModel.tbl_Visit" Width="1.5" PointX="5.5" PointY="0.5" />
-        <AssociationConnector Association="hospitalModel.FK_tbl_Visit_To_tbl_Doctors" />
-        <EntityTypeShape EntityType="hospitalModel.tbl_Patient" Width="1.5" PointX="0.75" PointY="4.875" />
-        <AssociationConnector Association="hospitalModel.FK_tbl_Visit_To_Patient" />
-        <EntityTypeShape EntityType="hospitalModel.tbl_VisitType" Width="1.5" PointX="5.625" PointY="5.5" />
-        <AssociationConnector Association="hospitalModel.FK_tbl_Visit_To_VisitType" />
-        <EntityTypeShape EntityType="hospitalModel.tbl_VisitStatus" Width="1.5" PointX="0.75" PointY="7.875" />
-        <AssociationConnector Association="hospitalModel.FK_tbl_Visit_To_VisitStatus" />
-        <EntityTypeShape EntityType="hospitalModel.View_Visit" Width="1.5" PointX="7.5" PointY="0.5" />
-        <EntityTypeShape EntityType="hospitalModel.tbl_VisitPerDoctors" Width="1.5" PointX="3" PointY="5.25" />
-        <AssociationConnector Association="hospitalModel.FK_tbl_VisitPerDoctors_tbl_Doctors" />
-        <AssociationConnector Association="hospitalModel.FK_tbl_VisitPerDoctors_tbl_VisitType" />
-        <EntityTypeShape EntityType="hospitalModel.View_VisitPerDoctors" Width="1.5" PointX="9.125" PointY="0.5" />
-        <EntityTypeShape EntityType="hospitalModel.tbl_comm" Width="1.5" PointX="3.375" PointY="8.75" />
+      <Diagram DiagramId="2683bb80546e40ec8b4df82d97047e70" Name="Diagram1" >
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_Awards" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_comm" Width="1.5" PointX="8" PointY="7" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_Doctors" Width="1.5" PointX="3.75" PointY="7.75" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_language" Width="1.5" PointX="5.75" PointY="7.25" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_Patient" Width="1.5" PointX="3.75" PointY="13.625" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_Research" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_Skills" Width="1.5" PointX="1.5" PointY="8.375" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_Visit" Width="1.5" PointX="6" PointY="2.625" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_VisitPerDoctors" Width="1.5" PointX="3" PointY="3.125" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_VisitStatus" Width="1.5" PointX="3.75" PointY="11.25" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.tbl_VisitType" Width="1.5" PointX="0.75" PointY="3.375" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.View_Comm" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.View_Visit" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Mazrouie8834_hospitalModel.View_VisitPerDoctors" Width="1.5" PointX="0.75" PointY="10.75" />
+        <AssociationConnector Association="Mazrouie8834_hospitalModel.FK_tbl_comm_tbl_language" />
+        <AssociationConnector Association="Mazrouie8834_hospitalModel.FK_Table_1_Table_1" />
+        <AssociationConnector Association="Mazrouie8834_hospitalModel.FK_tbl_Visit_To_tbl_Doctors" />
+        <AssociationConnector Association="Mazrouie8834_hospitalModel.FK_tbl_VisitPerDoctors_tbl_Doctors" />
+        <AssociationConnector Association="Mazrouie8834_hospitalModel.FK_tbl_Visit_To_Patient" />
+        <AssociationConnector Association="Mazrouie8834_hospitalModel.FK_tbl_Visit_To_VisitStatus" />
+        <AssociationConnector Association="Mazrouie8834_hospitalModel.FK_tbl_Visit_To_VisitType" />
+        <AssociationConnector Association="Mazrouie8834_hospitalModel.FK_tbl_VisitPerDoctors_tbl_VisitType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
